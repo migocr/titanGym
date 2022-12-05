@@ -67,19 +67,21 @@ page_protect();
                     </tr>
                   </thead>
                   <tbody>
-				  <?php
+	<!--  --------------------------------------------------------------------  -->			  
+          <?php
 							$query  = "select * from users ORDER BY joining_date";
 							//echo $query;
 							$result = mysqli_query($con, $query);
-							$sno    = 1;
 
+							$sno  = 1;         
 							if (mysqli_affected_rows($con) != 0) {
 							    while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
 							        $uid   = $row['userid'];
-							        $query1  = "select * from enrolls_to WHERE uid='$uid' AND renewal='yes'";
-							        $result1 = mysqli_query($con, $query1);
-							        if (mysqli_affected_rows($con) == 1) {
-							            while ($row1 = mysqli_fetch_array($result1, MYSQLI_ASSOC)) {
+
+							        /*$query1  = "select * from enrolls_to WHERE uid='$uid' ";*/
+			
+							       
+							            while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
 							                $rowGender = $row['gender'];
 											echo "<td> 
                       <div class='d-flex px-2'>
@@ -94,16 +96,7 @@ page_protect();
 
 							                
 											echo "<td>" . $row['joining_date'] ."</td>";
-							                echo "<td><span class='badge badge-sm bg-gradient-success'>Activo</span></td>";
-
-							                
-
-											echo "<td><p class='text-xs font-weight-bold mb-0'>" . $row1['expire'] . "</p></td>";
-
-							               
-
-							                
-							                
+							                echo "<td><span class='badge badge-sm bg-gradient-success'>Activo</span></td>";     
 							                $sno++;
 							       
 							                echo "<td><form action='edit_member.php' method='post'><input type='hidden' name='name' value='" . $uid . "'/><input type='submit' class='a1-btn a1-blue' id='button1' value='Editar' class='btn btn-info'/></form></td></tr>";
@@ -111,11 +104,13 @@ page_protect();
 							            }
 							        }
 							    }
-							}
-						?>	
+							
+						?>
+      	
+	<!--  --------------------------------------------------------------------  -->			
                   </tbody>
 
-				  	
+				  
                 </table>
               </div>
             </div>
