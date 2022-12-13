@@ -44,7 +44,7 @@ page_protect();
 	<?php $active = 'payment'; include 'components/menu.php'; ?>
   <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
     <!-- Navbar -->
-    <?php include 'components/navbar.php';?>
+    <?php $titlePage = 'Pagos'; include 'components/navbar.php'; ?>
     <!-- End Navbar -->
     <div class="container-fluid py-4">
      
@@ -52,64 +52,62 @@ page_protect();
         <div class="col-12">
           <div class="card mb-4">
             <div class="card-header pb-0">
-              <h6>Projects table</h6>
+              <h6>Pagos</h6>
             </div>
-            <div class="card-body px-0 pt-0 pb-2">
-              <div class="table-responsive p-0">
-			  <table class="table table-bordered datatable" id="table-1" border=1>
-			<thead>
-				<tr>
-					<th>Sl.No</th>
-					<th>Fecha de Expiración</th>
-					<th>Nombre</th>
-					<th>ID de Miembro</th>
-					<th>Género</th>
-					<th>Acción</th>
-				</tr>
-			</thead>
+            <div class="card px-4">
+              <div class="table-responsive">
+                <table class="table align-items-center mb-0" id="table-1">
+                  <thead>
+                    <tr>
+                      <th>#</th>
+                      <th>Fecha de Expiración</th>
+                      <th>Nombre</th>
+                      <th>ID de Miembro</th>
+                      <th>Género</th>
+                      <th>Acción</th>
+                    </tr>
+                  </thead>
 
-				<tbody>
+				          <tbody>
 
-				<?php
+				            <?php
 
 
-					$query  = "select * from enrolls_to where renewal='yes' ORDER BY expire";
-					//echo $query;
-					$result = mysqli_query($con, $query);
-					$sno    = 1;
+                    $query  = "select * from enrolls_to where renewal='yes' ORDER BY expire";
+                    //echo $query;
+                    $result = mysqli_query($con, $query);
+                    $sno    = 1;
 
-					if (mysqli_affected_rows($con) != 0) {
-					    while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
+                    if (mysqli_affected_rows($con) != 0) {
+                        while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
 
-					        $uid   = $row['uid'];
-					        $planid=$row['pid'];
-					        $query1  = "select * from users WHERE userid='$uid'";
-					        $result1 = mysqli_query($con, $query1);
-					        if (mysqli_affected_rows($con) == 1) {
-					            while ($row1 = mysqli_fetch_array($result1, MYSQLI_ASSOC)) {
-					                
-					                 echo "<tr><td>".$sno."</td>";
-					                echo "<td>" . $row['expire'] . "</td>";
-					                echo "<td>" . $row1['username'] . "</td>";
-					                echo "<td>" . $row1['userid'] . "</td>";
-					                echo "<td>" . $row1['gender'] . "</td>";
-					                
-					                $sno++;
-					                
-					                echo "<td><form action='make_payments.php' method='post'><input type='hidden' name='userID' value='" . $uid . "'/>
-					                <input type='hidden' name='planID' value='" . $planid . "'/><input type='submit' class='a1-btn a1-blue' value='Agregar Pago ' class='btn btn-info'/></form></td></tr>";
-									
-					                $uid = 0;
-					            }
-					        }
-					    }
-					}
+                            $uid   = $row['uid'];
+                            $planid=$row['pid'];
+                            $query1  = "select * from users WHERE userid='$uid'";
+                            $result1 = mysqli_query($con, $query1);
+                            if (mysqli_affected_rows($con) == 1) {
+                                while ($row1 = mysqli_fetch_array($result1, MYSQLI_ASSOC)) {
+                                    
+                                    echo "<tr><td>".$sno."</td>";
+                                    echo "<td>" . $row['expire'] . "</td>";
+                                    echo "<td>" . $row1['username'] . "</td>";
+                                    echo "<td>" . $row1['userid'] . "</td>";
+                                    echo "<td>" . $row1['gender'] . "</td>";
+                                    
+                                    $sno++;
+                                    
+                                    echo "<td><form action='make_payments.php' method='post'><input type='hidden' name='userID' value='" . $uid . "'/>
+                                    <input type='hidden' name='planID' value='" . $planid . "'/><input type='submit' class='btn btn-default' value='Agregar Pago ' class='btn btn-info'/></form></td></tr>";
+                            
+                                    $uid = 0;
+                                }
+                            }
+                        }
+                    }
 
-					?>									
-				</tbody>
-
-		</table>
-
+                    ?>									
+				          </tbody>
+		            </table>
               </div>
             </div>
           </div>

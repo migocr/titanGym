@@ -64,7 +64,7 @@ if (isset($_POST['userID']) && isset($_POST['planID'])) {
 	<?php $active = 'payment'; include 'components/menu.php'; ?>
   <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
     <!-- Navbar -->
-    <?php include 'components/navbar.php';?>
+    <?php $titlePage = 'Pagos'; include 'components/navbar.php'; ?>
     <!-- End Navbar -->
     <div class="container-fluid py-4">
       <div class="row">

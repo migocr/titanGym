@@ -29,7 +29,7 @@ page_protect();
 	<?php $active = 'new'; include 'components/menu.php'; ?>
 	<main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
 		<!-- Navbar -->
-		<?php include 'components/navbar.php';?>
+		<?php $titlePage = 'Nuevo Registro'; include 'components/navbar.php'; ?>
 		<!-- End Navbar -->
 		<div class="container-fluid py-4">
 
@@ -99,10 +99,11 @@ page_protect();
 
 																</select>
 									</div>
-									<input class="a1-btn a1-blue" type="submit"
-																	name="submit" id="submit" value="Registrar">
-																<input class="a1-btn a1-blue" type="reset" name="reset"
-																	id="reset" value="Borrar">
+									<div style="width: auto; display: flex;justify-content: center;">
+										<input class="btn btn-primary" type="submit" name="submit" id="submit" value="Registrar">
+										<input class="btn btn-default" type="reset" name="reset" id="reset" value="Borrar">
+									</div>
+									
 								</form>
 								</div>
 							</div>
