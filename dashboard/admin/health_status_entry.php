@@ -59,7 +59,7 @@ else{
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
 
    <title>ConfiguroWeb | Health Status Entry</title>

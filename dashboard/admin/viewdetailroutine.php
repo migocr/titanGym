@@ -5,7 +5,7 @@ page_protect();
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
 
     <title>ConfiguroWeb | Detalles de Rutina</title>

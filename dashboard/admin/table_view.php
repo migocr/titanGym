@@ -1,8 +1,12 @@
 ﻿<?php
 require '../../include/db_conn.php';
 page_protect();
-?>
+$_DIR = 'C:\xampp\htdocs\gym_l';
 
+require  $_DIR . '\vendor\autoload.php' ;
+$dotenv = Dotenv\Dotenv::createImmutable($_DIR);
+$dotenv->load(); 
+?>
 
 <!--
 =========================================================
@@ -19,7 +23,7 @@ page_protect();
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 -->
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
   <meta charset="utf-8" />
@@ -76,10 +80,7 @@ page_protect();
 							if (mysqli_affected_rows($con) != 0) {
 							    while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
 							        $uid   = $row['userid'];
-							        $query1  = "select * from enrolls_to WHERE uid='$uid' AND renewal='yes'";
-							        $result1 = mysqli_query($con, $query1);
-							        if (mysqli_affected_rows($con) == 1) {
-							            while ($row1 = mysqli_fetch_array($result1, MYSQLI_ASSOC)) {
+							       
 							                $rowGender = $row['gender'];
 											echo "<td> 
                       <div class='d-flex px-2'>
@@ -98,7 +99,7 @@ page_protect();
 
 							                
 
-											echo "<td><p class='text-xs font-weight-bold mb-0'>" . $row1['expire'] . "</p></td>";
+											echo "<td><p class='text-xs font-weight-bold mb-0'>" . $row['dob'] . "</p></td>";
 
 							               
 
@@ -109,8 +110,8 @@ page_protect();
 							                echo "<td><form action='edit_member.php' method='post'><input type='hidden' name='name' value='" . $uid . "'/><input type='submit' class='a1-btn a1-blue' id='button1' value='Editar' class='btn btn-info'/></form></td></tr>";
 							                $msgid = 0;
 							            }
-							        }
-							    }
+							        
+							    
 							}
 						?>	
                   </tbody>

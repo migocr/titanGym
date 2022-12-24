@@ -21506,7 +21506,7 @@ fieldset:disabled .btn {
 }
 
 .input-group-text {
-  z-index: 9999;
+  z-index: 9;
   border-right: 0;
   padding-left: 10px;
   padding-right: 10px;
@@ -23146,7 +23146,7 @@ hr.horizontal.gray-light {
 }
 
 .sidenav {
-  z-index: 9999;
+  z-index: 999;
 }
 
 .sidenav .navbar-brand,

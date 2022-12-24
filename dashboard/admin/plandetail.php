@@ -3,16 +3,27 @@ require '../../include/db_conn.php';
 $pid=$_GET['q'];
 $query="select * from plan where pid='".$pid."'";
 $res=mysqli_query($con,$query);
-if($res){
+if ($res){
 	$row=mysqli_fetch_array($res,MYSQLI_ASSOC);
+	if ($row['planType'] == "d") {
+		$planTypeString = "Dia";
+		if($row['validity'] !== "1") {
+			$planTypeString = "Dias";
+		}
+		
+	}
+	if ($row['planType'] == "m") {
+		$planTypeString = "Mes";
+		if($row['validity'] !== "1") {
+			$planTypeString = "Meses";
+		}
+	}
 	// echo "<tr><td>".$row['amount']."</td></tr>";
-	echo "<tr>
-		<td height='35'>AMOUNT:</td>
-		<td height='35'>&nbsp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;<input id='boxx' type='text' value='$".$row['amount']."' readonly></td></tr>
-		<tr>
-		<td height='35'>VALIDITY:</td>
-		<td height='35'>&nbsp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;<input type='text' id='boxx' value='".$row['validity']." Month' readonly></td>
-		</tr>
+	echo "
+		<label class='form-control-label'>Costo:</label>
+		<input class='form-control'id='boxx' type='text' value='$".$row['amount']."' readonly></input>
+		<label class='form-control-label'>Validez:</label>
+		<input class='form-control' type='text' id='boxx' value='".$row['validity']." $planTypeString' readonly></input>
 	";
 }
 

@@ -2,8 +2,15 @@
 require '../../include/db_conn.php';
 page_protect();
 ?>
+<?php
+
+$_DIR = 'C:\xampp\htdocs\gym_l';
+
+require  $_DIR . '\vendor\autoload.php' ;
+$dotenv = Dotenv\Dotenv::createImmutable($_DIR);
+$dotenv->load(); ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
 	<meta charset="utf-8" />
@@ -75,7 +82,7 @@ page_protect();
 									<div class="form-group">
 										<label for="example-date-input" class="form-control-label">Fecha Caduca</label>
 										<input class="form-control" type="date" value='<?php echo str_replace("/","-",date("Y/m/d"));?>'
-											name="dob" id="boxx" required>
+											name="dob" id="expire-date" required>
 											
 									</div>
 									<div class="form-group">
@@ -84,14 +91,14 @@ page_protect();
 											border: 1px #e9ecef solid;
 											border-radius: 5px;
 											padding: 5px;"  class="selectpicker " data-style="select-with-transition" title="Single Select" data-size="7"  name="plan" id="boxx" required
-																	onchange="myplandetail(this.value)">
+																	onchange="changeExpireDate(this.value,this.options[this.selectedIndex].getAttribute('duration'),this.options[this.selectedIndex].getAttribute('durationtype'))">
 																	<option value="">--Favor Seleccionar--</option>
 																	<?php
 																	$query="select * from plan where active='yes'";
 																	$result=mysqli_query($con,$query);
 																	if(mysqli_affected_rows($con)!=0){
 																		while($row=mysqli_fetch_row($result)){
-																			echo "<option value=".$row[0].">".$row[1]."</option>";
+																			echo "<option value=" .$row[0]." duration=". $row[3]." durationtype=". $row[6] . ">".$row[1]."</option>";
 																		}
 																	}
 
@@ -99,6 +106,7 @@ page_protect();
 
 																</select>
 									</div>
+									<div id="plandetls"></div>
 									<div style="width: auto; display: flex;justify-content: center;">
 										<input class="btn btn-primary" type="submit" name="submit" id="submit" value="Registrar">
 										<input class="btn btn-default" type="reset" name="reset" id="reset" value="Borrar">
@@ -149,6 +157,7 @@ page_protect();
 				</div>
 			</footer>
 		</div>
+		
 	</main>
 	<?php include 'components/fixed_plugin.php';?>
 	<!--   Core JS Files   -->
@@ -172,8 +181,8 @@ page_protect();
 </body>
 
 <script>
-	function myplandetail(str) {
-
+	function changeExpireDate(str, duration, durationType) {
+		/*Obtenemos data del plan e imprimimos en pantalla un template llamado plandetail.php */
 		if (str == "") {
 			document.getElementById("plandetls").innerHTML = "";
 			return;
@@ -192,6 +201,23 @@ page_protect();
 			xmlhttp.open("GET", "plandetail.php?q=" + str, true);
 			xmlhttp.send();
 		}
+		/* FIN */
+		/* Seteamos fecha de acuerdo al plan elegido */
+		var expireDateInput = document.getElementById("expire-date");
+		console.log(expireDateInput.value)
+		var expireQty = parseInt(duration); //cantidad de dias o meses
+		let date = new Date();
+		if(durationType == "m") { // si es un plan con meses
+			var expireDate = date.setMonth(date.getMonth() + expireQty);
+		}
+		if(durationType == "d") {// si es un plan con dias
+			var expireDate = date.setDate(date.getDate() + expireQty);
+		}
+		let formatedDate = `${new Date(expireDate).getFullYear()}-${new Date(expireDate).getMonth()+1 > 9 ? new Date(expireDate).getMonth()+1 : '0' + (new Date(expireDate).getMonth()+1)}-${new Date(expireDate).getDate() > 9 ? new Date(expireDate).getDate() : '0'+new Date(expireDate).getDate()}`
+		console.log(formatedDate);
+		expireDateInput.value = formatedDate;
+		//console.log(expireDateInput.value);
+
 
 	}
 </script>

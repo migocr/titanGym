@@ -4,7 +4,7 @@ page_protect();
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
 
     <title>ConfiguroWeb | Vista de Miembro</title>
@@ -127,10 +127,6 @@ page_protect();
 							                echo "<td>" . $row['userid'] . "</td>";
 
 							                echo "<td>" . $row['username'] . "</td>";
-
-							                echo "<td>" . $row['mobile'] . "</td>";
-
-							                echo "<td>" . $row['email'] . "</td>";
 
 							                echo "<td>" . $row['gender'] . "</td>";
 

@@ -17,10 +17,15 @@ if (isset($_POST['userID']) && isset($_POST['planID'])) {
             $result2=mysqli_query($con,$query2);
             if($result2){
                $planValue=mysqli_fetch_array($result2,MYSQLI_ASSOC);
-               $planName=$planValue['planName'];
             }
         }
     }
+?>
+<?php
+$_DIR = 'C:\xampp\htdocs\gym_l';
+require  $_DIR . '\vendor\autoload.php' ;
+$dotenv = Dotenv\Dotenv::createImmutable($_DIR);
+$dotenv->load(); 
 ?>
 
 <!--
@@ -38,7 +43,7 @@ if (isset($_POST['userID']) && isset($_POST['planID'])) {
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 -->
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
   <meta charset="utf-8" />
@@ -49,6 +54,7 @@ if (isset($_POST['userID']) && isset($_POST['planID'])) {
     Soft UI Dashboard by Creative Tim
   </title>
   <!--     Fonts and icons     -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
   <!-- Nucleo Icons -->
   <link href="../assets/css/nucleo-icons.css" rel="stylesheet" />
@@ -58,6 +64,12 @@ if (isset($_POST['userID']) && isset($_POST['planID'])) {
   <link href="../assets/css/nucleo-svg.css" rel="stylesheet" />
   <!-- CSS Files -->
   <link id="pagestyle" href="../assets/css/soft-ui-dashboard.css?v=1.0.6" rel="stylesheet" />
+  <!-- Core -->
+  <script src="../assets/js/core/popper.min.js"></script>
+  <script src="../assets/js/core/bootstrap.min.js"></script>
+
+  <!-- Theme JS -->
+  <script src="../assets/js/soft-ui-dashboard.min.js"></script>
 </head>
 
 <body class="g-sidenav-show  bg-gray-100">
@@ -66,74 +78,62 @@ if (isset($_POST['userID']) && isset($_POST['planID'])) {
     <!-- Navbar -->
     <?php $titlePage = 'Pagos'; include 'components/navbar.php'; ?>
     <!-- End Navbar -->
-    <div class="container-fluid py-4">
+    <div class="container-fluid py-4">      
       <div class="row">
         <div class="col-12">
           <div class="card mb-4">
             <div class="card-header pb-0">
-              <h6>Authors table</h6>
-            </div>
-            <div class="card-body px-0 pt-0 pb-2">
+              <h6>Registrar pago</h6>
+              <div class="card-body px-0 pt-0 pb-2">
               <div class="table-responsive p-0">
-				<form id="form1" name="form1" method="post" class="a1-container" action="submit_payments.php">
-					<table width="100%" border="0" align="center">
-					<tr>
-					<td height="35"><table width="100%" border="0" align="center">
-						<tr>
-						<td height="35">ID MEMBRESÍA:</td>
-						<td height="35"><input type="text" name="m_id" id="boxx" value="<?php echo $uid; ?>" readonly/></td>
-						</tr>
-						
-						<tr>
-						<td height="35">NOMBRE:</td>
-						<td height="35"><input type="text" name="u_name" id="boxx" value="<?php echo $name; ?>" placeholder="Member Name" maxlength="30" readonly/>
-							
-						</tr>
-						<tr>
-						<td height="35">PLAN ACTUAL</td>
-						<td height="35"><input type="text" name="prevPlan" id="boxx" value="<?php echo $planName; ?>" readonly></td></td>
-						</tr>
-						<tr>
-						<td height="35">SELECCIONAR NUEVO PLAN:</td>
-						<td height="35"><select name="plan" id="boxx" required onchange="myplandetail(this.value)">
-										<option value="">-- Favor Seleccionar --</option>
-										<?php
-				
-											$query = "select * from plan where active='yes'";
+                <div id="form1" name="form1" class="a1-container">
+                  <div class="form-group">
+                          <label for="example-text-input" class="form-control-label">ID de Cliente</label>
+                          <input  class="form-control" type="text" name="m_id" id="idMembresia" value="<?php echo $uid; ?>" readonly/>
+                  </div>
+                  <div class="form-group">
+                          <label for="example-text-input" class="form-control-label">Nombre</label>
+                          <input class="form-control" type="text" name="u_name" id="nameCustomer" value="<?php echo $name; ?>" placeholder="Member Name" maxlength="30" readonly/>
+                  </div>
+                  <div class="form-group">
+										<label for="example-date-input" class="form-control-label">Fecha Caduca</label>
+										<input id="expire-date" class="form-control" type="date" value=''
+											name="dob" id="expire-date" required readonly>
 											
-											//echo $query;
-											$result = mysqli_query($con, $query);
-											
-											if (mysqli_affected_rows($con) != 0) {
-												while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
-													echo "<option value=" . $row['pid'] . ">" . $row['planName'] . "</option>";
-													
-												}
-											}
-											
-										?>
-									</select></td></td>
-						</tr>
-						
-					
-						
-						<tr>
-						<table id="plandetls">
-						</table>
-						
-						
-					</table></td>
-					
-					</tr>
-					<tr>
-						<td height="35">&nbsp;</td>
-						<td height="35">&ensp;&ensp;&ensp;&ensp;&ensp;&ensp; &ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp; &ensp;&ensp;&ensp;&ensp;&ensp; &ensp;&ensp;&ensp;&ensp;&ensp;&ensp; <input class="a1-btn a1-blue" type="submit" name="submit" id="submit" value="AGREGAR PAGO" >
-							<input class="a1-btn a1-blue" type="reset" name="reset" id="reset" value="Borrar"></td>
-						</tr>
-					</table>
-				</form>
+									</div>
+                  <div class="form-group">
+                    <label for="example-color-input" class="form-control-label">Plan</label>	
+                    <select style="width: 100%; border: 1px #e9ecef solid; border-radius: 5px;
+                              padding: 5px;" class="selectpicker" data-style="select-with-transition" 
+                              name="plan" id="planSelector" 
+                              onchange="changeExpireDate(this.value,this.options[this.selectedIndex].getAttribute('duration'),this.options[this.selectedIndex].getAttribute('durationtype'))" required>
+                      <option value="">-- Favor Seleccionar --</option>
+                        <?php
+                
+                          $query = "select * from plan where active='yes'";
+                              
+                              //echo $query;
+                          $result = mysqli_query($con, $query);
+                              
+                          if (mysqli_affected_rows($con) != 0) {
+                            while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
+                              echo "<option value=" . $row['pid'] . " duration=".$row['validity']. " durationtype=".$row['planType']. ">" . $row['planName'] . "</option>";				
+                            }
+                          }
+                              
+                        ?>
+                          </select></div>
+                    
+                </div>
+                <div style="display: flex;justify-content: center;">
+                  <button style="margin-right: 10px;" class="btn btn-primary btn-sm" onclick="savePayment()" name="submit" id="submit" >Guardar</button>
+                  <input class="btn btn-secondary btn-sm" type="reset" name="reset" id="reset" value="Borrar"></td>
+                </div>
+
               </div>
             </div>
+            </div>
+            
           </div>
         </div>
       </div>
@@ -238,6 +238,7 @@ if (isset($_POST['userID']) && isset($_POST['planID'])) {
       </div>
     </div>
   </div>
+ 
   <!--   Core JS Files   -->
   <script src="../assets/js/core/popper.min.js"></script>
   <script src="../assets/js/core/bootstrap.min.js"></script>
@@ -257,7 +258,7 @@ if (isset($_POST['userID']) && isset($_POST['planID'])) {
   <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
   <script src="../assets/js/soft-ui-dashboard.min.js?v=1.0.6"></script>
   		<script>
-        	function myplandetail(str){
+          function changeExpireDate(str, duration, durationType){
 
         		if(str==""){
         			document.getElementById("plandetls").innerHTML = "";
@@ -277,8 +278,67 @@ if (isset($_POST['userID']) && isset($_POST['planID'])) {
        				 xmlhttp.open("GET","plandetail.php?q="+str,true);
        				 xmlhttp.send();	
         		}
+
+            var expireDateInput = document.getElementById("expire-date");
+            console.log(expireDateInput.value)
+            var expireQty = parseInt(duration); //cantidad de dias o meses
+            let date = new Date();
+            if(durationType == "m") { // si es un plan con meses
+              var expireDate = date.setMonth(date.getMonth() + expireQty);
+            }
+            if(durationType == "d") {// si es un plan con dias
+              var expireDate = date.setDate(date.getDate() + expireQty);
+            }
+            let formatedDate = `${new Date(expireDate).getFullYear()}-${new Date(expireDate).getMonth()+1 > 9 ? new Date(expireDate).getMonth()+1 : '0' + (new Date(expireDate).getMonth()+1)}-${new Date(expireDate).getDate() > 9 ? new Date(expireDate).getDate() : '0'+new Date(expireDate).getDate()}`
+            console.log(formatedDate);
+            expireDateInput.value = formatedDate;
+            expireDateInput.setAttribute("value", formatedDate);
         		
         	}
+        </script>
+
+        <script>
+          function savePayment() {
+            let formData = new FormData();
+            let id = document.getElementById("idMembresia").value;
+            let plan =document.getElementById("planSelector").value;
+            if(!plan || plan == "" || plan == undefined){
+              swal("Selecciona un Plan" ,  "Por favor selecciona un plan antes de guardar" ,  "warning");
+              return;
+            }
+          
+            let dob = document.getElementById("expire-date").getAttribute("value");
+            console.log(id,"-",plan,"-",dob)
+            formData.append('m_id', id);
+            formData.append('plan', plan);
+            formData.append('dob', dob);
+
+            const url = "./submit_payments.php";
+            const XHR = new XMLHttpRequest();
+             // Define what happens on successful data submission
+            XHR.addEventListener('load', (event) => {
+              swal({
+                icon: "success",
+                text: "Pago Guardado",
+                value: true,
+                visible: true,
+                className: "",
+                closeModal: true,
+              });
+              
+            });
+
+            // Define what happens in case of an error
+            XHR.addEventListener('error', (event) => {
+              swal("Error" ,  "Ocurrio un error al intentar guardar el pago" ,  "error");
+            });
+
+            // Set up our request
+            XHR.open('POST', url);
+
+            // Send our FormData object; HTTP headers are set automatically
+            XHR.send(formData);
+          }
         </script>
 </body>
 

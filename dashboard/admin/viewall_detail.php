@@ -7,7 +7,7 @@ if (isset($_POST['name'])) {
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
 
     <title>ConfiguroWeb | Editar Miembro</title>

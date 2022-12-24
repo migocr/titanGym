@@ -2,148 +2,85 @@
 require '../../include/db_conn.php';
 page_protect();
 ?>
-
+<?php
+$_DIR = 'C:\xampp\htdocs\gym_l';
+require  $_DIR . '\vendor\autoload.php' ;
+$dotenv = Dotenv\Dotenv::createImmutable($_DIR);
+$dotenv->load(); 
+?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
+
 <head>
-
-    <title>ConfiguroWeb | Nuevo Plan</title>
-  
-	<link rel="stylesheet" href="../../css/style.css"  id="style-resource-5">
-    <script type="text/javascript" src="../../js/Script.js"></script>
-    <link rel="stylesheet" href="../../css/dashMain.css">
-    <link rel="stylesheet" type="text/css" href="../../css/entypo.css">
-	<link href="a1style.css" rel="stylesheet" type="text/css">
-	<style>
-    	.page-container .sidebar-menu #main-menu li#planhassubopen > a {
-    	background-color: #2b303a;
-    	color: #ffffff;
-		}
-
-    </style>
-  
-
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png">
+  <link rel="icon" type="image/png" href="../assets/img/favicon.png">
+  <title>
+    Soft UI Dashboard by Creative Tim
+  </title>
+  <!--     Fonts and icons     -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
+  <!-- Nucleo Icons -->
+  <link href="../assets/css/nucleo-icons.css" rel="stylesheet" />
+  <link href="../assets/css/nucleo-svg.css" rel="stylesheet" />
+  <!-- Font Awesome Icons -->
+  <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
+  <link href="../assets/css/nucleo-svg.css" rel="stylesheet" />
+  <!-- CSS Files -->
+  <link id="pagestyle" href="../assets/css/soft-ui-dashboard.css?v=1.0.6" rel="stylesheet" />
 </head>
-    <body class="page-body  page-fade" onload="collapseSidebar()">
-
-    	<div class="page-container sidebar-collapsed" id="navbarcollapse">	
-	
-		<div class="sidebar-menu">
-	
-			<header class="logo-env">
-			
-			<!-- logo -->
-			<div class="logo">
-				<a href="main.php">
-					<img src="../../images/logo.png" alt="" width="192" height="80" />
-				</a>
-			</div>
-			
-					<!-- logo collapse icon -->
-					<div class="sidebar-collapse" onclick="collapseSidebar()">
-				<a href="#" class="sidebar-collapse-icon with-animation"><!-- add class "with-animation" if you want sidebar to have animation during expanding/collapsing transition -->
-					<i class="entypo-menu"></i>
-				</a>
-			</div>
-							
-			
-			</header>
-    		<?php include('nav.php'); ?>
-    	</div>
-
-    		<div class="main-content">
-		
-				<div class="row">
-					
-					<!-- Profile Info and Notifications -->
-					<div class="col-md-6 col-sm-8 clearfix">	
-							
+	<body class="g-sidenav-show  bg-gray-100">
+		<?php $active = 'memberships'; include 'components/menu.php'; ?>
+		<main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
+			<!-- Navbar -->
+			<?php $titlePage = 'Miembros'; include 'components/navbar.php'; ?>
+			<!-- End Navbar -->
+			<div class="container-fluid py-4">
+			<div class="row">
+				<div class="col-12">
+				<div class="card mb-4">
+					<div class="card-header pb-0">
+						<h6>Agregar Membresia</h6>
+						<form id="form1" name="form1" method="post" class="a1-container" action="submit_plan_new.php">
+							<div class="form-group">
+								<label for="example-text-input" class="form-control-label">ID de Membresia</label>
+								<?php
+									function getRandomWord($len = 6)
+									{
+										$word = array_merge(range('A', 'Z'));
+										shuffle($word);
+										return substr(implode($word), 0, $len);
+									}
+								?>
+								<input class="form-control" type="text" name="planid" id="planID" readonly value="<?php echo getRandomWord(); ?>"></td>		
+							</div>
+							<div class="form-group">
+								<label for="example-text-input" class="form-control-label">Nombre de membresia</label>
+								<input class="form-control" name="planname" id="planName" type="text" placeholder="Ingrese el nombre del plan" size="40">
+							</div>
+							<div class="form-group">
+								<label for="example-text-input" class="form-control-label">Descripción de membresia</label>
+								<input class="form-control" type="text" name="desc" id="planDesc" placeholder="Ingrese la descripción del plan" size="40">
+							</div>
+							<div class="form-group">
+								<label for="example-text-input" class="form-control-label">Validez de membresia</label>
+								<input class="form-control" type="number" name="planval" id="planVal" placeholder="Ingrese el tiempo de validez en meses" size="40">
+							</div>
+							<div class="form-group">
+								<label for="example-text-input" class="form-control-label">Costo de membresia</label>
+								<input class="form-control" type="text" name="amount" id="planAmnt" placeholder="Enter plan amount" size="40">
+							</div>
+							<div class="form-group">
+								<input class="a1-btn a1-blue" type="submit" name="submit" id="submit" value="Crear Plan" >
+								<input class="a1-btn a1-blue" type="reset" name="reset" id="reset" value="Borrar">
+							</div>
+						</form>
 					</div>
-					
-					
-					<!-- Raw Links -->
-					<div class="col-md-6 col-sm-4 clearfix hidden-xs">
-						
-						<ul class="list-inline links-list pull-right">
-
-							<li>Bienvenid@ <?php echo $_SESSION['full_name']; ?> 
-							</li>						
-						
-							<li>
-								<a href="logout.php">
-									Cerrar Sesión <i class="entypo-logout right"></i>
-								</a>
-							</li>
-						</ul>
-						
-					</div>
-					
 				</div>
-
-		<h3>Crear Plan</h3>
-
-		<hr />
-		
-		<div class="a1-container a1-small a1-padding-32" style="margin-top:2px; margin-bottom:2px;">
-        <div class="a1-card-8 a1-light-gray" style="width:600px; margin:0 auto;">
-		<div class="a1-container a1-dark-gray a1-center">
-        	<h6>Detalles de Nuevo Plan</h6>
-        </div>
-       <form id="form1" name="form1" method="post" class="a1-container" action="submit_plan_new.php">
-         <table width="100%" border="0" align="center">
-         <tr>
-           <td height="35"><table width="100%" border="0" align="center">
-           	 <tr>
-           	   <td height="35">PLAN ID:</td>
-           	   <td height="35"><?php
-							function getRandomWord($len = 6)
-							{
-							    $word = array_merge(range('A', 'Z'));
-							    shuffle($word);
-							    return substr(implode($word), 0, $len);
-							}
-
-						?>
-				<input type="text" name="planid" id="planID" readonly value="<?php echo getRandomWord(); ?>"></td>
-         	   </tr>
-             <tr>
-               <td height="35">Nombre de Plan:</td>
-               <td height="35"><input name="planname" id="planName" type="text" placeholder="Ingrese el nombre del plan" size="40"></td>
-             </tr>
-             <tr>
-               <td height="35">Descripción de Plan</td>
-               <td height="35"><input type="text" name="desc" id="planDesc" placeholder="Ingrese la descripción del plan" size="40"></td>
-             </tr>
-             <tr>
-               <td height="35">Validez del Plan</td>
-               <td height="35"><input type="number" name="planval" id="planVal" placeholder="Ingrese el tiempo de validez en meses" size="40"></td>
-             </tr>
-             
-             <tr>
-               <td height="35">PLAN AMOUNT:</td>
-               <td height="35"><input type="text" name="amount" id="planAmnt" placeholder="Enter plan amount" size="40"></td>
-             </tr>
-             
-            
-             <tr>
-             <tr>
-               <td height="35">&nbsp;</td>
-               <td height="35"><input class="a1-btn a1-blue" type="submit" name="submit" id="submit" value="Crear Plan" >
-                 <input class="a1-btn a1-blue" type="reset" name="reset" id="reset" value="Borrar"></td>
-             </tr>
-           </table></td>
-         </tr>
-         </table>
-       </form>
-    </div>
-    </div>   
-		
-		
-
-			<?php include('footer.php'); ?>
-    	</div>
-
-    </body>
+			</div>
+		</main>
+	</body>
 </html>
 
 

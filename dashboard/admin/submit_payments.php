@@ -2,15 +2,25 @@
 require '../../include/db_conn.php';
 page_protect();
 
- $memID=$_POST['m_id'];
- $plan=$_POST['plan'];
+  $memID=$_POST['m_id'];
+  $plan=$_POST['plan'];
+  $expireDate = $_POST['dob'];
+  
+  $response = new stdClass();
+  $response->status = false;
+  $response->userUpdate = false;
+  $response->errorCode = "";
 
 //updating renewal from yes to no from enrolls_to table
-$query="update enrolls_to set renewal='no' where uid='$memID'";
-    if(mysqli_query($con,$query)==1){
+  $query="update enrolls_to set renewal='no' where uid='$memID'";
+  $queryUserUpdate="update users set dob='".$expireDate."' where userid='".$memID."'";
+  if(mysqli_query($con,$queryUserUpdate)){
+    $response->userUpdate = true;
+  }
+  if(mysqli_query($con,$query)==1){
       //inserting new payment data into enrolls_to table
-      $query1="select * from plan where pid='$plan'";
-      $result=mysqli_query($con,$query1);
+    $query1="select * from plan where pid='$plan'";
+    $result=mysqli_query($con,$query1);
 
         if($result){
           $value=mysqli_fetch_row($result);
@@ -21,28 +31,24 @@ $query="update enrolls_to set renewal='no' where uid='$memID'";
           //inserting into enrolls_to table of corresponding userid
           $query2="insert into enrolls_to(pid,uid,paid_date,expire,renewal) values('$plan','$memID','$cdate','$expiredate','yes')";
           if(mysqli_query($con,$query2)==1){
-
-               echo "<head><script>alert('Pago Actualizado Satisfactoriamente ');</script></head></html>";
-               echo "<meta http-equiv='refresh' content='0; url=payments.php'>";
-            }
-             
-            else{
-               echo "<head><script>alert('Pago no Ingresado Fallo en Sistema');</script></head></html>";
-              echo "error: ".mysqli_error($con);
-            }
-            
-          }
-          else{
-            echo "<head><script>alert('Pago no Ingresado Fallo en Sistema');</script></head></html>";
-            echo "error: ".mysqli_error($con);
-          }
-
+              $response->status = true;
+          } else{
+              //echo "<head><script>alert('Pago no Ingresado Fallo en Sistema');</script></head></html>";
+              $response->errorCode = "error: ".mysqli_error($con);
+          }   
+        } else{
+            //echo "<head><script>alert('Pago no Ingresado Fallo en Sistema');</script></head></html>";
+            //echo "error: ".mysqli_error($con);
+            $response->errorCode = "error: ".mysqli_error($con);
+        }
          
-        }
-        else
-        {
-          echo "<head><script>alert('Pago no Ingresado Fallo en Sistema');</script></head></html>";
-          echo "error: ".mysqli_error($con);
-        }
-
+  } else {
+      //echo "<head><script>alert('Pago no Ingresado Fallo en Sistema');</script></head></html>";
+      //echo "error: ".mysqli_error($con);
+      $response->errorCode = "error: ".mysqli_error($con);
+    }
+    $responseJSON = json_encode($response);
+    header("Content-Type: application/json");
+    echo json_encode($responseJSON);
+    exit();
 ?>

@@ -1,8 +1,12 @@
 ﻿<?php
 require '../../include/db_conn.php';
 page_protect();
-?>
+$_DIR = 'C:\xampp\htdocs\gym_l';
 
+require  $_DIR . '\vendor\autoload.php' ;
+$dotenv = Dotenv\Dotenv::createImmutable($_DIR);
+$dotenv->load(); 
+?>
 <!--
 =========================================================
 * Soft UI Dashboard - v1.0.6
@@ -18,7 +22,7 @@ page_protect();
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 -->
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
   <meta charset="utf-8" />

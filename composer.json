@@ -1,0 +1,15 @@
+{
+    "name": "misa/gym_l",
+    "autoload": {
+        "psr-4": {
+            "Misa\\GymL\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Misa",
+            "email": "migocr@gmail.com"
+        }
+    ],
+    "require": {}
+}
