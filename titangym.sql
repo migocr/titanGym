@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 24-12-2022 a las 22:56:25
+-- Tiempo de generación: 29-12-2022 a las 08:59:22
 -- Versión del servidor: 10.4.25-MariaDB
 -- Versión de PHP: 7.4.30
 
@@ -358,6 +358,24 @@ INSERT INTO `plan` (`pid`, `planName`, `description`, `validity`, `amount`, `act
 ('OZHSJL', '6 MESES', '6 MESES', '6', 1200, 'yes', ''),
 ('POQKJC', 'Plan Mensual', 'Suscripcion Mensual', '1', 600, 'yes', 'm'),
 ('RMNOGS', 'Visita 1 dia', 'Visita 1 dia', '1', 50, 'yes', 'd');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `system_settings`
+--
+
+CREATE TABLE `system_settings` (
+  `nombre` varchar(50) NOT NULL,
+  `config` varchar(200) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `system_settings`
+--
+
+INSERT INTO `system_settings` (`nombre`, `config`) VALUES
+('color', 'linear-gradient(310deg, #ea0606 0%, #ff667c 100%)');
 
 -- --------------------------------------------------------
 

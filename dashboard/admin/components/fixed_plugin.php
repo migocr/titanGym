@@ -5,7 +5,7 @@
 		<div class="card shadow-lg ">
 			<div class="card-header pb-0 pt-3 ">
 				<div class="float-start">
-					<h5 class="mt-3 mb-0">Soft UI Configurator</h5>
+					<h5 class="mt-3 mb-0">TitaniumGym Configuracion</h5>
 					<p>See our dashboard options.</p>
 				</div>
 				<div class="float-end mt-4">
@@ -23,18 +23,18 @@
 				</div>
 				<a href="javascript:void(0)" class="switch-trigger background-color">
 					<div class="badge-colors my-2 text-start">
-						<span class="badge filter bg-gradient-primary active" data-color="primary"
-							onclick="sidebarColor(this)"></span>
-						<span class="badge filter bg-gradient-dark" data-color="dark"
-							onclick="sidebarColor(this)"></span>
-						<span class="badge filter bg-gradient-info" data-color="info"
-							onclick="sidebarColor(this)"></span>
-						<span class="badge filter bg-gradient-success" data-color="success"
-							onclick="sidebarColor(this)"></span>
-						<span class="badge filter bg-gradient-warning" data-color="warning"
-							onclick="sidebarColor(this)"></span>
-						<span class="badge filter bg-gradient-danger" data-color="danger"
-							onclick="sidebarColor(this)"></span>
+						<span class="badge filter bg-gradient-primary active" data-color="linear-gradient(310deg, #7928CA 0%, #FF0080 100%)"
+							onclick="sidebarColorCustom(this)"></span>
+						<span class="badge filter bg-gradient-dark" data-color="linear-gradient(310deg, #141727 0%, #3A416F 100%)"
+							onclick="sidebarColorCustom(this)"></span>
+						<span class="badge filter bg-gradient-info" data-color="linear-gradient(310deg, #2152ff 0%, #21d4fd 100%)"
+							onclick="sidebarColorCustom(this)"></span>
+						<span class="badge filter bg-gradient-success" data-color="linear-gradient(310deg, #17ad37 0%, #7ea151 100%)"
+							onclick="sidebarColorCustom(this)"></span>
+						<span class="badge filter bg-gradient-warning" data-color="linear-gradient(310deg, #f53939 0%, #fbcf33 100%)"
+							onclick="sidebarColorCustom(this)"></span>
+						<span class="badge filter bg-gradient-danger" data-color="linear-gradient(310deg, #ea0606 0%, #ff667c 100%)"
+							onclick="sidebarColorCustom(this)"></span>
 					</div>
 				</a>
 				<!-- Sidenav Type -->
@@ -80,3 +80,39 @@
 			</div>
 		</div>
 	</div>
+	<script>
+		function sidebarColorCustom(e) {
+			console.log(e.getAttribute("data-color"));
+			let formData = new FormData();
+          
+          
+            formData.append('color', e.getAttribute("data-color"));
+
+            const url = "./scripts/change_color.php";
+            const XHR = new XMLHttpRequest();
+             // Define what happens on successful data submission
+            XHR.addEventListener('load', (event) => {
+              /*swal({
+                icon: "success",
+                text: "Color Guardado",
+                value: true,
+                visible: true,
+                className: "",
+                closeModal: true,
+              });*/
+			  location.reload();
+              
+            });
+
+            // Define what happens in case of an error
+            XHR.addEventListener('error', (event) => {
+              //swal("Error" ,  "Ocurrio un error al intentar guardar el pago" ,  "error");
+            });
+
+            // Set up our request
+            XHR.open('POST', url);
+
+            // Send our FormData object; HTTP headers are set automatically
+            XHR.send(formData);
+		}
+	</script>

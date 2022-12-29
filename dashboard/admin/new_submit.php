@@ -1,8 +1,9 @@
 <?php
-  require '../../include/db_conn.php';
-  page_protect();
+	require '../../include/db_conn.php';
+	require '../../include/get_color.php';
+	page_protect();
+	$principalColor = getColor($con);
 ?>
-
 <html lang="es">
   <head>
     <meta charset="utf-8" />

@@ -1,6 +1,8 @@
 ﻿<?php
-require '../../include/db_conn.php';
-page_protect();
+	require '../../include/db_conn.php';
+	require '../../include/get_color.php';
+	page_protect();
+	$principalColor = getColor($con);
 ?>
 <?php
 
@@ -45,7 +47,7 @@ $dotenv->load(); ?>
 					<div class="card mb-4">
 						<div class="card-body px-0 pt-0 pb-2">
 							<div class="table-responsive p-0">
-								<div class="a1-card-8 a1-light-gray" style="max-width:700px; margin:1em auto auto;">
+								<div class="" style="margin:1em;">
 									
 										<h6>Agregar Miembro</h6>
 									

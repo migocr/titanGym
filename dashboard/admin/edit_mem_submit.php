@@ -1,6 +1,13 @@
 <?php
    require '../../include/db_conn.php';
-   page_protect();  
+	require '../../include/get_color.php';
+   require  $_DIR . '\vendor\autoload.php' ;
+
+	page_protect();
+	$principalColor = getColor($con);
+   $_DIR = 'C:\xampp\htdocs\gym_l';
+   $dotenv = Dotenv\Dotenv::createImmutable($_DIR);
+   $dotenv->load();
 
 ?>
 
@@ -26,7 +33,7 @@
       <link id="pagestyle" href="../assets/css/soft-ui-dashboard.css?v=1.0.6" rel="stylesheet" />
    </head>
    <body class="g-sidenav-show  bg-gray-100">
-      <?php $active = 'new'; include 'components/menu.php'; ?>
+      <?php $active = 'members'; include 'components/menu.php'; ?>
       <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
          <?php $titlePage = 'Nuevo Registro'; include 'components/navbar.php'; ?>
          <div class="container-fluid py-4">
