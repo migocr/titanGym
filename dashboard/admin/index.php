@@ -203,7 +203,7 @@
 								<div class="col-4 text-end">
 									<div
 										class="icon icon-shape bg-gradient-primary shadow text-center border-radius-md" style=<?php echo "'background-image:$principalColor;'"?>>
-										<i class="ni ni-paper-diploma text-lg opacity-10" aria-hidden="true"></i>
+										<i class="fa-solid fa-user-check opacity-10"></i>
 									</div>
 								</div>
 							</div>
@@ -237,7 +237,7 @@
 								<div class="col-4 text-end">
 									<div
 										class="icon icon-shape bg-gradient-primary shadow text-center border-radius-md" style=<?php echo "'background-image:$principalColor;'"?>>
-										<i class="ni ni-cart text-lg opacity-10" aria-hidden="true"></i>
+										<i class="fa-solid fa-users-rays opacity-10"></i>
 									</div>
 								</div>
 							</div>

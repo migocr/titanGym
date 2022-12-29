@@ -1,7 +1,7 @@
 <aside class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3 "
 	id="sidenav-main">
 	<div class="sidenav-header">
-		<i class="fas fa-times p-3 cursor-pointer text-secondary opacity-5 position-absolute end-0 top-0 d-none d-xl-none"
+		<i class="fas fa-times p-3 cursor-pointer text-secondary opacity-10 position-absolute end-0 top-0 d-none d-xl-none"
 			aria-hidden="true" id="iconSidenav"></i>
 		<a class="navbar-brand m-0" href=" ./ ">
 			<img src="../assets/img/logo-ct-dark.png" class="navbar-brand-img h-100" alt="main_logo">
@@ -15,7 +15,7 @@
 				<a class="nav-link  <?php echo ($active == 'dashboard') ? "active"  : ""; ?>" href="./index.php">
 					<div style=<?php echo "'background-image:$principalColor;'"?>
 						class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
-						<i class="fa-solid fa-chart-line"></i>
+						<i class="fa-solid fa-chart-line opacity-10"></i>
 					</div>
 					<span class="nav-link-text ms-1">Resumen</span>
 				</a>
@@ -24,7 +24,7 @@
 				<a class="nav-link  <?php echo ($active == 'new') ? "active"  : ""; ?>" href="./new_entry.php">
 					<div style=<?php echo "'background-image:$principalColor;'"?>
 						class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
-						<i class="fa-solid fa-user-plus"></i>
+						<i class="fa-solid fa-user-plus opacity-10" ></i>
 					</div>
 					<span class="nav-link-text ms-1">Nuevo Registro</span>
 				</a>
@@ -59,7 +59,7 @@
 				<a class="nav-link  <?php echo ($active == 'members') ? "active"  : ""; ?>" href="./table_view.php">
 					<div style=<?php echo "'background-image:$principalColor;'"?>
 						class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
-						<i class="fa-solid fa-users"></i>
+						<i class="fa-solid fa-users opacity-10"></i>
 					</div>
 					<span class="nav-link-text ms-1">Miembros</span>
 				</a>
@@ -111,7 +111,7 @@
 				<a class="nav-link  " href="logout.php">
 					<div style=<?php echo "'background-image:$principalColor;'"?>
 						class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
-						<i class="fa-solid fa-power-off"></i>
+						<i class="fa-solid fa-power-off opacity-10"></i>
 					</div>
 					
 					<span class="nav-link-text ms-1">Salir</span>
