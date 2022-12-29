@@ -252,7 +252,7 @@
 							<div class="row">
 							<div class="col-12">
 								<div class="card mb-4" style="box-shadow: none;">
-									<div class="card-header pb-0">
+									<div class="card-header pb-0 pt-1">
 									<h6>Miembros proximos a caducar</h6>
 									</div>
 									<div class="card-body px-0 pt-0 pb-2">
