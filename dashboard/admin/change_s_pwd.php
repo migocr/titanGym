@@ -1,3 +1,5 @@
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
+
 <?php
 // $a = $_SERVER['HTTP_REFERER'];
 
@@ -22,8 +24,14 @@ if (isset($user_id_auth) && isset($pass) && isset($key)) {
     $count  = mysqli_num_rows($result);
     if ($count == 1) {
         mysqli_query($con, "UPDATE admin SET pass_key='$pass',securekey='$key' WHERE username='$user_id_auth'");
-        echo "<html><head><script>alert('Perfil actualizado, vuelva a iniciar sesión ');</script></head></html>";
-        echo "<meta http-equiv='refresh' content='0; url=logout.php'>";
+        echo "<html><head><script>
+        document.addEventListener('DOMContentLoaded', function () {
+          swal('Guardado' ,  'Perfil actualizado, vuelva a iniciar sesión ' ,  'success').then(function () {
+                window.location.href = './logout.php'
+          });;
+        });
+        </script></head></html>";
+       
     } else {
         echo "<html><head><script>alert('Cambio Insatisfactorio');</script></head></html>";
         echo "error".mysqli_error($con);

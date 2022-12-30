@@ -45,84 +45,86 @@ $dotenv->load(); ?>
 		<div class="container-fluid py-4">
 
 			<div class="row">
-				<div class="col-12">
-					<div class="card mb-4">
-						<div class="card-body px-0 pt-0 pb-2">
-							<div class="table-responsive p-0">
-								<div class="" style="margin:1em;">
-									
-										<h6>Agregar Miembro</h6>
-									
-									<form id="form1" name="form1" method="post" class="a1-container" action="new_submit.php">
-									<div class="form-group">
-										<label for="example-text-input" class="form-control-label">ID de Membresia</label>
-										<input class="form-control" type="text" id="boxx" name="m_id"
-																	value="<?php echo time(); ?>" readonly required />
-										
-									</div>
-									<div class="form-group">
-										<label for="example-search-input" class="form-control-label">Nombre</label>
-										
-										<input class="form-control" type="text" placeholder="Nombre del nuevo miembro" value=""
-											name="u_name" id="boxx" required>
-									</div>
-									<div class="form-group">
-										<label for="example-email-input" class="form-control-label">Genero</label>
-										<select style="width: 100%;
-											border: 1px #e9ecef solid;
-											border-radius: 5px;
-											padding: 5px;" name="gender" id="boxx" required>
-											<option value="">--Favor Seleccionar--</option>
-											<option value="Hombre">Hombre</option>
-											<option value="Mujer">Mujer</option>
-										</select>
-									</div>
-									<div class="form-group">
-										<label for="example-date-input" class="form-control-label">Fecha de ingreso</label>
-										<input class="form-control" type="date" value='<?php echo str_replace("/","-",date("Y/m/d"));?>'
-											name="jdate" id="boxx">
-									</div>
-									
-									<div class="form-group">
-										<label for="example-date-input" class="form-control-label">Fecha Caduca</label>
-										<input class="form-control" type="date" value='<?php echo str_replace("/","-",date("Y/m/d"));?>'
-											name="dob" id="expire-date" required>
-											
-									</div>
-									<div class="form-group">
-										<label for="example-color-input" class="form-control-label">Plan</label>
-										<select  style="width: 100%;
-											border: 1px #e9ecef solid;
-											border-radius: 5px;
-											padding: 5px;"  class="selectpicker " data-style="select-with-transition" title="Single Select" data-size="7"  name="plan" id="boxx" required
-																	onchange="changeExpireDate(this.value,this.options[this.selectedIndex].getAttribute('duration'),this.options[this.selectedIndex].getAttribute('durationtype'))">
-																	<option value="">--Favor Seleccionar--</option>
-																	<?php
-																	$query="select * from plan where active='yes'";
-																	$result=mysqli_query($con,$query);
-																	if(mysqli_affected_rows($con)!=0){
-																		while($row=mysqli_fetch_row($result)){
-																			echo "<option value=" .$row[0]." duration=". $row[3]." durationtype=". $row[6] . ">".$row[1]."</option>";
-																		}
-																	}
+				<div class="card" style="box-shadow: none;">
+					<div class="card-body pt-3 py-3 pb-0">
+						<div class="row">
+							<div class="col-12">
+								<div class="card mb-4" style="box-shadow: none;">
+									<div class="card-body px-0 pt-0 pb-0">
+										<div class="table-responsive p-0">
+											<div class="" style="margin:1em 1em 0 1em;">
+												
+													<h6>Agregar Miembro</h6>
+												
+												<form id="form1" name="form1" method="post" class="a1-container" action="new_submit.php">
+												
+												<div class="form-group">
+													<label for="example-search-input" class="form-control-label">Nombre</label>
+													
+													<input class="form-control" type="text" placeholder="Nombre del nuevo miembro" value=""
+														name="u_name" id="boxx" required>
+												</div>
+												<div class="form-group">
+													<label for="example-email-input" class="form-control-label">Genero</label>
+													<select style="width: 100%;
+														border: 1px #e9ecef solid;
+														border-radius: 5px;
+														padding: 5px;" name="gender" id="boxx" required>
+														<option value="">--Favor Seleccionar--</option>
+														<option value="Hombre">Hombre</option>
+														<option value="Mujer">Mujer</option>
+													</select>
+												</div>
+												<div class="form-group">
+													<label for="example-date-input" class="form-control-label">Fecha de ingreso</label>
+													<input class="form-control" type="date" value='<?php echo str_replace("/","-",date("Y/m/d"));?>'
+														name="jdate" id="boxx">
+												</div>
+												
+												<div class="form-group">
+													<label for="example-date-input" class="form-control-label">Fecha Caduca</label>
+													<input class="form-control" type="date" value='<?php echo str_replace("/","-",date("Y/m/d"));?>'
+														name="dob" id="expire-date" required>
+														
+												</div>
+												<div class="form-group">
+													<label for="example-color-input" class="form-control-label">Plan</label>
+													<select  style="width: 100%;
+														border: 1px #e9ecef solid;
+														border-radius: 5px;
+														padding: 5px;"  class="selectpicker " data-style="select-with-transition" title="Single Select" data-size="7"  name="plan" id="boxx" required
+																				onchange="changeExpireDate(this.value,this.options[this.selectedIndex].getAttribute('duration'),this.options[this.selectedIndex].getAttribute('durationtype'))">
+																				<option value="">--Favor Seleccionar--</option>
+																				<?php
+																				$query="select * from plan where active='yes'";
+																				$result=mysqli_query($con,$query);
+																				if(mysqli_affected_rows($con)!=0){
+																					while($row=mysqli_fetch_row($result)){
+																						echo "<option value=" .$row[0]." duration=". $row[3]." durationtype=". $row[6] . ">".$row[1]."</option>";
+																					}
+																				}
 
-																?>
+																			?>
 
-																</select>
+																			</select>
+												</div>
+												<div id="plandetls"></div>
+												<div style="width: auto; display: flex;justify-content: center;">
+													<input style="margin-right: 1em;background-image:<?php echo $principalColor ?>" class="btn btn-primary" type="submit" name="submit" id="submit" value="Registrar">
+													<input class="btn btn-default" type="reset" name="reset" id="reset" value="Borrar">
+												</div>
+												
+											</form>
+											</div>
+										</div>
 									</div>
-									<div id="plandetls"></div>
-									<div style="width: auto; display: flex;justify-content: center;">
-										<input class="btn btn-primary" type="submit" name="submit" id="submit" value="Registrar">
-										<input class="btn btn-default" type="reset" name="reset" id="reset" value="Borrar">
-									</div>
-									
-								</form>
 								</div>
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
+				
 			<footer class="footer pt-3  ">
 				<div class="container-fluid">
 					<div class="row align-items-center justify-content-lg-between">

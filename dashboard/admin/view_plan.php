@@ -53,7 +53,7 @@ $dotenv->load();
               <div class="table-responsive p-0">
                 <table class="table align-items-center justify-content-center mb-0">
 					<thead>
-						<tr>
+						<tr class='text-center'>
 							<th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">#</th>
 							<th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">ID de Plan</th>
 							<th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Nombre del Plan</th>
@@ -74,7 +74,7 @@ $dotenv->load();
 								while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
 									$msgid = $row['pid'];
 									                       
-									echo "<tr><td><div class='my-auto'><h6 class='mb-0 text-sm text-center'>" . $sno . "</h6></div></td>";
+									echo "<tr ><td><div class='my-auto'><h6 class='mb-0 text-sm text-center'>" . $sno . "</h6></div></td>";
 									echo "<td><p class='text-sm font-weight-bold mb-0 text-center'>" . $row['pid'] . "</p></td>";
 									echo "<td><p class='text-sm font-weight-bold mb-0 text-center'>" . $row['planName'] . "</p></td>";
 									echo "<td><p class='text-sm font-weight-bold mb-0 text-center'>" . $row['description'] . "</p></td>";
@@ -83,7 +83,7 @@ $dotenv->load();
 
 									$sno++;
 
-									echo '<td><a href=edit_plan.php?id="'.$row['pid'].'"><input type="button" class="btn btn-primary" id="boxxe"  value="Editar Plan" ></a><form action="del_plan.php" method="post" onSubmit="return ConfirmDelete();"><input type="hidden" name="name" value="' . $msgid .'"/><input type="submit" id="button1" value="Eliminar Plan" class="btn bg-gradient-danger"/></form></td></tr>';
+									echo '<td class="d-flex justify-content-evenly"><a href=edit_plan.php?id="'.$row['pid'].'"><i class="fa-solid fa-pen-to-square"></i></a><form action="del_plan.php" method="post" onSubmit="return ConfirmDelete();"><input type="hidden" name="name" value="' . $msgid .'"/><i class="fa-solid fa-trash"></i></form></td></tr>';
 									
 									$msgid = 0;
 								}

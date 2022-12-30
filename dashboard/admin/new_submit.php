@@ -42,7 +42,7 @@
       
   </body>
   <?php
-    $memID=$_POST['m_id'];
+    //$memID=$_POST['m_id'];
     $uname=$_POST['u_name'];
     $gender=$_POST['gender'];
     $dob=$_POST['dob'];
@@ -50,8 +50,9 @@
     $plan=$_POST['plan'];
 
 //inserting into users table
-    $query="insert into users(username,gender,dob,joining_date,userid) values('$uname','$gender','$dob','$jdate','$memID')";
+    $query="insert into users(username,gender,dob,joining_date) values('$uname','$gender','$dob','$jdate')";
       if(mysqli_query($con,$query)==1){
+        $memID = $con->insert_id;
         //Retrieve information of plan selected by user
         $query1="select * from plan where pid='$plan'";
         $result=mysqli_query($con,$query1);

@@ -75,10 +75,10 @@
 				</a>
 			</li>
 			<li class="nav-item mt-3">
-				<h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Cuenta</h6>
+				<h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Ajustes</h6>
 			</li>
 			<li class="nav-item">
-				<a class="nav-link  " href="more-userprofile.php">
+				<a class="nav-link  <?php echo ($active == 'system') ? 'active'  : ''; ?>" href="account.php">
 					<div style=<?php echo "'background-image:$principalColor;'"?>
 						class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
 						<svg width="16px" height="16px" viewBox="0 0 40 40" version="1.1"
@@ -103,6 +103,15 @@
 								</g>
 							</g>
 						</svg>
+					</div>
+					<span class="nav-link-text ms-1">Sistema</span>
+				</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link  <?php echo ($active == 'account') ? 'active'  : ''; ?>" href="account.php">
+					<div style=<?php echo "'background-image:$principalColor;'"?>
+						class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
+						<i style="opacity:1" class="fa-solid fa-user-lock"></i>
 					</div>
 					<span class="nav-link-text ms-1">Cuenta</span>
 				</a>
