@@ -52,11 +52,11 @@
 							</g>
 						</svg>
 					</div>
-					<span class="nav-link-text ms-1">Pago</span>
+					<span class="nav-link-text ms-1">Historial de Pagos</span>
 				</a>
 			</li>
 			<li class="nav-item">
-				<a class="nav-link  <?php echo ($active == 'members') ? "active"  : ""; ?>" href="./table_view.php">
+				<a class="nav-link  <?php echo ($active == 'members') ? "active"  : ""; ?>" href="./members.php">
 					<div style=<?php echo "'background-image:$principalColor;'"?>
 						class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
 						<i class="fa-solid fa-users opacity-10"></i>

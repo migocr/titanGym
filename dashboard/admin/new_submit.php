@@ -81,8 +81,12 @@
                 //echo "<meta http-equiv='refresh' content='0; url=new_entry.php'>";
                 }
                 else{
-                    echo "<head><script>
-                    alert('Miembro Agregado Fallo');</script></head></html>";
+                  echo "<html><head><script>
+                  document.addEventListener('DOMContentLoaded', function () {
+                    swal('Error' ,  'Error al intentar guardar' ,  'error').then((event) => {window.location.href = window.location.href.replace('new_submit.php', 'new_entry.php');});
+                    //setTimeout(function(){ window.location.href = window.location.href.replace('new_submit.php', 'new_entry.php'); }, 3000);
+                  });
+                  </script></head></html>";
                   echo "error: ".mysqli_error($con);
                   //Deleting record of users if inserting to enrolls_to table failed to execute
                   $query3 = "DELETE FROM users WHERE userid='$memID'";
@@ -91,7 +95,12 @@
               }
               
               else{
-                echo "<head><script>alert('Miembro Agregado Fallido');</script></head></html>";
+                echo "<html><head><script>
+                document.addEventListener('DOMContentLoaded', function () {
+                  swal('Error' ,  'Error al intentar guardar' ,  'error').then((event) => {window.location.href = window.location.href.replace('new_submit.php', 'new_entry.php');});
+                  //setTimeout(function(){ window.location.href = window.location.href.replace('new_submit.php', 'new_entry.php'); }, 3000);
+                });
+                </script></head></html>";
                 echo "error: ".mysqli_error($con);
                 //Deleting record of users if inserting to enrolls_to table failed to execute
                   $query3 = "DELETE FROM users WHERE userid='$memID'";
@@ -100,7 +109,12 @@
               
             }
             else{
-              echo "<head><script>alert('Miembro Agregado Fallido');</script></head></html>";
+              echo "<html><head><script>
+              document.addEventListener('DOMContentLoaded', function () {
+                swal('Error' ,  'Error al intentar guardar' ,  'error').then((event) => {window.location.href = window.location.href.replace('new_submit.php', 'new_entry.php');});
+                //setTimeout(function(){ window.location.href = window.location.href.replace('new_submit.php', 'new_entry.php'); }, 3000);
+              });
+              </script></head></html>";
               echo "error: ".mysqli_error($con);
               //Deleting record of users if inserting to enrolls_to table failed to execute
               $query3 = "DELETE FROM users WHERE userid='$memID'";
@@ -111,7 +125,12 @@
           }
           else
           {
-            echo "<head><script>alert('Miembro Agregado Fallo');</script></head></html>";
+            echo "<html><head><script>
+            document.addEventListener('DOMContentLoaded', function () {
+              swal('Error' ,  'Error al intentar guardar' ,  'error').then((event) => {window.location.href = window.location.href.replace('new_submit.php', 'new_entry.php');});
+              //setTimeout(function(){ window.location.href = window.location.href.replace('new_submit.php', 'new_entry.php'); }, 3000);
+            });
+            </script></head></html>";
             echo "error: ".mysqli_error($con);
             //Deleting record of users if retrieving inf of plan failed
             $query3 = "DELETE FROM users WHERE userid='$memID'";
@@ -120,7 +139,12 @@
 
       }
       else{
-        echo "<head><script>alert('Miembro Agregado Fallido');</script></head></html>";
+        echo "<html><head><script>
+                  document.addEventListener('DOMContentLoaded', function () {
+                    swal('Error' ,  'Error al intentar guardar' ,  'error').then((event) => {window.location.href = window.location.href.replace('new_submit.php', 'new_entry.php');});
+                    //setTimeout(function(){ window.location.href = window.location.href.replace('new_submit.php', 'new_entry.php'); }, 3000);
+                  });
+                  </script></head></html>";
         echo "error: ".mysqli_error($con);
       }
   ?>

@@ -58,7 +58,7 @@
       if(mysqli_query($con,$query1)){
          echo "<html><head><script>
                     document.addEventListener('DOMContentLoaded', function () {
-                      swal('Guardado' ,  'Miembro agregado exitosamente' ,  'success').then((event) => {window.location.href = window.location.href.replace('edit_mem_submit.php', 'table_view.php');});
+                      swal('Guardado' ,  'Miembro agregado exitosamente' ,  'success').then((event) => {window.location.href = window.location.href.replace('edit_mem_submit.php', 'members.php');});
                       //setTimeout(function(){ window.location.href = window.location.href.replace('new_submit.php', 'new_entry.php'); }, 3000);
                     });
                     </script></head></html>";

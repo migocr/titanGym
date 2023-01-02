@@ -129,14 +129,40 @@ $dotenv->load();
                                       <div class='d-flex px-2'>
                                         <h6 class='mb-0 text-sm'>". $row['username'] ." </h6>
                                       </td>";
+                                      // convertimos las fechas a formato Unix
+                                      $expireDate =  str_replace('-', '/', $row['dob']);
+                                      $today = date('Y/m/d');
+                                      //$my_date = date('d/m/Y', strtotime($date));
 
+                                      $now = strtotime($today);
+
+                                      $timestamp1 = strtotime($expireDate);
+                                      $timestamp2 = strtotime($today);
+                                      //echo $today;
+                                      if (date('Ymd', $timestamp1) <= date('Ymd', $timestamp2)) {
+                                          //echo $today . 'es menor que' . $expireDate;
+                                          $memberStatus = false;
+                                          $statusString = "Expirado";
+                                          $statusClass = "bg-gradient-danger";
+                                      } else {
+                                          //echo  $today . 'es mayor o igual que'. $expireDate;
+                                          $memberStatus = true;
+                                          $statusString = "Activo";
+                                          $statusClass = "bg-gradient-success";
+                                      }
+
+                                      $query2  = "select * from enrolls_to where uid = $uid order by paid_date desc limit 1";
+                                      $result2 = mysqli_query($con, $query2);
+                                      $lastPayment = mysqli_fetch_array($result2);
+                                      $lastPaymentStr = $lastPayment ? str_replace('-', '/', date("d-m-Y", strtotime($lastPayment['paid_date']))) : "NA";
+                                      
+                                    
+                                    
                                               
-                                      echo "<td>" . $row['joining_date'] ."</td>";
-                                              echo "<td class='text-center'><span class='badge badge-sm bg-gradient-success'>Activo</span></td>";
+                                      echo "<td><p class='text-sm font-weight-bold mb-0'> $lastPaymentStr</p></td>";
+                                      echo "<td class='text-center'><span class='badge badge-sm ${statusClass}'>$statusString</span></td>";
 
-                                              
-
-                                      echo "<td class='text-center'><p class='text-xs font-weight-bold mb-0'>" . $row['dob'] . "</p></td>";
+                                      echo "<td class='text-center'><p class='text-sm font-weight-bold mb-0'>" . str_replace('-', '/', date("d-m-Y", strtotime($row['dob']))) . "</p></td>";
 
                                             
 

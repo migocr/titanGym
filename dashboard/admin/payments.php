@@ -42,83 +42,150 @@
   <!-- Font Awesome Icons -->
   <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
   <link href="../assets/css/nucleo-svg.css" rel="stylesheet" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
+    integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
 
   <!-- CSS Files -->
   <link id="pagestyle" href="../assets/css/soft-ui-dashboard.css?v=1.0.6" rel="stylesheet" />
 </head>
 
 <body class="g-sidenav-show  bg-gray-100">
-	<?php $active = 'payment'; include 'components/menu.php'; ?>
+  <?php $active = 'payment'; include 'components/menu.php'; ?>
   <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
     <!-- Navbar -->
     <?php $titlePage = 'Pagos'; include 'components/navbar.php'; ?>
     <!-- End Navbar -->
     <div class="container-fluid py-4">
-     
+
       <div class="row">
-        <div class="col-12">
-          <div class="card mb-4">
-            <div class="card-header pb-0">
-              <h6>Pagos</h6>
+        <div class="card" style="box-shadow: none;">
+          <div class="card-header pb-0">
+            <div class="d-flex justify-content-between">
+              <h6>Lista de miembros</h6>
+              <p>
+                Total : 4</p>
             </div>
-            <div class="card px-4">
-              <div class="table-responsive">
-                <table class="table align-items-center mb-0" id="table-1">
-                  <thead>
-                    <tr>
-                      <th>#</th>
-                      <th>Fecha de Expiración</th>
-                      <th>Nombre</th>
-                      <th>ID de Miembro</th>
-                      <th>Género</th>
-                      <th>Acción</th>
-                    </tr>
-                  </thead>
-
-				          <tbody>
-
-				            <?php
-
-
-                    $query  = "select * from enrolls_to where renewal='yes' ORDER BY expire";
-                    //echo $query;
-                    $result = mysqli_query($con, $query);
-                    $sno    = 1;
-
-                    if (mysqli_affected_rows($con) != 0) {
-                        while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
-
-                            $uid   = $row['uid'];
-                            $planid=$row['pid'];
-                            $query1  = "select * from users WHERE userid='$uid'";
-                            $result1 = mysqli_query($con, $query1);
-                            if (mysqli_affected_rows($con) == 1) {
-                                while ($row1 = mysqli_fetch_array($result1, MYSQLI_ASSOC)) {
-                                    
-                                    echo "<tr><td>".$sno."</td>";
-                                    echo "<td>" . $row['expire'] . "</td>";
-                                    echo "<td>" . $row1['username'] . "</td>";
-                                    echo "<td>" . $row1['userid'] . "</td>";
-                                    echo "<td>" . $row1['gender'] . "</td>";
-                                    
-                                    $sno++;
-                                    
-                                    echo "<td><form action='make_payments.php' method='post'><input type='hidden' name='userID' value='" . $uid . "'/>
-                                    <input type='hidden' name='planID' value='" . $planid . "'/><input type='submit' class='btn btn-default' value='Agregar Pago ' class='btn btn-info'/></form></td></tr>";
-                            
-                                    $uid = 0;
-                                }
-                            }
-                        }
-                    }
-
-                    ?>									
-				          </tbody>
-		            </table>
-              </div>
+            <div class="input-group">
+              <span class="input-group-text text-body"><i class="fas fa-search" aria-hidden="true"></i></span>
+              <input id="buscador" type="text" class="form-control" placeholder="Buscar pago por nombre o id..."
+                onfocus="focused(this)" onfocusout="defocused(this)">
             </div>
           </div>
+          <div class="card-body p-3">
+            <div class="row">
+              <div class="col-12">
+                <div class="table-responsive p-0">
+                  <table class="table align-items-center mb-0">
+                    <thead>
+                      <tr>
+                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Nombre</th>
+                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Fecha de pago</th>
+                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Fecha de expiracion</th>
+                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Status
+                        </th>
+                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                          Caduca</th>
+                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                          Editar</th>
+                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                          Pagar</th>
+                      </tr>
+                    </thead>
+                    <tbody id="membersTable">
+                    <?php
+
+
+                      $query  = "select * from enrolls_to ORDER BY expire";
+                      //echo $query;
+                      $result = mysqli_query($con, $query);
+                      $sno    = 1;
+
+                      if (mysqli_affected_rows($con) != 0) {
+                          while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
+
+                              $uid   = $row['uid'];
+                              $planid=$row['pid'];
+                              $etId = $row['et_id'];
+                              $paidDate= str_replace('-', '/', date("d-m-Y", strtotime($row['paid_date'])));
+                              $expireDate= str_replace('-', '/', date("d-m-Y", strtotime($row['expire'])));
+                             
+                             
+                              echo "<tr json-data=''>";
+                              $query2  = "select * from users where userid = $uid limit 1";
+                              $result2 = mysqli_query($con, $query2);
+                              $user = mysqli_fetch_array($result2);
+                              $userName = $user['username'];
+
+                              $query3  = "select * from plan where pid = '$planid' limit 1";
+                              $result3 = mysqli_query($con, $query3);
+                              $planData = mysqli_fetch_array($result3);
+                              $planName = $planData['planName'];
+
+                              // convertimos las fechas a formato Unix
+                              $expireDate =  str_replace('-', '/', $row['expire']);
+                              $today = date('Y/m/d');
+                              //$my_date = date('d/m/Y', strtotime($date));
+
+                              $now = strtotime($today);
+
+                              $timestamp1 = strtotime($expireDate);
+                              $timestamp2 = strtotime($today);
+                              //echo $today;
+                              if (date('Ymd', $timestamp1) <= date('Ymd', $timestamp2)) {
+                                  //echo $today . 'es menor que' . $expireDate;
+                                  $memberStatus = false;
+                                  $statusString = "Expirado";
+                                  $statusClass = "bg-gradient-danger";
+                              } else {
+                                  //echo  $today . 'es mayor o igual que'. $expireDate;
+                                  $memberStatus = true;
+                                  $statusString = "Activo";
+                                  $statusClass = "bg-gradient-success";
+                              }
+
+
+                              echo "<td>
+                                  <div class='d-flex px-2'>
+                                    <h6 class='mb-0 text-sm'>$userName</h6>
+                                  </div>
+                                </td>";
+                                echo "<td>
+                                  <div class='d-flex px-2'>
+                                    <h6 class='mb-0 text-sm'>$paidDate</h6>
+                                  </div>
+                                </td>";
+                                echo "<td>
+                                  <div class='d-flex px-2'>
+                                    <h6 class='mb-0 text-sm'>$expireDate</h6>
+                                  </div>
+                                </td>";
+                                echo "<td>
+                                  <div class='d-flex px-2'>
+                                    <h6 class='mb-0 text-sm'>$planName</h6>
+                                  </div>
+                                </td>";
+                                echo "<td class='text-center'>
+                                <span class='badge badge-sm $statusClass'>$statusString</span>
+                                 
+                                </td>";
+                                echo "</tr>";
+
+                          }
+                      }
+                      ?>			
+                     
+                    </tbody>
+
+
+                  </table>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+
         </div>
       </div>
       <footer class="footer pt-3  ">
@@ -140,13 +207,15 @@
                   <a href="https://www.creative-tim.com" class="nav-link text-muted" target="_blank">Creative Tim</a>
                 </li>
                 <li class="nav-item">
-                  <a href="https://www.creative-tim.com/presentation" class="nav-link text-muted" target="_blank">About Us</a>
+                  <a href="https://www.creative-tim.com/presentation" class="nav-link text-muted" target="_blank">About
+                    Us</a>
                 </li>
                 <li class="nav-item">
                   <a href="https://www.creative-tim.com/blog" class="nav-link text-muted" target="_blank">Blog</a>
                 </li>
                 <li class="nav-item">
-                  <a href="https://www.creative-tim.com/license" class="nav-link pe-0 text-muted" target="_blank">License</a>
+                  <a href="https://www.creative-tim.com/license" class="nav-link pe-0 text-muted"
+                    target="_blank">License</a>
                 </li>
               </ul>
             </div>
@@ -177,5 +246,3 @@
 </body>
 
 </html>
-
-
