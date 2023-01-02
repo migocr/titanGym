@@ -67,45 +67,12 @@
             $query2="insert into enrolls_to(pid,uid,paid_date,expire,renewal) values('$plan','$memID','$cdate','$expiredate','yes')";
             if(mysqli_query($con,$query2)==1){
 
-              $query4="insert into health_status(uid) values('$memID')";
-              if(mysqli_query($con,$query4)==1){
-
-                $query5="insert into address(id) values('$memID')";
-                if(mysqli_query($con,$query5)==1){
-                  echo "<html><head><script>
+              echo "<html><head><script>
                     document.addEventListener('DOMContentLoaded', function () {
                       swal('Guardado' ,  'Miembro agregado exitosamente' ,  'success').then((event) => {window.location.href = window.location.href.replace('new_submit.php', 'new_entry.php');});
                       //setTimeout(function(){ window.location.href = window.location.href.replace('new_submit.php', 'new_entry.php'); }, 3000);
                     });
                     </script></head></html>";
-                //echo "<meta http-equiv='refresh' content='0; url=new_entry.php'>";
-                }
-                else{
-                  echo "<html><head><script>
-                  document.addEventListener('DOMContentLoaded', function () {
-                    swal('Error' ,  'Error al intentar guardar' ,  'error').then((event) => {window.location.href = window.location.href.replace('new_submit.php', 'new_entry.php');});
-                    //setTimeout(function(){ window.location.href = window.location.href.replace('new_submit.php', 'new_entry.php'); }, 3000);
-                  });
-                  </script></head></html>";
-                  echo "error: ".mysqli_error($con);
-                  //Deleting record of users if inserting to enrolls_to table failed to execute
-                  $query3 = "DELETE FROM users WHERE userid='$memID'";
-                  mysqli_query($con,$query3);
-                }
-              }
-              
-              else{
-                echo "<html><head><script>
-                document.addEventListener('DOMContentLoaded', function () {
-                  swal('Error' ,  'Error al intentar guardar' ,  'error').then((event) => {window.location.href = window.location.href.replace('new_submit.php', 'new_entry.php');});
-                  //setTimeout(function(){ window.location.href = window.location.href.replace('new_submit.php', 'new_entry.php'); }, 3000);
-                });
-                </script></head></html>";
-                echo "error: ".mysqli_error($con);
-                //Deleting record of users if inserting to enrolls_to table failed to execute
-                  $query3 = "DELETE FROM users WHERE userid='$memID'";
-                  mysqli_query($con,$query3);
-              }
               
             }
             else{
