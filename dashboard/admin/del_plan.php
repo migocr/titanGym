@@ -1,3 +1,4 @@
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
 <?php
 require '../../include/db_conn.php';
 page_protect();
@@ -5,11 +6,20 @@ page_protect();
 $msgid = $_POST['name'];
 if (strlen($msgid) > 0) {
     mysqli_query($con, "update plan set active ='no' WHERE pid='$msgid'");
-    echo "<html><head><script>alert('Miembro Eliminado');</script></head></html>";
-    echo "<meta http-equiv='refresh' content='0; url=view_plan.php'>";
+    echo "<script>window.addEventListener('load', (event) => {
+        swal('Listo!' ,  'Membresia Eliminada' ,  'success').then(function () {
+            window.location.href = './view_plan.php'
+        });;
+    })        
+    </script>";
+   
 } else {
-    echo "<html><head><script>alert('ERROR! Eliminar operación no exitosa');</script></head></html>";
-   echo "error".mysqli_error($con);
+    echo "<script>window.addEventListener('load', (event) => {
+        swal('Error!' ,  'No se pudo eliminar la membresia' ,  'error').then(function () {
+            window.location.href = './view_plan.php'
+        });;
+    })        
+    </script>";
 }
 
 ?>

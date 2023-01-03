@@ -1,3 +1,4 @@
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
 <?php
 require '../../include/db_conn.php';
 page_protect();
@@ -7,22 +8,35 @@ page_protect();
     $desc = $_POST['desc'];
     $planval = $_POST['planval'];
     $amount = $_POST['amount'];
+    if ( isset( $_POST['planTimeType'] ) ) {
+      $planTimeType  = $_POST['planTimeType'];
+    } else {
+      $planTimeType  = '';
+    }
+   
     
    //Inserting data into plan table
-    $query="insert into plan(pid,planName,description,validity,amount,active) values('$planid','$name','$desc','$planval','$amount','yes')";
+    $query="insert into plan(pid,planName,description,validity,amount,active, planType) values('$planid','$name','$desc','$planval','$amount','yes', '$planTimeType')";
    
    
 
-	 if(mysqli_query($con,$query)==1){
+	 if(mysqli_query($con,$query)==1){        
         
-        echo "<head><script>alert('Plan Agregado ');</script></head></html>";
-        echo "<meta http-equiv='refresh' content='0; url=new_plan.php'>";
-       
+        echo "<script>window.addEventListener('load', (event) => {
+          swal('Listo!' ,  'Membresia Agregada' ,  'success').then(function () {
+              window.location.href = './view_plan.php'
+          });;
+        })        
+        </script>";
       }
 
     else{
-        echo "<head><script>alert('Proceso no satisfactorio, intenta de nuevo');</script></head></html>";
-        echo "error".mysqli_error($con);
+      echo "<script>window.addEventListener('load', (event) => {
+          swal('Error!' ,  'No se pudo agregar el membresia' ,  'error').then(function () {
+              window.location.href = './view_plan.php'
+          });;
+        })        
+        </script>";
       }
 
 ?>

@@ -4,30 +4,20 @@
     $response->status = false;
     $response->updateStatus = false;
     $response->errorCode = $_POST['color'];
+    
     if (isset($_POST['color'])) {
         $response->errorCode = "ENTRA";
         $color  = $_POST['color'];
-        $sql="select config from system_settings where nombre='color'";
-        $result = $con->query($sql);
-        if ($result) {
-            // output data of each row
-            while($row = $result->fetch_assoc()) {
-                // Actualizar el campo 
-                $sql = "update system_settings set config='$color' where nombre='color'";
+        $atributo  = $_POST['atributo'];
+        $sql = "update system_settings set config='$color' where nombre='${atributo}'";
     
-                if ($con->query($sql) === TRUE) {
-                    echo "Registro actualizado exitosamente";
-                    $response->status = true;
-                    $response->updateStatus = true;
-                   
-                } else {
-                    echo "Error actualizando registro: " . $con->error;
-                    $response->errorCode = $con->error;
-                }
-            }
+        if ($con->query($sql) === TRUE) {
+            //echo "Registro actualizado exitosamente";
+            $response->status = true;
+            $response->updateStatus = true;   
         } else {
-            echo "0 results";
-            $response->errorCode = "NO RESULTS";
+            //echo "Error actualizando registro: " . $con->error;
+            $response->errorCode = $con->error;
         }
     } 
     

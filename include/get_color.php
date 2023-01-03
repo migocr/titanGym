@@ -8,4 +8,13 @@
         }	
         return $principalColor;
     }
+    function getBackgroundColor($con) {
+        $query="select config from system_settings where nombre='backgroundColor'";
+        $result=mysqli_query($con,$query);
+        $principalColor;
+        while ($row = $result->fetch_assoc()) {
+            $principalColor = $row['config'];
+        }	
+        return $principalColor;
+    }
 ?>

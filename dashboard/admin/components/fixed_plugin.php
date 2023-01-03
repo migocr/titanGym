@@ -6,7 +6,7 @@
 			<div class="card-header pb-0 pt-3 ">
 				<div class="float-start">
 					<h5 class="mt-3 mb-0">TitaniumGym Configuracion</h5>
-					<p>See our dashboard options.</p>
+					<p>Personalizar aspecto</p>
 				</div>
 				<div class="float-end mt-4">
 					<button class="btn btn-link text-dark p-0 fixed-plugin-close-button">
@@ -19,34 +19,57 @@
 			<div class="card-body pt-sm-3 pt-0">
 				<!-- Sidebar Backgrounds -->
 				<div>
-					<h6 class="mb-0">Sidebar Colors</h6>
+					<h6 class="mb-0">Color de iconos</h6>
 				</div>
 				<a href="javascript:void(0)" class="switch-trigger background-color">
 					<div class="badge-colors my-2 text-start">
-						<span class="badge filter bg-gradient-primary active" data-color="linear-gradient(310deg, #7928CA 0%, #FF0080 100%)"
+						<span class="badge filter bg-gradient-primary active" data-attr="color" data-color="linear-gradient(310deg, #7928CA 0%, #FF0080 100%)"
 							onclick="sidebarColorCustom(this)"></span>
-						<span class="badge filter bg-gradient-dark" data-color="linear-gradient(310deg, #141727 0%, #3A416F 100%)"
+						<span class="badge filter bg-gradient-dark" data-attr="color" data-color="linear-gradient(310deg, #141727 0%, #3A416F 100%)"
 							onclick="sidebarColorCustom(this)"></span>
-						<span class="badge filter bg-gradient-info" data-color="linear-gradient(310deg, #2152ff 0%, #21d4fd 100%)"
+						<span class="badge filter bg-gradient-info" data-attr="color" data-color="linear-gradient(310deg, #2152ff 0%, #21d4fd 100%)"
 							onclick="sidebarColorCustom(this)"></span>
-						<span class="badge filter bg-gradient-success" data-color="linear-gradient(310deg, #17ad37 0%, #7ea151 100%)"
+						<span class="badge filter bg-gradient-success" data-attr="color" data-color="linear-gradient(310deg, #17ad37 0%, #7ea151 100%)"
 							onclick="sidebarColorCustom(this)"></span>
-						<span class="badge filter bg-gradient-warning" data-color="linear-gradient(310deg, #f53939 0%, #fbcf33 100%)"
+						<span class="badge filter bg-gradient-warning" data-attr="color" data-color="linear-gradient(310deg, #f53939 0%, #fbcf33 100%)"
 							onclick="sidebarColorCustom(this)"></span>
-						<span class="badge filter bg-gradient-danger" data-color="linear-gradient(310deg, #ea0606 0%, #ff667c 100%)"
+						<span class="badge filter bg-gradient-danger" data-attr="color" data-color="linear-gradient(310deg, #ea0606 0%, #ff667c 100%)"
+							onclick="sidebarColorCustom(this)"></span>
+					</div>
+				</a>
+				<div>
+					<h6 class="mb-0">Color de Fondo</h6>
+				</div>
+				<a href="javascript:void(0)" class="switch-trigger background-color">
+					<div class="badge-colors my-2 text-start">
+					<span class="badge filter bg-gradient-info" style="background: white; border: solid 1px black;" data-attr="backgroundColor" data-color=""
+							onclick="sidebarColorCustom(this)"></span>
+						<span class="badge filter bg-gradient-primary active" style="background-image: linear-gradient(160deg, #0093E9 0%, #80D0C7 100%);" data-attr="backgroundColor" data-color="linear-gradient(160deg, #0093E9 0%, #80D0C7 100%);"
+							onclick="sidebarColorCustom(this)"></span>
+						<span class="badge filter bg-gradient-dark" style="background:  linear-gradient(177deg, #FBAB7E 0%, #F7CE68 100%);;"  data-attr="backgroundColor" data-color=" linear-gradient(177deg, #FBAB7E 0%, #F7CE68 100%);"
+							onclick="sidebarColorCustom(this)"></span>
+						<span class="badge filter bg-gradient-info" style="background-image:  linear-gradient( 83.2deg,  rgba(150,93,233,1) 10.8%, rgba(99,88,238,1) 94.3% );" data-attr="backgroundColor" data-color=" linear-gradient( 83.2deg,  rgba(150,93,233,1) 10.8%, rgba(99,88,238,1) 94.3% )"
+							onclick="sidebarColorCustom(this)"></span>
+						<span class="badge filter bg-gradient-success" style="background-image:  linear-gradient( 179.6deg,  rgba(0,19,26,1) -4.9%, rgba(0,77,105,1) 108.4% );" data-attr="backgroundColor" data-color=" linear-gradient( 179.6deg,  rgba(0,19,26,1) -4.9%, rgba(0,77,105,1) 108.4% )"
+							onclick="sidebarColorCustom(this)"></span>
+						<span class="badge filter bg-gradient-warning" style="background-image: radial-gradient( circle farthest-corner at 10% 20%,  rgba(0,0,0,1) 0%, rgba(0,0,0,1) 90% );;" data-attr="backgroundColor" data-color="radial-gradient( circle farthest-corner at 10% 20%,  rgba(0,0,0,1) 0%, rgba(0,0,0,1) 90% );"
+							onclick="sidebarColorCustom(this)"></span>
+						<span class="badge filter bg-gradient-danger" style="background: transparent;" data-attr="backgroundColor" data-color="transparent"
 							onclick="sidebarColorCustom(this)"></span>
 					</div>
 				</a>
 				<!-- Sidenav Type -->
 				<div class="mt-3">
-					<h6 class="mb-0">Sidenav Type</h6>
+					<h6 class="mb-0">Color del Menu</h6>
 					<p class="text-sm">Choose between 2 different sidenav types.</p>
 				</div>
 				<div class="d-flex">
 					<button class="btn bg-gradient-primary w-100 px-3 mb-2 active" data-class="bg-transparent"
-						onclick="sidebarType(this)">Transparent</button>
+						onclick="sidebarType(this)">Defult</button>
 					<button class="btn bg-gradient-primary w-100 px-3 mb-2 ms-2" data-class="bg-white"
-						onclick="sidebarType(this)">White</button>
+						onclick="sidebarType(this)">Blanco</button>
+					<button class="btn bg-gradient-primary w-100 px-3 mb-2 ms-2" data-class="bg-black"
+						onclick="sidebarType(this)">Negro</button>
 				</div>
 				<p class="text-sm d-xl-none d-block mt-2">You can change the sidenav type just on desktop view.</p>
 				<!-- Navbar Fixed -->
@@ -80,6 +103,11 @@
 			</div>
 		</div>
 	</div>
+	<style>
+		.bg-black {
+			background-color: black;
+		}
+	</style>
 	<script>
 		function sidebarColorCustom(e) {
 			console.log(e.getAttribute("data-color"));
@@ -87,6 +115,8 @@
           
           
             formData.append('color', e.getAttribute("data-color"));
+			console.log(e.getAttribute("data-attr"));
+			formData.append('atributo', e.getAttribute("data-attr"));
 
             const url = "./scripts/change_color.php";
             const XHR = new XMLHttpRequest();
@@ -101,12 +131,14 @@
                 closeModal: true,
               });*/
 			  location.reload();
+			  console.log(event);
               
             });
 
             // Define what happens in case of an error
             XHR.addEventListener('error', (event) => {
               //swal("Error" ,  "Ocurrio un error al intentar guardar el pago" ,  "error");
+			  console.log(event);
             });
 
             // Set up our request

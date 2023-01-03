@@ -1,5 +1,6 @@
 ﻿<?php
 require '../../include/db_conn.php';
+require '../../include/get_color.php';
 page_protect();
 ?>
 <?php
@@ -7,6 +8,7 @@ $_DIR = 'C:\xampp\htdocs\gym_l';
 require  $_DIR . '\vendor\autoload.php' ;
 $dotenv = Dotenv\Dotenv::createImmutable($_DIR);
 $dotenv->load(); 
+$principalColor = getColor($con);
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -53,28 +55,50 @@ $dotenv->load();
 										return substr(implode($word), 0, $len);
 									}
 								?>
-								<input class="form-control" type="text" name="planid" id="planID" readonly value="<?php echo getRandomWord(); ?>"></td>		
+								<input class="form-control" type="text" name="planid" id="planID" readonly value="<?php echo getRandomWord(); ?>" required></td>		
 							</div>
 							<div class="form-group">
 								<label for="example-text-input" class="form-control-label">Nombre de membresia</label>
-								<input class="form-control" name="planname" id="planName" type="text" placeholder="Ingrese el nombre del plan" size="40">
+								<input class="form-control" name="planname" id="planName" type="text" placeholder="Ingrese el nombre del plan" size="40" required>
 							</div>
 							<div class="form-group">
 								<label for="example-text-input" class="form-control-label">Descripción de membresia</label>
 								<input class="form-control" type="text" name="desc" id="planDesc" placeholder="Ingrese la descripción del plan" size="40">
 							</div>
-							<div class="form-group">
-								<label for="example-text-input" class="form-control-label">Validez de membresia</label>
-								<input class="form-control" type="number" name="planval" id="planVal" placeholder="Ingrese el tiempo de validez en meses" size="40">
+							<div style="display: inline-flex;
+										justify-content: flex-start;
+										width: 100%;
+										align-items: center;">
+								<div class="form-group" style="width:50%;">
+									<label for="example-text-input" class="form-control-label">Validez de membresia</label>
+									<input class="form-control" type="number" name="planval" id="planVal" placeholder="Ingrese el tiempo de validez en meses" size="40" required>
+								</div>
+								<div style="margin-left:1em;">
+									<div class="form-check mb-3">
+										<input class="form-check-input" type="radio" name="planTimeType" value="m" id="customRadio1" required>
+										<label class="custom-control-label" for="customRadio1">Meses</label>
+									</div>
+									<div class="form-check">
+										<input class="form-check-input" type="radio" name="planTimeType" value="d" id="customRadio2" required>
+										<label class="custom-control-label" for="customRadio2">Dias</label>
+									</div>
+								</div>
+								
 							</div>
+							
 							<div class="form-group">
 								<label for="example-text-input" class="form-control-label">Costo de membresia</label>
-								<input class="form-control" type="text" name="amount" id="planAmnt" placeholder="Enter plan amount" size="40">
+								<input class="form-control" type="number" name="amount" id="planAmnt" placeholder="Enter plan amount" size="40" required>
+								
+								
+
 							</div>
+							
 							<div class="form-group">
 								<input class="a1-btn a1-blue" type="submit" name="submit" id="submit" value="Crear Plan" >
 								<input class="a1-btn a1-blue" type="reset" name="reset" id="reset" value="Borrar">
 							</div>
+							
 						</form>
 					</div>
 				</div>

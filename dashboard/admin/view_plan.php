@@ -58,7 +58,7 @@ $dotenv->load();
 							<th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">ID de Plan</th>
 							<th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Nombre del Plan</th>
 							<th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Detalles de Plan</th>
-							<th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Meses</th>
+							<th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Duracion</th>
 							<th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Costo</th>
 							<th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Acción</th>
 						</tr>
@@ -73,17 +73,23 @@ $dotenv->load();
 							if (mysqli_affected_rows($con) != 0) {
 								while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
 									$msgid = $row['pid'];
+                  $planTimeType;
+                  if($row['validity'] > 1) {
+                    $planTimeType = $row['planType'] == "d" ? "dias" : "meses";
+                  } else {
+                    $planTimeType = $row['planType'] == "d" ? "dia" : "mes";
+                  }
 									                       
 									echo "<tr ><td><div class='my-auto'><h6 class='mb-0 text-sm text-center'>" . $sno . "</h6></div></td>";
 									echo "<td><p class='text-sm font-weight-bold mb-0 text-center'>" . $row['pid'] . "</p></td>";
 									echo "<td><p class='text-sm font-weight-bold mb-0 text-center'>" . $row['planName'] . "</p></td>";
 									echo "<td><p class='text-sm font-weight-bold mb-0 text-center'>" . $row['description'] . "</p></td>";
-									echo "<td><p class='text-sm font-weight-bold mb-0 text-center'>" . $row['validity'] . "</p></td>";
+									echo "<td><p class='text-sm font-weight-bold mb-0 text-center'>" . $row['validity'] . " " . $planTimeType . "</p></td>";
 									echo "<td><p class='text-sm font-weight-bold mb-0 text-center'>$" . $row['amount'] . "</p></td>";
 
 									$sno++;
 
-									echo '<td class="d-flex justify-content-evenly"><a href=edit_plan.php?id="'.$row['pid'].'"><i class="fa-solid fa-pen-to-square"></i></a><form action="del_plan.php" method="post" onSubmit="return ConfirmDelete();"><input type="hidden" name="name" value="' . $msgid .'"/><i class="fa-solid fa-trash"></i></form></td></tr>';
+									echo '<td class="d-flex justify-content-evenly"><a href=edit_plan.php?id="'.$row['pid'].'"><i class="fa-solid fa-pen-to-square"></i></a><form action="del_plan.php" method="post" onSubmit="return ConfirmDelete();"><input type="hidden" name="name" value="' . $msgid .'"/><button class="px-0 py-0" style="background: transparent; border: none;" type="submit"><i class="fa-solid fa-trash"></i></button></form></td></tr>';
 									
 									$msgid = 0;
 								}
@@ -101,38 +107,7 @@ $dotenv->load();
         </div>
       </div>
       
-      <footer class="footer pt-3  ">
-        <div class="container-fluid">
-          <div class="row align-items-center justify-content-lg-between">
-            <div class="col-lg-6 mb-lg-0 mb-4">
-              <div class="copyright text-center text-sm text-muted text-lg-start">
-                © <script>
-                  document.write(new Date().getFullYear())
-                </script>,
-                made with <i class="fa fa-heart"></i> by
-                <a href="https://www.creative-tim.com" class="font-weight-bold" target="_blank">Creative Tim</a>
-                for a better web.
-              </div>
-            </div>
-            <div class="col-lg-6">
-              <ul class="nav nav-footer justify-content-center justify-content-lg-end">
-                <li class="nav-item">
-                  <a href="https://www.creative-tim.com" class="nav-link text-muted" target="_blank">Creative Tim</a>
-                </li>
-                <li class="nav-item">
-                  <a href="https://www.creative-tim.com/presentation" class="nav-link text-muted" target="_blank">About Us</a>
-                </li>
-                <li class="nav-item">
-                  <a href="https://www.creative-tim.com/blog" class="nav-link text-muted" target="_blank">Blog</a>
-                </li>
-                <li class="nav-item">
-                  <a href="https://www.creative-tim.com/license" class="nav-link pe-0 text-muted" target="_blank">License</a>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </footer>
+      <?php include 'components/footer.php';?>
     </div>
   </main>
   <?php include 'components/fixed_plugin.php';?>
