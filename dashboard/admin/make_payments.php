@@ -1,10 +1,10 @@
 <?php
 require '../../include/db_conn.php';
-require '../../include/get_color.php';
+
 date_default_timezone_set('America/Tijuana'); 
 page_protect();
-$principalColor = getColor($con);
-
+$principalColor = $_SESSION['principalColor'];
+$backgroundColor =  $_SESSION['backgroundColor'];
 if (isset($_POST['userID']) && isset($_POST['planID'])) {
     $uid  = $_POST['userID'];
     $planid=$_POST['planID'];
@@ -93,7 +93,7 @@ $dotenv->load();
   <script src="../assets/js/soft-ui-dashboard.min.js"></script>
 </head>
 
-<body class="g-sidenav-show  bg-gray-100">
+<body class="g-sidenav-show  bg-gray-100" style="<?php echo "background-image:$backgroundColor;"?>">
 	<?php $active = 'payment'; include 'components/menu.php'; ?>
   <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
     <!-- Navbar -->

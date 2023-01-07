@@ -14,7 +14,7 @@
 
 </head>
 
-<body class="page-body login-page login-form-fall">
+<body class="page-body login-page login-form-fall" >
 	<div id="container">
 		<div class="login-container">
 			

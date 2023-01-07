@@ -130,8 +130,10 @@
                 className: "",
                 closeModal: true,
               });*/
+			  
 			  location.reload();
 			  console.log(event);
+			  console.log(XHR.response);
               
             });
 

@@ -15,6 +15,11 @@
             //echo "Registro actualizado exitosamente";
             $response->status = true;
             $response->updateStatus = true;   
+            session_start();
+            $atributo == 'color' ? $atributo = 'principalColor' : $atributo = $atributo;
+            $_SESSION[$atributo]     = $color;
+            header("location: ../");
+           
         } else {
             //echo "Error actualizando registro: " . $con->error;
             $response->errorCode = $con->error;

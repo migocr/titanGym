@@ -1,10 +1,10 @@
 <?php
 	require '../../include/db_conn.php';
 	date_default_timezone_set('America/Tijuana');
-	require '../../include/get_color.php';
 	page_protect();
-	$principalColor = getColor($con);
-	$backgroundColor = getBackgroundColor($con);
+	$principalColor = $_SESSION['principalColor'];
+	$backgroundColor =  $_SESSION['backgroundColor'];
+	$backgroundColor = $_SESSION['backgroundColor'];
 
 	$_DIR = 'C:\xampp\htdocs\gym_l';
 	require  $_DIR . '\vendor\autoload.php' ;
@@ -53,7 +53,7 @@
 </head>
 
 <body class="g-sidenav-show" style="<?php echo "background-image:$backgroundColor;"?>     background-attachment: fixed;">
-	<?php $active = 'dashboard'; $principalColor = $principalColor; include 'components/menu.php'; ?>
+	<?php $active = 'system'; $principalColor = $principalColor; include 'components/menu.php'; ?>
 	<main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
 		<!-- Navbar -->
 		<?php $titlePage = 'Resumen'; include 'components/navbar.php'; ?>

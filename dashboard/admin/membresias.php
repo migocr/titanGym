@@ -1,9 +1,9 @@
 ﻿
 <?php
 require '../../include/db_conn.php';
-require '../../include/get_color.php';
 page_protect();
-$principalColor = getColor($con);
+$principalColor = $_SESSION['principalColor'];
+$backgroundColor =  $_SESSION['backgroundColor'];
 ?>
 <?php
 $_DIR = 'C:\xampp\htdocs\gym_l';
@@ -36,7 +36,7 @@ $dotenv->load();
   <link id="pagestyle" href="../assets/css/soft-ui-dashboard.css?v=1.0.6" rel="stylesheet" />
 </head>
 
-<body class="g-sidenav-show  bg-gray-100">
+<body class="g-sidenav-show  bg-gray-100" style="<?php echo "background-image:$backgroundColor;"?>">
   <?php $active = 'memberships'; include 'components/menu.php'; ?>
   <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
     <!-- Navbar -->

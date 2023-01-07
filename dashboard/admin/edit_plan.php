@@ -24,7 +24,7 @@ page_protect();
   
 
 </head>
-    <body class="page-body  page-fade" onload="collapseSidebar()">
+    <body class="page-body  page-fade" onload="collapseSidebar()" style="<?php echo "background-image:$backgroundColor;"?>">
 
     	<div class="page-container sidebar-collapsed" id="navbarcollapse">	
 	

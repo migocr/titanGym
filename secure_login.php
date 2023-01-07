@@ -1,6 +1,7 @@
 
 <?php
 include './include/db_conn.php';
+require './include/get_color.php';
 
 $user_id_auth = ltrim($_POST['user_id_auth']);
 $user_id_auth = rtrim($user_id_auth);
@@ -10,7 +11,8 @@ $pass_key = rtrim($_POST['pass_key']);
 
 $user_id_auth = stripslashes($user_id_auth);
 $pass_key     = stripslashes($pass_key);
-
+$principalColor = getColor($con);
+$backgroundColor = getBackgroundColor($con);
 
 
 if($pass_key=="" &&  $user_id_auth==""){
@@ -45,6 +47,8 @@ if ($count == 1) {
     // $_SESSION['auth_level'] = $row['level'];
     $_SESSION['full_name']  = $user_id_auth;
     $_SESSION['username']=$row['Full_name'];
+    $_SESSION['principalColor']     = $principalColor;
+    $_SESSION['backgroundColor']     = $backgroundColor;
     // $auth_l_x               = $_SESSION['auth_level'];
     // if ($auth_l_x == 5) {
         header("location: ./dashboard/admin/");

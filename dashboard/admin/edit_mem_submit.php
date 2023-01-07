@@ -1,12 +1,12 @@
 <?php
    require '../../include/db_conn.php';
-	require '../../include/get_color.php';
+
    $_DIR = 'C:\xampp\htdocs\gym_l';
    require  $_DIR . '\vendor\autoload.php' ;
 
 	page_protect();
-	$principalColor = getColor($con);
- 
+	$principalColor = $_SESSION['principalColor'];
+	$backgroundColor =  $_SESSION['backgroundColor']; 
    $dotenv = Dotenv\Dotenv::createImmutable($_DIR);
    $dotenv->load();
 
@@ -35,7 +35,7 @@
       <!-- CSS Files -->
       <link id="pagestyle" href="../assets/css/soft-ui-dashboard.css?v=1.0.6" rel="stylesheet" />
    </head>
-   <body class="g-sidenav-show  bg-gray-100">
+   <body class="g-sidenav-show  bg-gray-100" style="<?php echo "background-image:$backgroundColor;"?>">
       <?php $active = 'members'; include 'components/menu.php'; ?>
       <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
          <?php $titlePage = 'Nuevo Registro'; include 'components/navbar.php'; ?>

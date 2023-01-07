@@ -1,10 +1,9 @@
 <?php
 	require '../../include/db_conn.php';
 	date_default_timezone_set('America/Tijuana');
-	require '../../include/get_color.php';
 	page_protect();
-	$principalColor = getColor($con);
-
+	$principalColor = $_SESSION['principalColor'];
+	$backgroundColor =  $_SESSION['backgroundColor'];
 	$_DIR = 'C:\xampp\htdocs\gym_l';
 	require  $_DIR . '\vendor\autoload.php' ;
 	$dotenv = Dotenv\Dotenv::createImmutable($_DIR);
@@ -55,7 +54,7 @@
 	<!-- CSS Files -->
 	<link id="pagestyle" href="../assets/css/soft-ui-dashboard.css?v=1.0.6" rel="stylesheet" />
 </head>
-    <body class="g-sidenav-show  bg-gray-100">
+    <body class="g-sidenav-show  bg-gray-100"  style="<?php echo "background-image:$backgroundColor;"?>">
 		<?php $active = 'account'; $principalColor = $principalColor; include 'components/menu.php'; ?>
 		<main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
 			<?php $titlePage = 'Cuenta'; include 'components/navbar.php'; ?>
