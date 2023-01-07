@@ -1,6 +1,7 @@
 <?php
 require '../../include/db_conn.php';
 require '../../include/get_color.php';
+date_default_timezone_set('America/Tijuana'); 
 page_protect();
 $principalColor = getColor($con);
 
@@ -15,11 +16,26 @@ if (isset($_POST['userID']) && isset($_POST['planID'])) {
         while ($row1 = mysqli_fetch_array($result1, MYSQLI_ASSOC)) {
             
             $name = $row1['username'];
-            $query2="select * from plan where pid='$planid'";
+            
+            $query = "SELECT * FROM enrolls_to WHERE uid = '$uid'";
+            $result = mysqli_query($con, $query);
 
-            $result2=mysqli_query($con,$query2);
-            if($result2){
-               $planValue=mysqli_fetch_array($result2,MYSQLI_ASSOC);
+            if (mysqli_num_rows($result) > 0) {
+                // output data of each row
+                $lastExpireDate = 0;
+                while($row = mysqli_fetch_assoc($result)) {
+                    //echo "expire: " . $row["expire"]. "<br>";
+                    $expireDate = strtotime($row["expire"]);
+                    if($lastExpireDate == 0 || $expireDate > $lastExpireDate) {
+                      $lastExpireDate = $expireDate;
+                    }
+                    
+                }
+                $expDate = date('Y-m-d', $lastExpireDate);
+                //echo $expDate;
+            } else {
+                //echo "0 results";
+                $expDate = date('Y-m-d');
             }
         }
     }
@@ -59,6 +75,8 @@ $dotenv->load();
   <!--     Fonts and icons     -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
   <!-- Nucleo Icons -->
   <link href="../assets/css/nucleo-icons.css" rel="stylesheet" />
   <link href="../assets/css/nucleo-svg.css" rel="stylesheet" />
@@ -89,21 +107,50 @@ $dotenv->load();
               <h6>Registrar pago</h6>
               <div class="card-body px-0 pt-0 pb-2">
               <div class="table-responsive p-0">
-                <div id="form1" name="form1" class="a1-container">
-                  <div class="form-group">
-                          <label for="example-text-input" class="form-control-label">ID de Cliente</label>
-                          <input  class="form-control" type="text" name="m_id" id="idMembresia" value="<?php echo $uid; ?>" readonly/>
+                <form id="form1" name="form1">
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="form-group">
+                              <label for="example-text-input" class="form-control-label">ID de Cliente</label>
+                              <input  class="form-control" type="text" name="m_id" id="idMembresia" value="<?php echo $uid; ?>" readonly/>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group">
+                            <label for="example-text-input" class="form-control-label">Nombre</label>
+                            <input class="form-control" type="text" name="u_name" id="nameCustomer" value="<?php echo $name; ?>" placeholder="Member Name" maxlength="30" readonly/>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label for="example-date-input" class="form-control-label">Fecha Inicio</label>
+                        <input id="start-date" class="form-control" type="date" value='<?php 
+                        //echo $expDate; 
+                        date_default_timezone_set('America/Tijuana'); 
+                        $hoy = date('Y-m-d');
+                        
+                        if ($expDate <= $hoy) {
+                            echo $hoy;
+                        } else {
+                            echo $expDate;
+                        }
+                        ?>'
+                        name="startdate" id="start-date" required>
+                        
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label for="example-date-input" class="form-control-label">Fecha Fin</label>
+                        <input id="expire-date" class="form-control" type="date" value=''
+                          name="dob" id="expire-date" required readonly>
+                          
+                      </div>
+                    </div>
                   </div>
-                  <div class="form-group">
-                          <label for="example-text-input" class="form-control-label">Nombre</label>
-                          <input class="form-control" type="text" name="u_name" id="nameCustomer" value="<?php echo $name; ?>" placeholder="Member Name" maxlength="30" readonly/>
-                  </div>
-                  <div class="form-group">
-										<label for="example-date-input" class="form-control-label">Fecha Caduca</label>
-										<input id="expire-date" class="form-control" type="date" value=''
-											name="dob" id="expire-date" required readonly>
-											
-									</div>
+                  
+                 
+                  <div class="col-md-12">
                   <div class="form-group">
                     <label for="example-color-input" class="form-control-label">Plan</label>	
                     <select style="width: 100%; border: 1px #e9ecef solid; border-radius: 5px;
@@ -125,9 +172,12 @@ $dotenv->load();
                           }
                               
                         ?>
-                          </select></div>
-                    
-                </div>
+                          </select>
+                    </div>
+                  </div>
+                  
+                </form>
+                <div id="plandetls" class="row"></div>
                 <div style="display: flex;justify-content: center;">
                   <button style="margin-right: 10px;" class="btn btn-primary btn-sm" onclick="savePayment()" name="submit" id="submit" >Guardar</button>
                   <input class="btn btn-secondary btn-sm" type="reset" name="reset" id="reset" value="Borrar"></td>
@@ -151,6 +201,8 @@ $dotenv->load();
   <script src="../assets/js/core/bootstrap.min.js"></script>
   <script src="../assets/js/plugins/perfect-scrollbar.min.js"></script>
   <script src="../assets/js/plugins/smooth-scrollbar.min.js"></script>
+  <script src="../assets/js/moment.js"></script>
+
   <script>
     var win = navigator.platform.indexOf('Win') > -1;
     if (win && document.querySelector('#sidenav-scrollbar')) {
@@ -166,7 +218,8 @@ $dotenv->load();
   <script src="../assets/js/soft-ui-dashboard.min.js?v=1.0.6"></script>
   		<script>
           function changeExpireDate(str, duration, durationType){
-
+            console.log(str);
+            debugger;
         		if(str==""){
         			document.getElementById("plandetls").innerHTML = "";
         			return;
@@ -189,15 +242,23 @@ $dotenv->load();
             var expireDateInput = document.getElementById("expire-date");
             console.log(expireDateInput.value)
             var expireQty = parseInt(duration); //cantidad de dias o meses
-            let date = new Date();
+            var inputStartDate = document.getElementById("start-date").value; //input fecha inicial
+            console.log("inputStartDate ", inputStartDate);
+            console.log(expireQty);
+            //let date = new Date(inputStartDate);
+            var parts = inputStartDate.split('-');
+            // Please pay attention to the month (parts[1]); JavaScript counts months from 0:
+            // January - 0, February - 1, etc.
+            var date = new Date(parts[0], parts[1] - 1, parts[2]); 
             if(durationType == "m") { // si es un plan con meses
               var expireDate = date.setMonth(date.getMonth() + expireQty);
+              
             }
             if(durationType == "d") {// si es un plan con dias
               var expireDate = date.setDate(date.getDate() + expireQty);
             }
+            console.log("expire date: ", expireDate)
             let formatedDate = `${new Date(expireDate).getFullYear()}-${new Date(expireDate).getMonth()+1 > 9 ? new Date(expireDate).getMonth()+1 : '0' + (new Date(expireDate).getMonth()+1)}-${new Date(expireDate).getDate() > 9 ? new Date(expireDate).getDate() : '0'+new Date(expireDate).getDate()}`
-            console.log(formatedDate);
             expireDateInput.value = formatedDate;
             expireDateInput.setAttribute("value", formatedDate);
         		
@@ -205,25 +266,31 @@ $dotenv->load();
         </script>
 
         <script>
-          function savePayment() {
+          async function savePayment() {
             let formData = new FormData();
             let id = document.getElementById("idMembresia").value;
             let plan =document.getElementById("planSelector").value;
+            let startDate = document.getElementById("start-date").value;
             if(!plan || plan == "" || plan == undefined){
               swal("Selecciona un Plan" ,  "Por favor selecciona un plan antes de guardar" ,  "warning");
               return;
             }
           
-            let dob = document.getElementById("expire-date").getAttribute("value");
+            let dob = document.getElementById("expire-date").value;
             console.log(id,"-",plan,"-",dob)
             formData.append('m_id', id);
             formData.append('plan', plan);
             formData.append('dob', dob);
+            formData.append('startdate', startDate);
+
 
             const url = "./submit_payments.php";
             const XHR = new XMLHttpRequest();
              // Define what happens on successful data submission
-            XHR.addEventListener('load', (event) => {
+            await XHR.addEventListener('load', (event) => {
+              console.log(event);
+              console.log(XHR.responseText);
+
               swal({
                 icon: "success",
                 text: "Pago Guardado",
@@ -241,10 +308,10 @@ $dotenv->load();
             });
 
             // Set up our request
-            XHR.open('POST', url);
+            await XHR.open('POST', url);
 
             // Send our FormData object; HTTP headers are set automatically
-            XHR.send(formData);
+            await XHR.send(formData);
           }
         </script>
 </body>

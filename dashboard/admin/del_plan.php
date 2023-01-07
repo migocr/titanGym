@@ -8,7 +8,7 @@ if (strlen($msgid) > 0) {
     mysqli_query($con, "update plan set active ='no' WHERE pid='$msgid'");
     echo "<script>window.addEventListener('load', (event) => {
         swal('Listo!' ,  'Membresia Eliminada' ,  'success').then(function () {
-            window.location.href = './view_plan.php'
+            window.location.href = './membresias.php'
         });;
     })        
     </script>";
@@ -16,7 +16,7 @@ if (strlen($msgid) > 0) {
 } else {
     echo "<script>window.addEventListener('load', (event) => {
         swal('Error!' ,  'No se pudo eliminar la membresia' ,  'error').then(function () {
-            window.location.href = './view_plan.php'
+            window.location.href = './membresias.php'
         });;
     })        
     </script>";

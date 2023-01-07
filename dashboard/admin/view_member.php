@@ -104,30 +104,19 @@ if (isset($_POST['name'])) {
 															<div class="form-group">
 																<label for="example-search-input" class="form-control-label">Nombre</label>
 																<input class="form-control" type="text" placeholder="Nombre del nuevo miembro" 
-																name="uname" id="boxxe" value="<?php echo $name?>" required>
+																name="uname" id="boxxe" value="<?php echo $name?>" readonly>
 															</div>
 														</div>
 														<div class="col-md-6">
 															<div class="form-group">
 																<label for="example-email-input" class="form-control-label">Genero</label>
-																<select style="width: 100%;
-																border: 1px #e9ecef solid;
-																border-radius: 5px;
-																padding: 5px;" name="gender" id="gender" required>
-																				
-																<option
-																	<?php if($gender == 'Hombre'){echo("selected");}?>	value="Hombre">Hombre
-																</option>
-																<option
-																	<?php if($gender == 'Mujer'){echo("selected");}?> value="Mujer">Mujer
-																</option>
-																</select>
+																<input type="text" class="form-control" value="<?php echo $gender?>" readonly>
 															</div>
 														</div>
 														<div class="col-md-6">
 															<div class="form-group">
 																<label for="example-tel-input" class="form-control-label">Telefono</label>
-																<input class="form-control" type="tel" name="phone" placeholder="Numero a 10 digitos" value='<?php echo $phone ?>' id="example-tel-input" onfocus="focused(this)" onfocusout="defocused(this)">
+																<input class="form-control" type="tel" name="phone" placeholder="Numero a 10 digitos" value='<?php echo $phone ?>' id="example-tel-input" onfocus="focused(this)" onfocusout="defocused(this)" readonly>
 															</div>
 														</div>
 													</div>														

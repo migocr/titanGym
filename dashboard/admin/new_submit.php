@@ -1,8 +1,13 @@
 <?php
 	require '../../include/db_conn.php';
 	require '../../include/get_color.php';
+  date_default_timezone_set('America/Tijuana');
 	page_protect();
 	$principalColor = getColor($con);
+  $_DIR = 'C:\xampp\htdocs\gym_l';
+  require  $_DIR . '\vendor\autoload.php' ;
+  $dotenv = Dotenv\Dotenv::createImmutable($_DIR);
+  $dotenv->load(); 
 ?>
 <html lang="es">
   <head>
@@ -42,15 +47,20 @@
       
   </body>
   <?php
+    date_default_timezone_set('America/Tijuana');
+    //echo date("d-m-Y H:i:s");  
     //$memID=$_POST['m_id'];
     $uname=$_POST['u_name'];
     $gender=$_POST['gender'];
-    $dob=$_POST['dob'];
-    $jdate=$_POST['jdate'];
+    $dob= date('Y-m-d', strtotime($_POST['dob']));
+    $jdate= date('Y-m-d', strtotime($_POST['jdate']));
+    //echo $jdate;
+    echo $jdate;
     $plan=$_POST['plan'];
+    $phone=$_POST['phone'];
 
 //inserting into users table
-    $query="insert into users(username,gender,dob,joining_date) values('$uname','$gender','$dob','$jdate')";
+    $query="insert into users(username,gender,dob,joining_date, phone) values('$uname','$gender','$dob','$jdate', '$phone')";
       if(mysqli_query($con,$query)==1){
         $memID = $con->insert_id;
         //Retrieve information of plan selected by user
@@ -59,12 +69,20 @@
 
           if($result){
             $value=mysqli_fetch_row($result);
-            date_default_timezone_set('America/Bogota');
-            $d=strtotime("+".$value[3]." Months");
+            $isDayOrMonth = $value[6];
+            if ($isDayOrMonth == "d") {
+              $timeType = " Days";
+            }
+            if ($isDayOrMonth == "m") {
+              $timeType = " Months";
+            }
+            $d=strtotime("+".$value[3]. $timeType);
+            //echo $value[6];
             $cdate=date("Y-m-d"); //current date
+            echo $cdate;
             $expiredate=date("Y-m-d",$d); //adding validity retrieve from plan to current date
             //inserting into enrolls_to table of corresponding userid
-            $query2="insert into enrolls_to(pid,uid,paid_date,expire,renewal) values('$plan','$memID','$cdate','$expiredate','yes')";
+            $query2="insert into enrolls_to(pid,uid,paid_date,expire,renewal, startDate) values('$plan','$memID','$cdate','$expiredate','yes','$jdate')";
             if(mysqli_query($con,$query2)==1){
 
               echo "<html><head><script>

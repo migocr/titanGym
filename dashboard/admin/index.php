@@ -1,5 +1,6 @@
 ﻿<?php
 	require '../../include/db_conn.php';
+	date_default_timezone_set('America/Tijuana');
 	require '../../include/get_color.php';
 	page_protect();
 	$principalColor = getColor($con);
@@ -68,7 +69,7 @@
 										<p class="text-sm mb-0 text-capitalize font-weight-bold">Ingresos del mes</p>
 										<h5 class="font-weight-bolder mb-0">
 											<?php
-											date_default_timezone_set('America/Bogota');
+											date_default_timezone_set('America/Tijuana');
 											$date  = date('Y-m');
 											$query = "select * from enrolls_to WHERE  paid_date LIKE '$date%'";
 
@@ -145,7 +146,7 @@
 										<p class="text-sm mb-0 text-capitalize font-weight-bold">Ingresos Anuales</p>
 										<h5 class="font-weight-bolder mb-0">
 											<?php
-											date_default_timezone_set('America/Bogota');
+											date_default_timezone_set('America/Tijuana');
 											$date  = date('Y');
 											$query = "select * from enrolls_to WHERE  paid_date LIKE '$date%'";
 
@@ -258,25 +259,24 @@
 								<div class="card mb-4" style="box-shadow: none;">
 									<div class="card-header pb-0 pt-1">
 									<h6>Miembros proximos a caducar</h6>
-									</div>
-									<div class="card-body px-0 pt-0 pb-2">
 									<div class="table-responsive p-0">
-										<table class="text-center table align-items-center justify-content-center mb-0">
+										<table class=" table align-items-center justify-content-center mb-0">
 										<thead>
 											<tr>
-											<th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">ID</th>
-											<th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Nombre</th>
-											<th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Dias Restantes</th>
-											<th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Status</th>
+											<th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 p-2">ID</th>
+											<th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 p-2">Nombre</th>
+											<th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2 text-center">Dias Restantes</th>
+											<th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2 text-center">Status</th>
 											<th class="text-uppercase text-secondary text-xxs font-weight-bolder text-center opacity-7 ps-2">Caduca</th>
-											<th></th>
+											<th class="text-uppercase text-secondary text-xxs font-weight-bolder text-center opacity-7 ps-2">Agregar Pago</th>
 											</tr>
 										</thead>
 										<?php
 											$today = date("Y-m-d");
-											$nextWeek = date('Y-m-d', strtotime(' +4117 days'));
+											$nextWeek = date('Y-m-d', strtotime(' +7 days'));
+											
 											//usuarios que van a caducar HOY y dentro de next week, definir tiempo
-											$query = "select * from users where cast(dob as DATE) BETWEEN CAST('${today}' AS DATE) AND CAST('${nextWeek}' AS DATE) ORDER BY cast(dob as DATE) ASC";
+											$query = "select * FROM users WHERE cast(dob as DATE) >= CURDATE() ORDER BY cast(dob as DATE) ASC";
 												$result = mysqli_query($con, $query);
 												$sno    = 1;
 												if (mysqli_affected_rows($con) != 0) {
@@ -288,20 +288,35 @@
 																	<h6 class='mb-0 text-sm'>".$uid ." </h6>
 															
 																</td>";										
-														echo "<td> 
-																<h6 class='mb-0 text-sm'>". $row['username'] ." </h6>
+														echo "<td style='width: 1em'> 
+																<h6 class='mb-0 text-sm'>". $row['username'] . " </h6>
 																</td>";
 														$expireDate = strtotime($row['dob']);
 														$today = strtotime(date("Y-m-d"));
 														$timeDiff = abs($expireDate - $today);
 														$numberDays = $timeDiff/86400;
 														$numberDays = intval($numberDays);
-														echo "<td>" . $numberDays ."</td>";
-														echo "<td><span class='badge badge-sm bg-gradient-success'>Activo</span></td>";									
-														echo "<td><p class='text-xs font-weight-bold mb-0'>" . $row['dob'] . "</p></td>";
+														
+														$timestamp1 = strtotime(str_replace('-', '/', $row['dob']));
+														$timestamp2 = strtotime(date('Y/m/d'));
+														//echo $today;
+														if (date('Ymd', $timestamp1) <= date('Ymd', $timestamp2)) {
+															//echo $today . 'es menor que' . $expireDate;
+															$memberStatus = false;
+															$statusString = "Expirado";
+															$statusClass = "bg-gradient-danger";
+														} else {
+															//echo  $today . 'es mayor o igual que'. $expireDate;
+															$memberStatus = true;
+															$statusString = "Activo";
+															$statusClass = "bg-gradient-success";
+														}
+														echo "<td ><p class='text-center'>" . $numberDays ."</p></td>";
+														echo "<td class='text-center'><span class='badge badge-sm bg-gradient-success $statusClass'>$statusString</span></td>";									
+														echo "<td><p class='text-center text-sm font-weight-bold mb-0 '>" . $row['dob'] . "</p></td>";
 														$sno++;
 														
-														echo "<td><form action='make_payments.php' method='post'><input type='hidden' name='userID' value='" . $uid . "'/>
+														echo "<td class='text-center' style='width:1em;'><form action='make_payments.php' method='post'><input type='hidden' name='userID' value='" . $uid . "'/>
 														<input type='hidden' name='planID' value='" .  "'/>
 														<div class='btn btn-default'><input type='submit' class='btn' value='Agregar Pago' style='
 															padding: 0 5px 0 0;;
@@ -313,11 +328,14 @@
 														</form></td></tr>";														$msgid = 0;
 													}
 												}
-										?>	
+											?>	
 										
 										
-										</table>
+											</table>
+										</div>
 									</div>
+									<div class="card-body px-0 pt-0 pb-2">
+									
 									</div>
 								</div>
 								</div>

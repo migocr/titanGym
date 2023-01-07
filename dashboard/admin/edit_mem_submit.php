@@ -1,11 +1,12 @@
 <?php
    require '../../include/db_conn.php';
 	require '../../include/get_color.php';
+   $_DIR = 'C:\xampp\htdocs\gym_l';
    require  $_DIR . '\vendor\autoload.php' ;
 
 	page_protect();
 	$principalColor = getColor($con);
-   $_DIR = 'C:\xampp\htdocs\gym_l';
+ 
    $dotenv = Dotenv\Dotenv::createImmutable($_DIR);
    $dotenv->load();
 
@@ -21,6 +22,8 @@
          Soft UI Dashboard by Creative Tim
       </title>
       <!--     Fonts and icons     -->
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
       <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
       <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
       <!-- Nucleo Icons -->
@@ -50,21 +53,27 @@
       $uid=$_POST['uid'];
       $uname=$_POST['uname'];
       $gender=$_POST['gender'];
-      $dob=$_POST['dob'];
-      $jdate=$_POST['jdate'];
+      //$dob=$_POST['dob'];
+      //$jdate=$_POST['jdate'];
+      $phone=$_POST['phone'];
       
-      $query1="update users set username='".$uname."',gender='".$gender."',dob='".$dob."',joining_date='".$jdate."' where userid='".$uid."'";
+      $query1 = "update users set phone='$phone', username='$uname', gender='$gender' Where userid='$uid'";
 
-      if(mysqli_query($con,$query1)){
+      if(mysqli_query($con,$query1) === true){
+         
          echo "<html><head><script>
                     document.addEventListener('DOMContentLoaded', function () {
-                      swal('Guardado' ,  'Miembro agregado exitosamente' ,  'success').then((event) => {window.location.href = window.location.href.replace('edit_mem_submit.php', 'members.php');});
+                      swal('Guardado' ,  'Miembro actualizado exitosamente' ,  'success').then((event) => {window.location.href = window.location.href.replace('edit_mem_submit.php', 'members.php');});
                       //setTimeout(function(){ window.location.href = window.location.href.replace('new_submit.php', 'new_entry.php'); }, 3000);
                     });
                     </script></head></html>";
       }else{
-      echo "<html><head><script>alert('ERROR! No es posible actualizar el registro actualmente');</script></head></html>";
-      echo "error".mysqli_error($con);
+         echo "<html><head><script>
+         document.addEventListener('DOMContentLoaded', function () {
+           swal('Error' ,  'Error al intentar actualizar usuario' ,  'error').then((event) => {window.location.href = window.location.href.replace('edit_mem_submit.php', 'members.php');});
+           //setTimeout(function(){ window.location.href = window.location.href.replace('new_submit.php', 'new_entry.php'); }, 3000);
+         });
+         </script></head></html>";
       }
    ?>
 </html>

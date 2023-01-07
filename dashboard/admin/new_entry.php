@@ -1,5 +1,6 @@
 ﻿<?php
 	require '../../include/db_conn.php';
+	date_default_timezone_set('America/Tijuana');
 	require '../../include/get_color.php';
 	page_protect();
 	$principalColor = getColor($con);
@@ -43,7 +44,7 @@ $dotenv->load(); ?>
 		<?php $titlePage = 'Nuevo Registro'; include 'components/navbar.php'; ?>
 		<!-- End Navbar -->
 		<div class="container-fluid py-4">
-
+			
 			<div class="row">
 				<div class="card" style="box-shadow: none;">
 					<div class="card-body pt-3 py-3 pb-0">
@@ -54,67 +55,92 @@ $dotenv->load(); ?>
 										<div class="table-responsive p-0">
 											<div class="" style="margin:1em 1em 0 1em;">
 												
-													<h6>Agregar Miembro</h6>
+												<h6>Agregar Miembro</h6>
 												
-												<form id="form1" name="form1" method="post" class="a1-container" action="new_submit.php">
-												
-												<div class="form-group">
-													<label for="example-search-input" class="form-control-label">Nombre</label>
+												<form id="form1" name="form1" method="post" action="new_submit.php">
+													<div class="row">
+														<div class="col-md-6">
+															<div class="form-group">
+																<label for="example-search-input" class="form-control-label">Nombre</label>
+																
+																<input class="form-control" type="text" placeholder="Nombre del nuevo miembro" value=""
+																	name="u_name" id="boxx" required>
+																
+															</div>
+														</div>
+														<div class="col-md-6">
+														<div class="form-group">
+															<label for="example-tel-input" class="form-control-label">Telefono</label>
+															<input class="form-control" type="tel" name="phone" placeholder="Numero a 10 digitos" id="example-tel-input">
+														</div>
+														</div>
+																											
+														<div class="col-md-6">
+															<div class="form-group">
+																<label for="example-date-input" class="form-control-label">Fecha de ingreso</label>
+																<input class="form-control" type="date" value='<?php echo str_replace("/","-",date("Y/m/d"));?>'
+																	name="jdate" id="boxx">
+															</div>
+														</div>
+														<div class="col-md-6">
+															<div class="form-group">
+																<label for="example-date-input" class="form-control-label">Fecha Caduca</label>
+																<input class="form-control" type="date" value='<?php echo str_replace("/","-",date("Y/m/d"));?>'
+																	name="dob" id="expire-date" required>
+																	
+															</div>
+														</div>
+														<div class="col-md-6">
+															<div class="form-group">
+																<label for="example-color-input" class="form-control-label">Plan</label>
+																<select  style="width: 100%;
+																	border: 1px #e9ecef solid;
+																	border-radius: 5px;
+																	padding: 5px;"  class="selectpicker " data-style="select-with-transition" title="Single Select" data-size="7"  name="plan" id="boxx" required
+																							onchange="changeExpireDate(this.value,this.options[this.selectedIndex].getAttribute('duration'),this.options[this.selectedIndex].getAttribute('durationtype'))">
+																							<option value="">--Favor Seleccionar--</option>
+																							<?php
+																							$query="select * from plan where active='yes'";
+																							$result=mysqli_query($con,$query);
+																							if(mysqli_affected_rows($con)!=0){
+																								while($row=mysqli_fetch_row($result)){
+																									echo "<option value=" .$row[0]." duration=". $row[3]." durationtype=". $row[6] . ">".$row[1]."</option>";
+																								}
+																							}
+
+																						?>
+
+																						</select>
+															</div>
+														</div>
+														<div class="col-md-6">
+															<div class="form-group">
+																<label for="example-email-input" class="form-control-label">Genero</label>
+																<select style="width: 100%;
+																	border: 1px #e9ecef solid;
+																	border-radius: 5px;
+																	padding: 5px;" name="gender" id="boxx" required>
+																	<option value="">--Favor Seleccionar--</option>
+																	<option value="Hombre">Hombre</option>
+																	<option value="Mujer">Mujer</option>
+																</select>
+															</div>
+														</div>
+													</div>
 													
-													<input class="form-control" type="text" placeholder="Nombre del nuevo miembro" value=""
-														name="u_name" id="boxx" required>
-												</div>
-												<div class="form-group">
-													<label for="example-email-input" class="form-control-label">Genero</label>
-													<select style="width: 100%;
-														border: 1px #e9ecef solid;
-														border-radius: 5px;
-														padding: 5px;" name="gender" id="boxx" required>
-														<option value="">--Favor Seleccionar--</option>
-														<option value="Hombre">Hombre</option>
-														<option value="Mujer">Mujer</option>
-													</select>
-												</div>
-												<div class="form-group">
-													<label for="example-date-input" class="form-control-label">Fecha de ingreso</label>
-													<input class="form-control" type="date" value='<?php echo str_replace("/","-",date("Y/m/d"));?>'
-														name="jdate" id="boxx">
-												</div>
+													
+													
+													
+													<div id="plandetls" class="row"></div>
+													<div class="col-md-12">
+													<div style="width: auto; display: flex;justify-content: center;">
+														<input style="margin-right: 1em;background-image:<?php echo $principalColor ?>" class="btn btn-primary" type="submit" name="submit" id="submit" value="Registrar">
+														<input class="btn btn-default" type="reset" name="reset" id="reset" value="Borrar">
+													</div>							
+													</div>
+													
 												
-												<div class="form-group">
-													<label for="example-date-input" class="form-control-label">Fecha Caduca</label>
-													<input class="form-control" type="date" value='<?php echo str_replace("/","-",date("Y/m/d"));?>'
-														name="dob" id="expire-date" required>
-														
-												</div>
-												<div class="form-group">
-													<label for="example-color-input" class="form-control-label">Plan</label>
-													<select  style="width: 100%;
-														border: 1px #e9ecef solid;
-														border-radius: 5px;
-														padding: 5px;"  class="selectpicker " data-style="select-with-transition" title="Single Select" data-size="7"  name="plan" id="boxx" required
-																				onchange="changeExpireDate(this.value,this.options[this.selectedIndex].getAttribute('duration'),this.options[this.selectedIndex].getAttribute('durationtype'))">
-																				<option value="">--Favor Seleccionar--</option>
-																				<?php
-																				$query="select * from plan where active='yes'";
-																				$result=mysqli_query($con,$query);
-																				if(mysqli_affected_rows($con)!=0){
-																					while($row=mysqli_fetch_row($result)){
-																						echo "<option value=" .$row[0]." duration=". $row[3]." durationtype=". $row[6] . ">".$row[1]."</option>";
-																					}
-																				}
-
-																			?>
-
-																			</select>
-												</div>
-												<div id="plandetls"></div>
-												<div style="width: auto; display: flex;justify-content: center;">
-													<input style="margin-right: 1em;background-image:<?php echo $principalColor ?>" class="btn btn-primary" type="submit" name="submit" id="submit" value="Registrar">
-													<input class="btn btn-default" type="reset" name="reset" id="reset" value="Borrar">
-												</div>
-												
-											</form>
+												</form>
 											</div>
 										</div>
 									</div>

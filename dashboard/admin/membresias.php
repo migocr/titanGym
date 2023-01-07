@@ -55,12 +55,12 @@ $dotenv->load();
 					<thead>
 						<tr class='text-center'>
 							<th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">#</th>
-							<th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">ID de Plan</th>
-							<th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Nombre del Plan</th>
-							<th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Detalles de Plan</th>
+							<th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">ID de Membresia</th>
+							<th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Nombre de Membresia</th>
+							<th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Detalles de Membresia</th>
 							<th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Duracion</th>
 							<th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Costo</th>
-							<th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Acción</th>
+							<th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Opciones</th>
 						</tr>
 					</thead>		
 					<tbody>
@@ -100,7 +100,7 @@ $dotenv->load();
 				</table>
               </div>
 			   <a href="new_plan.php">
-			  	<button type="button" class="btn btn-primary center text-center d-block m-auto">Agregar Membresia</button>
+			  	<button style="background-image: <?php echo $principalColor ?>;" type="button" class="btn btn-primary center text-center d-block m-auto">Agregar Membresia</button>
 				</a>
             </div>
           </div>

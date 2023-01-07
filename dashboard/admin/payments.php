@@ -1,6 +1,7 @@
 ﻿<?php
 	require '../../include/db_conn.php';
 	require '../../include/get_color.php';
+  date_default_timezone_set('America/Tijuana');
 	page_protect();
 	$principalColor = getColor($con);
   $_DIR = 'C:\xampp\htdocs\gym_l';
@@ -35,6 +36,7 @@
     Soft UI Dashboard by Creative Tim
   </title>
   <!--     Fonts and icons     -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
   <!-- Nucleo Icons -->
   <link href="../assets/css/nucleo-icons.css" rel="stylesheet" />
@@ -42,9 +44,7 @@
   <!-- Font Awesome Icons -->
   <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
   <link href="../assets/css/nucleo-svg.css" rel="stylesheet" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
-    integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
-    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <script src="../assets/js/moment.js"></script>
 
   <!-- CSS Files -->
   <link id="pagestyle" href="../assets/css/soft-ui-dashboard.css?v=1.0.6" rel="stylesheet" />
@@ -79,24 +79,25 @@
                   <table class="table align-items-center mb-0">
                     <thead>
                       <tr>
+                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">ID</th>
                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Nombre</th>
                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Fecha de pago</th>
-                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Fecha de expiracion</th>
-                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Status
+                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Inicio de Suscripcion</th>
+                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Fin de suscripcion</th>
+                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Plan
                         </th>
                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                          Caduca</th>
+                          Status</th>
                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                          Editar</th>
-                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                          Pagar</th>
+                          Detalles</th>
+                       
                       </tr>
                     </thead>
                     <tbody id="membersTable">
                     <?php
 
 
-                      $query  = "select * from enrolls_to ORDER BY expire";
+                      $query  = "select * from enrolls_to ORDER BY et_id DESC";
                       //echo $query;
                       $result = mysqli_query($con, $query);
                       $sno    = 1;
@@ -107,9 +108,13 @@
                               $uid   = $row['uid'];
                               $planid=$row['pid'];
                               $etId = $row['et_id'];
-                              $paidDate= str_replace('-', '/', date("d-m-Y", strtotime($row['paid_date'])));
-                              $expireDate= str_replace('-', '/', date("d-m-Y", strtotime($row['expire'])));
-                             
+                              setlocale(LC_TIME, 'es_ES', 'Spanish_Spain', 'Spanish'); 
+                              $_paidDate = date("Y-m-d", strtotime($row['paid_date']));
+                              $paidDate= strftime('%d %b %Y', strtotime($_paidDate));
+                              $_expireDateString = date("Y-m-d", strtotime($row['expire']));
+                              $_startDateString = date("Y-m-d",strtotime($row['startDate']));
+                              $expireDateString= strftime('%d %b %Y', strtotime($_expireDateString));
+                              $startDateString =  strftime('%d %b %Y', strtotime($_startDateString));                            
                              
                               echo "<tr json-data=''>";
                               $query2  = "select * from users where userid = $uid limit 1";
@@ -132,7 +137,7 @@
                               $timestamp1 = strtotime($expireDate);
                               $timestamp2 = strtotime($today);
                               //echo $today;
-                              if (date('Ymd', $timestamp1) <= date('Ymd', $timestamp2)) {
+                              if (date('Ydm', $timestamp1) <= date('Ydm', $timestamp2)) {
                                   //echo $today . 'es menor que' . $expireDate;
                                   $memberStatus = false;
                                   $statusString = "Expirado";
@@ -144,7 +149,11 @@
                                   $statusClass = "bg-gradient-success";
                               }
 
-
+                              echo "<td>
+                                  <div class='d-flex px-2'>
+                                    <h6 class='mb-0 text-sm'>$etId</h6>
+                                  </div>
+                                </td>";
                               echo "<td>
                                   <div class='d-flex px-2'>
                                     <h6 class='mb-0 text-sm'>$userName</h6>
@@ -157,7 +166,12 @@
                                 </td>";
                                 echo "<td>
                                   <div class='d-flex px-2'>
-                                    <h6 class='mb-0 text-sm'>$expireDate</h6>
+                                    <h6 class='mb-0 text-sm'>$startDateString</h6>
+                                  </div>
+                                </td>";
+                                echo "<td>
+                                  <div class='d-flex px-2'>
+                                    <h6 class='mb-0 text-sm'>$expireDateString</h6>
                                   </div>
                                 </td>";
                                 echo "<td>
@@ -167,6 +181,10 @@
                                 </td>";
                                 echo "<td class='text-center'>
                                 <span class='badge badge-sm $statusClass'>$statusString</span>
+                                 
+                                </td>";
+                                echo "<td class='text-center'>
+                                <span class='badge badge-sm'><i style='color:black;' class='fa-solid fa-arrow-up-right-from-square'></i></span>
                                  
                                 </td>";
                                 echo "</tr>";
@@ -198,6 +216,7 @@
   <script src="../assets/js/plugins/perfect-scrollbar.min.js"></script>
   <script src="../assets/js/plugins/smooth-scrollbar.min.js"></script>
   <script>
+
     var win = navigator.platform.indexOf('Win') > -1;
     if (win && document.querySelector('#sidenav-scrollbar')) {
       var options = {

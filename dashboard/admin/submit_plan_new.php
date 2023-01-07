@@ -24,7 +24,7 @@ page_protect();
         
         echo "<script>window.addEventListener('load', (event) => {
           swal('Listo!' ,  'Membresia Agregada' ,  'success').then(function () {
-              window.location.href = './view_plan.php'
+              window.location.href = './membresias.php'
           });;
         })        
         </script>";
@@ -33,7 +33,7 @@ page_protect();
     else{
       echo "<script>window.addEventListener('load', (event) => {
           swal('Error!' ,  'No se pudo agregar el membresia' ,  'error').then(function () {
-              window.location.href = './view_plan.php'
+              window.location.href = './membresias.php'
           });;
         })        
         </script>";

@@ -1,6 +1,7 @@
 ﻿<?php
 require '../../include/db_conn.php';
 require '../../include/get_color.php';
+date_default_timezone_set('America/Tijuana');
 page_protect();
 $principalColor = getColor($con);
 $_DIR = 'C:\xampp\htdocs\gym_l';
@@ -103,6 +104,7 @@ $dotenv->load();
                             <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Suscripcion</th>
                             <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Caduca</th>
                             <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Editar</th>
+                            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Ver</th>
                             <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Pagar</th>
                           </tr>
                         </thead>
@@ -154,7 +156,14 @@ $dotenv->load();
                                       $query2  = "select * from enrolls_to where uid = $uid order by paid_date desc limit 1";
                                       $result2 = mysqli_query($con, $query2);
                                       $lastPayment = mysqli_fetch_array($result2);
-                                      $lastPaymentStr = $lastPayment ? str_replace('-', '/', date("d-m-Y", strtotime($lastPayment['paid_date']))) : "NA";
+                                      setlocale(LC_TIME, 'es_ES', 'Spanish_Spain', 'Spanish'); 
+                                      $_lastPaymentStr =  $lastPayment ? date("Y-m-d",strtotime($lastPayment['paid_date'])) : '';
+                                      $lastPaymentStr= strftime('%d %b %Y', strtotime($_lastPaymentStr));
+                                      
+                                      $_userExpire = $row['dob'] ? date("Y-m-d",strtotime($row['dob'])) : '';
+                                      
+                                      $userExpire=  strftime('%d %b %Y',  strtotime($row['dob']));
+                                      
                                       
                                     
                                     
@@ -162,7 +171,7 @@ $dotenv->load();
                                       echo "<td><p class='text-sm font-weight-bold mb-0'> $lastPaymentStr</p></td>";
                                       echo "<td class='text-center'><span class='badge badge-sm ${statusClass}'>$statusString</span></td>";
 
-                                      echo "<td class='text-center'><p class='text-sm font-weight-bold mb-0'>" . str_replace('-', '/', date("d-m-Y", strtotime($row['dob']))) . "</p></td>";
+                                      echo "<td class='text-center'><p class='text-sm font-weight-bold mb-0'>" . $userExpire . "</p></td>";
 
                                             
 
@@ -173,6 +182,14 @@ $dotenv->load();
                                                     
                                                     <button type='submit' style='border: 0; background: none;'>
                                                       <i class='fa-solid fa-pen-to-square'></i>
+                                                    </button>
+                                                    
+                                                    <input type='hidden' name='name' value='" . $uid . "'/>
+                                                    </form></td>";
+                                                    echo "<td class='text-center'><form action='view_member.php' method='post'>
+                                                    
+                                                    <button type='submit' style='border: 0; background: none;'>
+                                                      <i class='fa-solid fa-arrow-up-right-from-square'></i>
                                                     </button>
                                                     
                                                     <input type='hidden' name='name' value='" . $uid . "'/>

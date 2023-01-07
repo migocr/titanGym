@@ -24,7 +24,7 @@
 			<li class="active">
 				<a href="new_plan.php"><span>Nuevo Plan</span></a></li>
 
-			<li><a href="view_plan.php"><span>Editar Detalles de Suscripción</span></a></li>
+			<li><a href="membresias.php"><span>Editar Detalles de Suscripción</span></a></li>
 		</ul>
 
 	<li class="" id="overviewhassubopen"><a href="#" onclick="memberExpand(3)"><i class="entypo-box"></i><span>Vista General</span></a>

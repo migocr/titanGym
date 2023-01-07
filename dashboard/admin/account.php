@@ -1,5 +1,6 @@
 <?php
 	require '../../include/db_conn.php';
+	date_default_timezone_set('America/Tijuana');
 	require '../../include/get_color.php';
 	page_protect();
 	$principalColor = getColor($con);

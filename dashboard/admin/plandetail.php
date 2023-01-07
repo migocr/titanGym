@@ -20,10 +20,20 @@ if ($res){
 	}
 	// echo "<tr><td>".$row['amount']."</td></tr>";
 	echo "
-		<label class='form-control-label'>Costo:</label>
-		<input class='form-control'id='boxx' type='text' value='$".$row['amount']."' readonly></input>
-		<label class='form-control-label'>Validez:</label>
-		<input class='form-control' type='text' id='boxx' value='".$row['validity']." $planTypeString' readonly></input>
+		<div class='col-md-6'>
+			<div class='form-group'>
+				<label class='form-control-label'>Costo:</label>
+				<input class='form-control'id='boxx' type='text' value='$".$row['amount']."' readonly></input>
+			</div>
+		</div>
+		<div class='col-md-6'>
+			<div class='form-group'>
+				<label class='form-control-label'>Validez:</label>
+				<input class='form-control' type='text' id='boxx' value='".$row['validity']." $planTypeString' readonly></input>
+			</div>
+		</div>
+		
+		
 	";
 }
 

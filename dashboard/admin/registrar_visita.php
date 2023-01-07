@@ -9,8 +9,6 @@ require  $_DIR . '\vendor\autoload.php' ;
 $dotenv = Dotenv\Dotenv::createImmutable($_DIR);
 $dotenv->load(); 
 
-if (isset($_POST['name'])) {
-    $memid = $_POST['name'];
 ?>
 
 <!DOCTYPE html>
@@ -50,35 +48,35 @@ if (isset($_POST['name'])) {
 				<div class="col-lg-12 col-md-6 mb-md-0 mb-4">
 					<div class="card">
 						<div class="card-header pb-0">
-							<div class="">
-								<h6>Editar Usuario</h6>
-							</div>
+							
 							<div class="row">
+							<div class="card card-plain">
+								<div class="card-header pb-0 text-left">
+									<h3 class="font-weight-bolder text-primary text-gradient">Registrar Ingreso</h3>
+									<p class="mb-0 text-center">Ingrese el Id del cliente</p>
+								</div>
+								<div class="card-body pb-3">
+									<form role="form text-left">
+									
+									<div class="input-group mb-3">
+										<input type="text" class="form-control" placeholder="ID" aria-label="Name" aria-describedby="name-addon">
+									</div>
+									
+									<div class="text-center">
+										<button type="button" class="btn bg-gradient-primary btn-lg btn-rounded w-100 mt-4 mb-0">Registrar</button>
+									</div>
+									</form>
+								</div>
+								<div class="card-footer text-center pt-0 px-sm-4 px-1">
+									<p class="mb-4 mx-auto">
+									¿Olvidaste tu ID?
+									<a href="javascrpt:;" class="text-primary text-gradient font-weight-bold">Buscar</a>
+									</p>
+								</div>
+								</div>
 								<?php
 	    
-									$query  = "SELECT * FROM users WHERE userid='$memid'";
-									//echo $query;
-									$result = mysqli_query($con, $query);
-									$sno    = 1;
 									
-									$name="";
-									$gender="";
-
-									if (mysqli_affected_rows($con) == 1) {
-										while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
-									
-											$name    = $row['username'];
-											$gender =$row['gender'];
-											$dob	 = $row['dob'];         
-											$jdate    = $row['joining_date'];
-											$phone    = $row['phone'];
-											
-																
-										}
-									} else{
-										echo "<html><head><script>alert('Cambio Insatisfactorio');</script></head></html>";
-										echo mysqli_error($con);
-									}
 
 
 								?>
@@ -94,51 +92,7 @@ if (isset($_POST['name'])) {
 												<form id="form1" name="form1" method="post" class="a1-container"
 													action="edit_mem_submit.php">
 													<div class="row">
-														<div class="col-md-6">
-															<div class="form-group">
-																<label for="example-text-input" class="form-control-label">ID de Membresia</label>
-																<input class="form-control"  id="boxxe" type="text" name="uid" value="<?php echo $memid?>" readonly required />
-															</div>
-														</div>
-														<div class="col-md-6">
-															<div class="form-group">
-																<label for="example-search-input" class="form-control-label">Nombre</label>
-																<input class="form-control" type="text" placeholder="Nombre del nuevo miembro" 
-																name="uname" id="boxxe" value="<?php echo $name?>" required>
-															</div>
-														</div>
-														<div class="col-md-6">
-															<div class="form-group">
-																<label for="example-email-input" class="form-control-label">Genero</label>
-																<select style="width: 100%;
-																border: 1px #e9ecef solid;
-																border-radius: 5px;
-																padding: 5px;" name="gender" id="gender" required>
-																				
-																<option
-																	<?php if($gender == 'Hombre'){echo("selected");}?>	value="Hombre">Hombre
-																</option>
-																<option
-																	<?php if($gender == 'Mujer'){echo("selected");}?> value="Mujer">Mujer
-																</option>
-																</select>
-															</div>
-														</div>
-														<div class="col-md-6">
-															<div class="form-group">
-																<label for="example-tel-input" class="form-control-label">Telefono</label>
-																<input class="form-control" type="tel" name="phone" placeholder="Numero a 10 digitos" value='<?php echo $phone ?>' id="example-tel-input" onfocus="focused(this)" onfocusout="defocused(this)">
-															</div>
-														</div>
-													</div>														
-													
-													
-																	
-													
-													<div style="width: auto; display: flex;justify-content: center;">
-														<input class="btn btn-primary" type="submit" name="submit" id="submit" value="Guardar">
-														<input class="btn btn-default" type="reset" name="reset" id="reset" value="Restaurar">
-													</div>
+														
 												</form>
 											</div>
 										</div>
@@ -350,7 +304,5 @@ if (isset($_POST['name'])) {
 
 
 <?php
-} else {
-    
-}
+
 ?>

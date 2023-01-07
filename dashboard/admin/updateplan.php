@@ -15,7 +15,7 @@ page_protect();
    if(mysqli_query($con,$query1)){
      
             echo "<html><head><script>alert('PLAN actualizado satisfactoriamente');</script></head></html>";
-            echo "<meta http-equiv='refresh' content='0; url=view_plan.php'>";  
+            echo "<meta http-equiv='refresh' content='0; url=membresias.php'>";  
    }
    else{
     echo "<html><head><script>alert('ERROR! Actualización de Plan Insatisfactorio');</script></head></html>";
