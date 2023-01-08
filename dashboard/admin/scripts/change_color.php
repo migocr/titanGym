@@ -3,7 +3,7 @@
     $response = new stdClass();
     $response->status = false;
     $response->updateStatus = false;
-    $response->errorCode = $_POST['color'];
+    $response->color = $_POST['color'];
     
     if (isset($_POST['color'])) {
         $response->errorCode = "ENTRA";

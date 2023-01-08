@@ -4,13 +4,14 @@ $username = "root"; // Mysql username
 $password = ""; // Mysql password 
 $db_name  = "titangym"; // Database name 
 
-// Connect to server and select databse.
-$con = mysqli_connect($host, $username, $password, $db_name);
+
+$con = new mysqli($host, $username, $password, $db_name );
 
 // Check connection
-if (mysqli_connect_errno($con)) {
-    echo "Failed to connect to MySQL: " . mysqli_connect_error();
-}
+if ($con -> connect_errno) {
+    echo "Failed to connect to MySQL: " . $con -> connect_error;
+    exit();
+  }
 ?>
 <?php
 function page_protect()

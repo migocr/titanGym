@@ -52,7 +52,7 @@
 	<link id="pagestyle" href="../assets/css/soft-ui-dashboard.css?v=1.0.6" rel="stylesheet" />
 </head>
 
-<body class="g-sidenav-show" style="<?php echo "background-image:$backgroundColor;"?>     background-attachment: fixed;">
+<body class="g-sidenav-show" style="<?php echo "background:$backgroundColor !important;"?>     background-attachment: fixed;">
 	<?php $active = 'system'; $principalColor = $principalColor; include 'components/menu.php'; ?>
 	<main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
 		<!-- Navbar -->

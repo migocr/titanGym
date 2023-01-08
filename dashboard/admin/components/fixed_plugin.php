@@ -23,8 +23,7 @@
 				</div>
 				<a href="javascript:void(0)" class="switch-trigger background-color">
 					<div class="badge-colors my-2 text-start">
-						<span class="badge filter bg-gradient-primary active" data-attr="color" data-color="linear-gradient(310deg, #7928CA 0%, #FF0080 100%)"
-							onclick="sidebarColorCustom(this)"></span>
+						
 						<span class="badge filter bg-gradient-dark" data-attr="color" data-color="linear-gradient(310deg, #141727 0%, #3A416F 100%)"
 							onclick="sidebarColorCustom(this)"></span>
 						<span class="badge filter bg-gradient-info" data-attr="color" data-color="linear-gradient(310deg, #2152ff 0%, #21d4fd 100%)"
@@ -35,6 +34,18 @@
 							onclick="sidebarColorCustom(this)"></span>
 						<span class="badge filter bg-gradient-danger" data-attr="color" data-color="linear-gradient(310deg, #ea0606 0%, #ff667c 100%)"
 							onclick="sidebarColorCustom(this)"></span>
+
+						<span class="badge filter bg-gradient-primary active" style="background-image: linear-gradient(160deg, #0093E9 0%, #80D0C7 100%);" data-attr="color" data-color="linear-gradient(160deg, #0093E9 0%, #80D0C7 100%);"
+							onclick="sidebarColorCustom(this)"></span>
+					
+						<span class="badge filter bg-gradient-info" style="background-image:  linear-gradient( 83.2deg,  rgba(150,93,233,1) 10.8%, rgba(99,88,238,1) 94.3% );" data-attr="color" data-color=" linear-gradient( 83.2deg,  rgba(150,93,233,1) 10.8%, rgba(99,88,238,1) 94.3% )"
+							onclick="sidebarColorCustom(this)"></span>
+						<span class="badge filter bg-gradient-success" style="background-image:  linear-gradient( 179.6deg,  rgba(0,19,26,1) -4.9%, rgba(0,77,105,1) 108.4% );" data-attr="color" data-color=" linear-gradient( 179.6deg,  rgba(0,19,26,1) -4.9%, rgba(0,77,105,1) 108.4% )"
+							onclick="sidebarColorCustom(this)"></span>
+						<span class="badge filter bg-gradient-warning" style="background-image: radial-gradient( circle farthest-corner at 10% 20%,  rgba(0,0,0,1) 0%, rgba(0,0,0,1) 90% );;" data-attr="color" data-color="radial-gradient( circle farthest-corner at 10% 20%,  rgba(0,0,0,1) 0%, rgba(0,0,0,1) 90% );"
+							onclick="sidebarColorCustom(this)"></span>
+						<span class="badge filter bg-gradient-danger" style="background: transparent;" data-attr="color" data-color="transparent"
+							onclick="sidebarColorCustom(this)"></span>
 					</div>
 				</a>
 				<div>
@@ -44,9 +55,9 @@
 					<div class="badge-colors my-2 text-start">
 					<span class="badge filter bg-gradient-info" style="background: white; border: solid 1px black;" data-attr="backgroundColor" data-color=""
 							onclick="sidebarColorCustom(this)"></span>
-						<span class="badge filter bg-gradient-primary active" style="background-image: linear-gradient(160deg, #0093E9 0%, #80D0C7 100%);" data-attr="backgroundColor" data-color="linear-gradient(160deg, #0093E9 0%, #80D0C7 100%);"
+						<span class="badge filter bg-gradient-primary active" style="background: #aeb9c2" data-attr="backgroundColor" data-color="#aeb9c2"
 							onclick="sidebarColorCustom(this)"></span>
-						<span class="badge filter bg-gradient-dark" style="background:  linear-gradient(177deg, #FBAB7E 0%, #F7CE68 100%);;"  data-attr="backgroundColor" data-color=" linear-gradient(177deg, #FBAB7E 0%, #F7CE68 100%);"
+						<span class="badge filter bg-gradient-dark" style="background:  #303841"  data-attr="backgroundColor" data-color="#303841"
 							onclick="sidebarColorCustom(this)"></span>
 						<span class="badge filter bg-gradient-info" style="background-image:  linear-gradient( 83.2deg,  rgba(150,93,233,1) 10.8%, rgba(99,88,238,1) 94.3% );" data-attr="backgroundColor" data-color=" linear-gradient( 83.2deg,  rgba(150,93,233,1) 10.8%, rgba(99,88,238,1) 94.3% )"
 							onclick="sidebarColorCustom(this)"></span>
@@ -54,7 +65,7 @@
 							onclick="sidebarColorCustom(this)"></span>
 						<span class="badge filter bg-gradient-warning" style="background-image: radial-gradient( circle farthest-corner at 10% 20%,  rgba(0,0,0,1) 0%, rgba(0,0,0,1) 90% );;" data-attr="backgroundColor" data-color="radial-gradient( circle farthest-corner at 10% 20%,  rgba(0,0,0,1) 0%, rgba(0,0,0,1) 90% );"
 							onclick="sidebarColorCustom(this)"></span>
-						<span class="badge filter bg-gradient-danger" style="background: transparent;" data-attr="backgroundColor" data-color="transparent"
+						<span class="badge filter bg-gradient-danger" style="background: url('../assets/img/back3.svg'); background-attachment: fixed;" data-attr="backgroundColor" data-color="url('../assets/img/back3.svg');"
 							onclick="sidebarColorCustom(this)"></span>
 					</div>
 				</a>
