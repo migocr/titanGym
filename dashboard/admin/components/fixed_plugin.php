@@ -52,21 +52,39 @@
 					<h6 class="mb-0">Color de Fondo</h6>
 				</div>
 				<a href="javascript:void(0)" class="switch-trigger background-color">
-					<div class="badge-colors my-2 text-start">
-					<span class="badge filter bg-gradient-info" style="background: white; border: solid 1px black;" data-attr="backgroundColor" data-color=""
-							onclick="sidebarColorCustom(this)"></span>
-						<span class="badge filter bg-gradient-primary active" style="background: #aeb9c2" data-attr="backgroundColor" data-color="#aeb9c2"
-							onclick="sidebarColorCustom(this)"></span>
-						<span class="badge filter bg-gradient-dark" style="background:  #303841"  data-attr="backgroundColor" data-color="#303841"
-							onclick="sidebarColorCustom(this)"></span>
-						<span class="badge filter bg-gradient-info" style="background-image:  linear-gradient( 83.2deg,  rgba(150,93,233,1) 10.8%, rgba(99,88,238,1) 94.3% );" data-attr="backgroundColor" data-color=" linear-gradient( 83.2deg,  rgba(150,93,233,1) 10.8%, rgba(99,88,238,1) 94.3% )"
-							onclick="sidebarColorCustom(this)"></span>
-						<span class="badge filter bg-gradient-success" style="background-image:  linear-gradient( 179.6deg,  rgba(0,19,26,1) -4.9%, rgba(0,77,105,1) 108.4% );" data-attr="backgroundColor" data-color=" linear-gradient( 179.6deg,  rgba(0,19,26,1) -4.9%, rgba(0,77,105,1) 108.4% )"
-							onclick="sidebarColorCustom(this)"></span>
-						<span class="badge filter bg-gradient-warning" style="background-image: radial-gradient( circle farthest-corner at 10% 20%,  rgba(0,0,0,1) 0%, rgba(0,0,0,1) 90% );;" data-attr="backgroundColor" data-color="radial-gradient( circle farthest-corner at 10% 20%,  rgba(0,0,0,1) 0%, rgba(0,0,0,1) 90% );"
-							onclick="sidebarColorCustom(this)"></span>
-						<span class="badge filter bg-gradient-danger" style="background: url('../assets/img/back3.svg'); background-attachment: fixed;" data-attr="backgroundColor" data-color="url('../assets/img/back3.svg');"
-							onclick="sidebarColorCustom(this)"></span>
+					<div class="badge-colors my-2 text-start d-flex">
+					
+							<span>
+								<style>
+									.color-input-wrapper {
+									height: 1.5em;
+									width: 1.5em;
+									overflow: hidden;
+									border-radius: 50%;
+									display: inline-flex;
+									align-items: center;
+									position: relative;
+									}
+									.color-input-wrapper  input[type=color] {
+										position: absolute;
+										height: 4em;
+										width: 4em;
+										top: 50%;
+										left: 50%;
+										transform: translate(-50%, -50%);
+										overflow: hidden;
+										border: none;
+										margin: 0;
+										padding: 0;
+									}
+									</style>
+									<div  class="color-input-wrapper" >
+										<input  id="colorPicker" type="color">
+									</div>
+							</span>
+							<span>
+								<p onclick="sidebarColorCustom(this)" data-attr="backgroundColor" id="colorPickerSave" style="margin-left: 1em;">Guardar</p>
+							</span>
 					</div>
 				</a>
 				<!-- Sidenav Type -->
@@ -120,6 +138,13 @@
 		}
 	</style>
 	<script>
+		let dataColor = document.getElementById("colorPicker");
+		let dataColorSave = document.getElementById("colorPickerSave");
+		
+		dataColor.addEventListener("input", function(event){
+			dataColorSave.setAttribute("data-color", dataColor.value);
+		});
+		
 		function sidebarColorCustom(e) {
 			console.log(e.getAttribute("data-color"));
 			let formData = new FormData();

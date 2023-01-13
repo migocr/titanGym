@@ -7,17 +7,27 @@
     
     if (isset($_POST['search'])) {
         $response->errorCode = "ENTRA";
-        $color  = $_POST['search'];
-        $atributo  = $_POST['atributo'];
-        $sql = "update system_settings set config='$color' where nombre='${atributo}'";
-    
-        if ($con->query($sql) === TRUE) {
+        $search  = $_POST['search'];
+       
+        
+        $sql = "select * from users where userid LIKE '${search}' OR username LIKE '${search}'";
+        $result = $con->query($sql);
+        if ($result) {
             //echo "Registro actualizado exitosamente";
             $response->status = true;
             $response->updateStatus = true;   
+            $response->userData = 
+            
+            $rows = array();
+            while($row = mysqli_fetch_assoc($result)) {
+                $rows[] = $row;
+            }
+            //cho json_encode($rows);
+          
+            $response->userData =json_encode($rows);
         } else {
             //echo "Error actualizando registro: " . $con->error;
-            $response->errorCode = $con->error;
+            //$response->errorCode = $con->error;
         }
     } 
     

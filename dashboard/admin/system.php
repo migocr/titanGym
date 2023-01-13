@@ -1,12 +1,12 @@
 <?php
 	require '../../include/db_conn.php';
-	date_default_timezone_set('America/Tijuana');
+	date_default_timezone_set('America/Mexico_City');
 	page_protect();
 	$principalColor = $_SESSION['principalColor'];
 	$backgroundColor =  $_SESSION['backgroundColor'];
 	$backgroundColor = $_SESSION['backgroundColor'];
 
-	$_DIR = 'C:\xampp\htdocs\gym_l';
+	$_DIR = dirname(dirname(dirname(__FILE__)));
 	require  $_DIR . '\vendor\autoload.php' ;
 	$dotenv = Dotenv\Dotenv::createImmutable($_DIR);
 	$dotenv->load();

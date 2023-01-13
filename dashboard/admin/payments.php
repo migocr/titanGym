@@ -1,11 +1,11 @@
 ﻿<?php
 	require '../../include/db_conn.php';
 
-  date_default_timezone_set('America/Tijuana');
+  date_default_timezone_set('America/Mexico_City');
 	page_protect();
 	$principalColor = $_SESSION['principalColor'];
 	$backgroundColor =  $_SESSION['backgroundColor'];
-  $_DIR = 'C:\xampp\htdocs\gym_l';
+  $_DIR = dirname(dirname(dirname(__FILE__)));
 
   require  $_DIR . '\vendor\autoload.php' ;
   $dotenv = Dotenv\Dotenv::createImmutable($_DIR);
@@ -129,16 +129,16 @@
                               $planName = $planData['planName'];
 
                               // convertimos las fechas a formato Unix
-                              $expireDate =  str_replace('-', '/', $row['expire']);
+                              $expireDate =  $row['expire'];
                               $today = date('Y/m/d');
                               //$my_date = date('d/m/Y', strtotime($date));
-
+                                  
                               $now = strtotime($today);
 
                               $timestamp1 = strtotime($expireDate);
                               $timestamp2 = strtotime($today);
                               //echo $today;
-                              if (date('Ydm', $timestamp1) <= date('Ydm', $timestamp2)) {
+                              if (date('Ymd', $timestamp1) <= date('Ymd', $timestamp2)) {
                                   //echo $today . 'es menor que' . $expireDate;
                                   $memberStatus = false;
                                   $statusString = "Expirado";

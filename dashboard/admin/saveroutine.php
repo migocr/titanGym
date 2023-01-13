@@ -1,6 +1,6 @@
 <?php
 	require '../../include/db_conn.php';
-	date_default_timezone_set('America/Tijuana');
+	date_default_timezone_set('America/Mexico_City');
 	page_protect();
 	
 		

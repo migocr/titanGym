@@ -1,17 +1,18 @@
 ﻿<?php
 require '../../include/db_conn.php';
-
+date_default_timezone_set('America/Mexico_City');
 page_protect();
 $principalColor = $_SESSION['principalColor'];
 $backgroundColor =  $_SESSION['backgroundColor'];
-$_DIR = 'C:\xampp\htdocs\gym_l';
+$_DIR = dirname(dirname(dirname(__FILE__)));
 require  $_DIR . '\vendor\autoload.php' ;
 $dotenv = Dotenv\Dotenv::createImmutable($_DIR);
 $dotenv->load(); 
 
-if (isset($_POST['name'])) {
-    $memid = $_POST['name'];
+if (isset($_GET['id'])) {
+    $memid = $_GET['id'];
 ?>
+
 
 <!DOCTYPE html>
 <html lang="es">
@@ -50,8 +51,17 @@ if (isset($_POST['name'])) {
 				<div class="col-lg-12 col-md-6 mb-md-0 mb-4">
 					<div class="card">
 						<div class="card-header pb-0">
-							<div class="">
-								<h6>Editar Usuario</h6>
+							
+							<div style="display: flex; justify-content: space-between;">
+								<h6>Informacion de Usuario</h6>
+														
+								<form action='edit_member.php' method='post'>
+									<button type='submit' style='border: 0; background: none;'>
+										<span>Editar <i class="fa-solid fa-user-pen"></i> </span>
+									</button>
+									
+									<input type='hidden' name='name' value='<?php echo $memid?>'/>
+								</form>
 							</div>
 							<div class="row">
 								<?php
@@ -66,14 +76,31 @@ if (isset($_POST['name'])) {
 
 									if (mysqli_affected_rows($con) == 1) {
 										while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
-									
+											$uid    = $row['userid'];
+											
 											$name    = $row['username'];
 											$gender =$row['gender'];
 											$dob	 = $row['dob'];         
 											$jdate    = $row['joining_date'];
 											$phone    = $row['phone'];
 											
-																
+											$query1  = "SELECT enrolls_to.pid, enrolls_to.amount, enrolls_to.et_id, enrolls_to.paid_date, enrolls_to.startDate, enrolls_to.expire, plan.planName FROM enrolls_to INNER JOIN plan ON enrolls_to.pid = plan.pid WHERE enrolls_to.uid = '$uid' AND enrolls_to.pid = plan.pid ORDER BY enrolls_to.et_id DESC ";
+											$result1 = mysqli_query($con, $query1);
+											if (mysqli_num_rows($result) > 0) {
+												$dataPayments = array();
+												
+												while ($row1 = mysqli_fetch_array($result1, MYSQLI_ASSOC)) {
+													
+													$payment= $row1;
+													//echo $row1["uid"];
+													//echo json_encode($dataPayments) ;
+													array_push($dataPayments, $payment);
+
+													
+												}
+												
+												
+											}
 										}
 									} else{
 										echo "<html><head><script>alert('Cambio Insatisfactorio');</script></head></html>";
@@ -124,11 +151,99 @@ if (isset($_POST['name'])) {
 													
 																	
 													
-													<div style="width: auto; display: flex;justify-content: center;">
-														<input class="btn btn-primary" type="submit" name="submit" id="submit" value="Guardar">
-														<input class="btn btn-default" type="reset" name="reset" id="reset" value="Restaurar">
-													</div>
+													
 												</form>
+												
+												<div style="display: flex; justify-content: space-between;">
+													<h6>Historial de Pagos</h6>
+																			
+													<form action='make_payments.php' method='post' style="cursor:pointer;">
+														<button type='submit' style='border: 0; background: none;'>
+															<span>Pagar <i class="fa-solid fa-money-check-dollar"></i> </span>
+														</button>
+														
+														<input type='hidden' name='userID'  value='<?php echo $memid?>'/>
+													</form>
+												</div>
+												
+												<div class="card">
+													<div class="table-responsive">
+														<table class="table align-items-center mb-0">
+														<thead>
+															<tr>
+															<th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">ID</th>
+															<th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Fecha de Pago</th>
+															<th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Comienza</th>
+															<th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Finaliza</th>
+															<th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Membresia</th>
+															<th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Pago</th>
+															<th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Status</th>
+	
+														</tr>
+														</thead>
+														<tbody>
+															<?php 
+															//echo json_encode($dataPayments);
+																foreach($dataPayments as $dataPayment) {
+																	//echo $dataPayment;
+																	
+																	$_pid =  $dataPayment['pid'];
+																	$paymentId =  $dataPayment['et_id'];
+																	$payDate =  $dataPayment['paid_date'];
+																	$planStart =  $dataPayment['startDate'];
+																	$planEnd =  $dataPayment['expire'];
+																	$planName =  $dataPayment['planName'];
+																	$amount =  $dataPayment['amount'];
+																	
+																	$today = date('Y/m/d');
+																	$timestamp1 = strtotime($planEnd);
+																	$timestamp2 = strtotime($today);
+																	//echo $today;
+																	if (date('Ymd', $timestamp1) <= date('Ymd', $timestamp2)) {
+																		//echo $today . 'es menor que' . $expireDate;
+																		$memberStatus = false;
+																		$statusString = "Expirado";
+																		$statusClass = "bg-gradient-danger";
+																	} else {
+																		//echo  $today . 'es mayor o igual que'. $expireDate;
+																		$memberStatus = true;
+																		$statusString = "Activo";
+																		$statusClass = "bg-gradient-success";
+																	}
+																	echo "<tr>
+																			<td>
+																				<p class='text-center text-xs font-weight-bold mb-0'>$paymentId </p>
+																			</td>
+																			
+																			<td>
+																				<p class='text-center text-xs font-weight-bold mb-0'>$payDate </p>
+																			</td>
+																			<td>
+																				<p class='text-center text-xs font-weight-bold mb-0'>$planStart </p>
+																			</td>
+																			<td>
+																				<p class='text-center text-xs font-weight-bold mb-0'>$planEnd </p>
+																			</td>
+																			<td>
+																				<p class='text-center text-xs font-weight-bold mb-0'>$planName </p>
+																			</td>
+																			<td>
+																				<p class='text-center text-xs font-weight-bold mb-0'>$amount </p>
+																			</td>
+																			<td class='text-center'>
+																				<span class='badge badge-sm $statusClass'>$statusString</span>
+																			</td>
+																		</tr>
+																	";
+																}
+															?>
+															
+														</tbody>
+														</table>
+													</div>
+												</div>
+												
+
 											</div>
 										</div>
 									</div>

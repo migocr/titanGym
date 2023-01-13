@@ -1,7 +1,7 @@
 <?php
    require '../../include/db_conn.php';
 
-   $_DIR = 'C:\xampp\htdocs\gym_l';
+   $_DIR = dirname(dirname(dirname(__FILE__)));
    require  $_DIR . '\vendor\autoload.php' ;
 
 	page_protect();

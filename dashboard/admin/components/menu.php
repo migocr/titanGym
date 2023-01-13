@@ -129,12 +129,14 @@
 		</ul>
 	</div>
 	<div class="sidenav-footer mx-3 ">
-		<button style=<?php echo "'background-image:$principalColor;'"?> data-bs-toggle="modal"
-			data-bs-target="#modalRegisterVisit" class="btn bg-gradient-primary mt-3 w-100">Registrar Visita</button>
+	
+		<a class="" href="registrar_visita.php">
+			<button style=<?php echo "'background-image:$principalColor;'"?> class="btn bg-gradient-primary mt-3 w-100">Registrar Visita</button>
+		</a>
 	</div>
 
 </aside>
-<?php include 'modals/register_user_visit.php'; ?>
+
 <style>
 	.navbar-vertical.navbar-expand-xs .navbar-nav .nav-link:hover {
 		background: white;

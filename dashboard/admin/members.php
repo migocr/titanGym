@@ -1,10 +1,10 @@
 ﻿<?php
 require '../../include/db_conn.php';
-date_default_timezone_set('America/Tijuana');
+date_default_timezone_set('America/Mexico_City');
 page_protect();
 $principalColor = $_SESSION['principalColor'];
 $backgroundColor =  $_SESSION['backgroundColor'];
-$_DIR = 'C:\xampp\htdocs\gym_l';
+$_DIR = dirname(dirname(dirname(__FILE__)));
 
 require  $_DIR . '\vendor\autoload.php' ;
 $dotenv = Dotenv\Dotenv::createImmutable($_DIR);
@@ -110,7 +110,7 @@ $dotenv->load();
                         </thead>
                         <tbody id="membersTable">
                           <?php
-                              $query  = "select * from users ORDER BY joining_date";
+                              $query  = "select * from users ORDER BY userid DESC";
                               //echo $query;
                               $result = mysqli_query($con, $query);
                               $sno    = 1;
@@ -186,14 +186,14 @@ $dotenv->load();
                                                     
                                                     <input type='hidden' name='name' value='" . $uid . "'/>
                                                     </form></td>";
-                                                    echo "<td class='text-center'><form action='view_member.php' method='post'>
-                                                    
+                                                    echo "<td class='text-center'>
+                                                    <a href='view_member.php?id=$uid'><i class='fa-solid fa-arrow-up-right-from-square'></i></a>
                                                     <button type='submit' style='border: 0; background: none;'>
-                                                      <i class='fa-solid fa-arrow-up-right-from-square'></i>
+                                                      
                                                     </button>
                                                     
-                                                    <input type='hidden' name='name' value='" . $uid . "'/>
-                                                    </form></td>";
+                                                    
+                                                   </td>";
                                           echo "<td class='text-center'><form action='make_payments.php' method='post'>
                                                     
                                                     <button type='submit' style='border: 0; background: none;'>

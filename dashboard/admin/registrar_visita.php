@@ -4,7 +4,7 @@ require '../../include/db_conn.php';
 page_protect();
 $principalColor = $_SESSION['principalColor'];
 $backgroundColor =  $_SESSION['backgroundColor'];
-$_DIR = 'C:\xampp\htdocs\gym_l';
+$_DIR = dirname(dirname(dirname(__FILE__)));
 require  $_DIR . '\vendor\autoload.php' ;
 $dotenv = Dotenv\Dotenv::createImmutable($_DIR);
 $dotenv->load(); 
@@ -37,7 +37,7 @@ $dotenv->load();
 </head>
 
 <body class="g-sidenav-show  bg-gray-100" style="<?php echo "background:$backgroundColor !important;"?>">
-	<?php $active = 'members'; include 'components/menu.php'; ?>
+	<?php $active = ''; include 'components/menu.php'; ?>
 	<main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ps ">
 		<!-- Navbar -->
 		<?php $titlePage = 'Resumen'; include 'components/navbar.php'; ?>
@@ -50,30 +50,67 @@ $dotenv->load();
 						<div class="card-header pb-0">
 							
 							<div class="row">
-							<div class="card card-plain">
-								<div class="card-header pb-0 text-left">
-									<h3 class="font-weight-bolder text-primary text-gradient">Registrar Ingreso</h3>
-									<p class="mb-0 text-center">Ingrese el Id del cliente</p>
-								</div>
-								<div class="card-body pb-3">
-									<form role="form text-left">
-									
-									<div class="input-group mb-3">
-										<input type="text" class="form-control" placeholder="ID" aria-label="Name" aria-describedby="name-addon">
+								<div class="card card-plain">
+									<div class="card-header pb-0 text-left">
+										<h3 class="font-weight-bolder ">Registrar Ingreso</h3>
+										<p class="mb-0">Ingrese el Id del cliente</p>
 									</div>
+									<div class="card-body pb-3">
+										<form role="form text-left">
 									
-									<div class="text-center">
-										<button type="button" class="btn bg-gradient-primary btn-lg btn-rounded w-100 mt-4 mb-0">Registrar</button>
+										<div class="input-group mb-3">
+											<input type="text" class="form-control" placeholder="ID" aria-label="Name" aria-describedby="name-addon">
+										</div>
+										<div class="card" style="box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;">
+									<div class="table-responsive">
+										<table class="table align-items-center mb-0">
+										<thead>
+											
+										</thead>
+										<tbody >
+											<tr>
+											<td>
+											<input
+												type="checkbox"
+												id="subscribeNews"
+												name="subscribe"
+												value="newsletter" />
+											</td>
+											<td>
+												<p id ="uid" class="m-auto text-secondary text-xs font-weight-bold">0001</p>
+											</td>
+											<td>
+												<p is="name" class=" m-auto  text-secondary text-xs font-weight-bold">Misael Gomez</p>
+											</td>
+											<td>
+												<p id="status" class="m-auto text-secondary text-xs font-weight-bold">Activo</p>
+											</td>
+											<td>
+												<p id="expire" class="m-auto text-secondary text-xs font-weight-bold">Caducidad</p>
+											</td>
+											</tr>
+
+											
+											
+										</tbody>
+										</table>
 									</div>
-									</form>
 								</div>
-								<div class="card-footer text-center pt-0 px-sm-4 px-1">
-									<p class="mb-4 mx-auto">
-									¿Olvidaste tu ID?
-									<a href="javascrpt:;" class="text-primary text-gradient font-weight-bold">Buscar</a>
-									</p>
+									
+										<div class="text-center">
+										<button style="background: <?php echo $principalColor?>; color: white;" type="button" class="btn btn-lg btn-rounded w-100 mt-4 mb-0">Registrar</button>
+										</div>
+										</form>
+									</div>
+								
+									<div class="card-footer text-center pt-0 px-sm-4 px-1">
+										<p class="mb-4 mx-auto">
+										¿Olvidaste tu ID?
+										<a href="javascrpt:;"  style="color: <?php echo $principalColor?>; " class="font-weight-bold">Buscar</a>
+										</p>
+									</div>
 								</div>
-								</div>
+								
 								<?php
 	    
 									

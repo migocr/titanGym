@@ -1,13 +1,14 @@
 ﻿<?php
 	require '../../include/db_conn.php';
-	date_default_timezone_set('America/Tijuana');
+	date_default_timezone_set('America/Mexico_City');
 	page_protect();
 	$principalColor = $_SESSION['principalColor'];
 	$backgroundColor =  $_SESSION['backgroundColor'];
 
-	$_DIR = 'C:\xampp\htdocs\gym_l';
+	$_DIR = dirname(dirname(dirname(__FILE__)));
 	require  $_DIR . '\vendor\autoload.php' ;
 	$dotenv = Dotenv\Dotenv::createImmutable($_DIR);
+
 	$dotenv->load();
 ?>
 <!DOCTYPE html>
@@ -68,7 +69,7 @@
 										<p class="text-sm mb-0 text-capitalize font-weight-bold">Ingresos del mes</p>
 										<h5 class="font-weight-bolder mb-0">
 											<?php
-											date_default_timezone_set('America/Tijuana');
+											date_default_timezone_set('America/Mexico_City');
 											$date  = date('Y-m');
 											$query = "select * from enrolls_to WHERE  paid_date LIKE '$date%'";
 
@@ -145,7 +146,7 @@
 										<p class="text-sm mb-0 text-capitalize font-weight-bold">Ingresos Anuales</p>
 										<h5 class="font-weight-bolder mb-0">
 											<?php
-											date_default_timezone_set('America/Tijuana');
+											date_default_timezone_set('America/Mexico_City');
 											$date  = date('Y');
 											$query = "select * from enrolls_to WHERE  paid_date LIKE '$date%'";
 

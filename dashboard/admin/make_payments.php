@@ -1,13 +1,13 @@
 <?php
 require '../../include/db_conn.php';
 
-date_default_timezone_set('America/Tijuana'); 
+date_default_timezone_set('America/Mexico_City'); 
 page_protect();
 $principalColor = $_SESSION['principalColor'];
 $backgroundColor =  $_SESSION['backgroundColor'];
-if (isset($_POST['userID']) && isset($_POST['planID'])) {
+if (isset($_POST['userID'])) {
     $uid  = $_POST['userID'];
-    $planid=$_POST['planID'];
+    
     $query1 = "select * from users WHERE userid='$uid'";
     
     $result1 = mysqli_query($con, $query1);
@@ -41,7 +41,7 @@ if (isset($_POST['userID']) && isset($_POST['planID'])) {
     }
 ?>
 <?php
-$_DIR = 'C:\xampp\htdocs\gym_l';
+$_DIR = dirname(dirname(dirname(__FILE__)));
 require  $_DIR . '\vendor\autoload.php' ;
 $dotenv = Dotenv\Dotenv::createImmutable($_DIR);
 $dotenv->load(); 
@@ -126,7 +126,7 @@ $dotenv->load();
                         <label for="example-date-input" class="form-control-label">Fecha Inicio</label>
                         <input id="start-date" class="form-control" type="date" value='<?php 
                         //echo $expDate; 
-                        date_default_timezone_set('America/Tijuana'); 
+                        date_default_timezone_set('America/Mexico_City'); 
                         $hoy = date('Y-m-d');
                         
                         if ($expDate <= $hoy) {
@@ -290,15 +290,31 @@ $dotenv->load();
             await XHR.addEventListener('load', (event) => {
               console.log(event);
               console.log(XHR.responseText);
-
-              swal({
-                icon: "success",
-                text: "Pago Guardado",
+              var response = JSON.parse(JSON.parse(XHR.responseText));
+            //  JSON.parse(response, true);
+              console.log(response)
+              if(response.status) {
+                swal({
+                  icon: "success",
+                  text: "Pago Guardado",
+                  value: true,
+                  visible: true,
+                  className: "",
+                  closeModal: true,
+                }).then(function() {
+                  window.location = './view_member.php?id=' + id;
+                });
+              } else {
+                swal({
+                icon: "error",
+                text: "Error al guardar",
                 value: true,
                 visible: true,
                 className: "",
                 closeModal: true,
-              });
+              })
+              }
+              
               
             });
 

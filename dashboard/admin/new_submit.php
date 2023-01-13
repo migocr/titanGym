@@ -5,7 +5,7 @@
 	page_protect();
 	$principalColor = $_SESSION['principalColor'];
 	$backgroundColor =  $_SESSION['backgroundColor'];
-  $_DIR = 'C:\xampp\htdocs\gym_l';
+  $_DIR = dirname(dirname(dirname(__FILE__)));
   require  $_DIR . '\vendor\autoload.php' ;
   $dotenv = Dotenv\Dotenv::createImmutable($_DIR);
   $dotenv->load(); 
@@ -83,13 +83,13 @@
             echo $cdate;
             $expiredate=date("Y-m-d",$d); //adding validity retrieve from plan to current date
             //inserting into enrolls_to table of corresponding userid
-            $query2="insert into enrolls_to(pid,uid,paid_date,expire,renewal, startDate) values('$plan','$memID','$cdate','$expiredate','yes','$jdate')";
+            $query2="insert into enrolls_to(pid,uid,paid_date,expire, startDate) values('$plan','$memID','$cdate','$expiredate','$jdate')";
             if(mysqli_query($con,$query2)==1){
 
               echo "<html><head><script>
                     document.addEventListener('DOMContentLoaded', function () {
-                      swal('Guardado' ,  'Miembro agregado exitosamente' ,  'success').then((event) => {window.location.href = window.location.href.replace('new_submit.php', 'new_entry.php');});
-                      //setTimeout(function(){ window.location.href = window.location.href.replace('new_submit.php', 'new_entry.php'); }, 3000);
+                      swal('Guardado' ,  'Miembro agregado exitosamente' ,  'success').then((event) => {window.location.href = window.location.href.replace('new_submit.php', 'view_member.php?id=$memID');});
+                      //setTimeout(function(){ window.location.href = window.location.href.replace('new_submit.php', 'view_member.php?id=$uid'); }, 3000);
                     });
                     </script></head></html>";
               
