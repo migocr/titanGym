@@ -25,10 +25,12 @@ $backgroundColor =  $_SESSION['backgroundColor'];
   <!--     Fonts and icons     -->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
   <!-- Nucleo Icons -->
+  <link rel="stylesheet" href="../assets/css/all-min.css"  />
+
   <link href="../assets/css/nucleo-icons.css" rel="stylesheet" />
   <link href="../assets/css/nucleo-svg.css" rel="stylesheet" />
   <!-- Font Awesome Icons -->
-  <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
+  <script src="../assets/js/kit-font-awesome.js" crossorigin="anonymous"></script>
   <link href="../assets/css/nucleo-svg.css" rel="stylesheet" />
   <!-- CSS Files -->
   <link id="pagestyle" href="../assets/css/soft-ui-dashboard.css?v=1.0.6" rel="stylesheet" />
@@ -105,6 +107,10 @@ $backgroundColor =  $_SESSION['backgroundColor'];
 				</div>
 			</div>
 		</main>
+		<?php include 'components/fixed_plugin.php';?>
+                
+        <script src="../assets/js/plugins/perfect-scrollbar.min.js"></script>
+        <script src="../assets/js/soft-ui-dashboard.min.js?v=1.0.6"></script>
 	</body>
 </html>
 

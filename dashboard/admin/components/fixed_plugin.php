@@ -82,7 +82,7 @@
 										<input  id="colorPicker" type="color">
 									</div>
 							</span>
-							<span>
+							<span style="cursor: pointer;">
 								<p onclick="sidebarColorCustom(this)" data-attr="backgroundColor" id="colorPickerSave" style="margin-left: 1em;">Guardar</p>
 							</span>
 					</div>

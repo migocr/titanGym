@@ -36,7 +36,9 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png">
 	<link rel="icon" type="image/png" href="../assets/img/favicon.png">
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+	<link rel="stylesheet" href="../assets/css/all-min.css"  />
+	<link rel="stylesheet" type="text/css"  href="/gym_l/dashboard/assets/css/all-min.css">
+
 	<title>
 		<?php echo $_ENV["PAGE_NAME"] ?>
 	</title>
@@ -46,7 +48,7 @@
 	<link href="../assets/css/nucleo-icons.css" rel="stylesheet" />
 	<link href="../assets/css/nucleo-svg.css" rel="stylesheet" />
 	<!-- Font Awesome Icons -->
-	<script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
+	<script src="../assets/js/kit-font-awesome.js" crossorigin="anonymous"></script>
 	<link href="../assets/css/nucleo-svg.css" rel="stylesheet" />
 	<!-- CSS Files -->
 	<link id="pagestyle" href="../assets/css/soft-ui-dashboard.css?v=1.0.6" rel="stylesheet" />
@@ -255,42 +257,63 @@
 					<div class="card">
 						<div class="card-body p-3">
 							<div class="row">
-							<div class="col-12">
-								<div class="card mb-4" style="box-shadow: none;">
-									<div class="card-header pb-0 pt-1">
-									<h6>Miembros proximos a caducar</h6>
-									<div class="table-responsive p-0">
-										<table class=" table align-items-center justify-content-center mb-0">
-										<thead>
+							
+							<div class="card" style="box-shadow: none;">
+								<div class="card-header pb-0">
+									<div class="d-flex justify-content-between">
+									<h6>Miembros Proximos a Expirar</h6> 
+									
+									</div>
+									
+									
+									
+									
+								</div>
+								
+								<div class="card-body p-3">
+									<div class="row">
+									<div class="col-12">
+										<div class="table-responsive p-0">
+										<table class="table align-items-center mb-0">
+											<thead>
 											<tr>
-											<th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 p-2">ID</th>
-											<th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 p-2">Nombre</th>
-											<th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2 text-center">Dias Restantes</th>
-											<th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2 text-center">Status</th>
-											<th class="text-uppercase text-secondary text-xxs font-weight-bolder text-center opacity-7 ps-2">Caduca</th>
-											<th class="text-uppercase text-secondary text-xxs font-weight-bolder text-center opacity-7 ps-2">Agregar Pago</th>
+												<th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">ID</th>
+												<th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 px-2">Nombre</th>
+												<th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2 text-center">Dias Restantes</th>
+												<th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Status</th>
+												<th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Caduca</th>
+
+												<th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Editar</th>
+												<th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Ver</th>
+												<th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Pagar</th>
+
 											</tr>
-										</thead>
-										<?php
-											$today = date("Y-m-d");
-											$nextWeek = date('Y-m-d', strtotime(' +7 days'));
+											</thead>
+											<tbody id="membersTable">
 											
-											//usuarios que van a caducar HOY y dentro de next week, definir tiempo
-											$query = "select * FROM users WHERE cast(dob as DATE) >= CURDATE() ORDER BY cast(dob as DATE) ASC";
+											<?php
+												$query = "select * FROM users WHERE cast(dob as DATE) >= CURDATE() ORDER BY cast(dob as DATE) ASC";
+												//echo $query;
 												$result = mysqli_query($con, $query);
 												$sno    = 1;
+												
 												if (mysqli_affected_rows($con) != 0) {
-													while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {													
+													while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
+														$emparray = array();
+														$emparray[] = $row;
+														$jsondata = json_encode($emparray);
+														echo "<tr json-data='$jsondata'>";
 														$uid   = $row['userid'];
-														$rowGender = $row['gender'];	
+														$rowGender = $row['gender'];
 														echo "<td> 
-																
-																	<h6 class='mb-0 text-sm'>".$uid ." </h6>
-															
-																</td>";										
-														echo "<td style='width: 1em'> 
-																<h6 class='mb-0 text-sm'>". $row['username'] . " </h6>
-																</td>";
+														<div class='d-flex px-2'>
+															<h6 class='mb-0 text-sm'>". $uid ." </h6>
+														</td>";
+														echo "<td> 
+														<div class='d-flex px-2'>
+															<h6 class='mb-0 text-sm'>". $row['username'] ." </h6>
+														</td>";
+
 														$expireDate = strtotime($row['dob']);
 														$today = strtotime(date("Y-m-d"));
 														$timeDiff = abs($expireDate - $today);
@@ -314,31 +337,53 @@
 														echo "<td ><p class='text-center'>" . $numberDays ."</p></td>";
 														echo "<td class='text-center'><span class='badge badge-sm bg-gradient-success $statusClass'>$statusString</span></td>";									
 														echo "<td><p class='text-center text-sm font-weight-bold mb-0 '>" . $row['dob'] . "</p></td>";
-														$sno++;
 														
-														echo "<td class='text-center' style='width:1em;'><form action='make_payments.php' method='post'><input type='hidden' name='userID' value='" . $uid . "'/>
-														<input type='hidden' name='planID' value='" .  "'/>
-														<div class='btn btn-default'><input type='submit' class='btn' value='Agregar Pago' style='
-															padding: 0 5px 0 0;;
-															margin: 0;
-															background: transparent;
-															box-shadow: none;
-														'><i class='fa-sharp fa-solid fa-credit-card'></i>
-														</div>
-														</form></td></tr>";														$msgid = 0;
-													}
+																
+																$sno++;
+																echo "<td class='text-center'><form action='edit_member.php' method='post'>
+																		
+																		<button type='submit' style='border: 0; background: none;'>
+																		<i class='fa-solid fa-pen-to-square'></i>
+																		</button>
+																		
+																		<input type='hidden' name='name' value='" . $uid . "'/>
+																		</form></td>";
+																		echo "<td class='text-center'>
+																		<a href='view_member.php?id=$uid'><i class='fa-solid fa-arrow-up-right-from-square'></i></a>
+																		<button type='submit' style='border: 0; background: none;'>
+																		
+																		</button>
+																		
+																		
+																	</td>";
+															echo "<td class='text-center'><form action='make_payments.php' method='post'>
+																		
+																		<button type='submit' style='border: 0; background: none;'>
+																		<i class='fa-sharp fa-solid fa-credit-card'></i>
+																		</button>
+																		
+																		<input type='hidden' name='userID' value='" . $uid . "'/>
+																		<input type='hidden' name='planID' value='RMNOGS'>
+																		</form></td>";
+																		
+																$msgid = 0;
+																echo "</tr>";
+															}
+														
+													
 												}
-											?>	
-										
-										
-											</table>
+												?>	
+											</tbody>
+
+									
+										</table>
 										</div>
 									</div>
-									<div class="card-body px-0 pt-0 pb-2">
-									
 									</div>
+								
 								</div>
-								</div>
+								
+							
 							</div>
 						</div>
 					</div>
@@ -356,6 +401,14 @@
 	<script src="../assets/js/plugins/perfect-scrollbar.min.js"></script>
 	<script src="../assets/js/plugins/smooth-scrollbar.min.js"></script>
 	<script src="../assets/js/plugins/chartjs.min.js"></script>
+	<style>
+		#membersTable td{
+			padding:0!important
+		}
+		#membersTable th {
+			
+		}
+	</style>
 	<script>
 		var ctx = document.getElementById("chart-bars").getContext("2d");
 
@@ -536,7 +589,7 @@
 		}
 	</script>
 	<!-- Github buttons -->
-	<script async defer src="https://buttons.github.io/buttons.js"></script>
+	<script async defer src="../assets/js/buttons.js"></script>
 	<!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
 	<script src="../assets/js/soft-ui-dashboard.min.js?v=1.0.6"></script>
 </body>

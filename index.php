@@ -39,7 +39,7 @@ if(isset($_SESSION["user_data"]))
   <link href="./dashboard/assets/css/nucleo-icons.css" rel="stylesheet" />
   <link href="./dashboard/assets/css/nucleo-svg.css" rel="stylesheet" />
   <!-- Font Awesome Icons -->
-  <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
+  <script src="../assets/js/kit-font-awesome.js" crossorigin="anonymous"></script>
   <link href="./dashboard/assets/css/nucleo-svg.css" rel="stylesheet" />
   <!-- CSS Files -->
   <link id="pagestyle" href="./dashboard/assets/css/soft-ui-dashboard.css?v=1.0.6" rel="stylesheet" />
@@ -140,7 +140,7 @@ if(isset($_SESSION["user_data"]))
     }
   </script>
   <!-- Github buttons -->
-  <script async defer src="https://buttons.github.io/buttons.js"></script>
+  <script async defer src="../assets/js/buttons.js"></script>
   <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
   <script src="./dashboard/assets/js/soft-ui-dashboard.min.js?v=1.0.6"></script>
 </body>
