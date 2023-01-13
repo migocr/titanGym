@@ -6,7 +6,7 @@
 	$backgroundColor =  $_SESSION['backgroundColor'];
 
 	$_DIR = dirname(dirname(dirname(__FILE__)));
-	require  $_DIR . '\vendor\autoload.php' ;
+	require  $_DIR . '/vendor/autoload.php' ;
 	$dotenv = Dotenv\Dotenv::createImmutable($_DIR);
 
 	$dotenv->load();

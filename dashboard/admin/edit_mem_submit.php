@@ -2,7 +2,7 @@
    require '../../include/db_conn.php';
 
    $_DIR = dirname(dirname(dirname(__FILE__)));
-   require  $_DIR . '\vendor\autoload.php' ;
+   require  $_DIR . '/vendor/autoload.php' ;
 
 	page_protect();
 	$principalColor = $_SESSION['principalColor'];
