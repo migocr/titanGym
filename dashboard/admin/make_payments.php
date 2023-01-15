@@ -219,25 +219,24 @@ $dotenv->load();
   		<script>
           function changeExpireDate(str, duration, durationType){
             console.log(str);
-            debugger;
         		if(str==""){
         			document.getElementById("plandetls").innerHTML = "";
         			return;
-        		}else{
-        			if (window.XMLHttpRequest) {
+        		} else{
+        		  if (window.XMLHttpRequest) {
            		 // code for IE7+, Firefox, Chrome, Opera, Safari
-           			 xmlhttp = new XMLHttpRequest();
-       				 }
+           		  xmlhttp = new XMLHttpRequest();
+       				}
        			 	xmlhttp.onreadystatechange = function() {
-            		if (this.readyState == 4 && this.status == 200) {
+            	if (this.readyState == 4 && this.status == 200) {
                		 document.getElementById("plandetls").innerHTML=this.responseText;
                 
-            			}
-        			};
+            	}
+        		};
         			
        				 xmlhttp.open("GET","plandetail.php?q="+str,true);
        				 xmlhttp.send();	
-        		}
+        	}
 
             var expireDateInput = document.getElementById("expire-date");
             console.log(expireDateInput.value)

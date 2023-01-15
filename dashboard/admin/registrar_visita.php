@@ -59,46 +59,46 @@ $dotenv->load();
 										<form role="form text-left">
 									
 										<div class="input-group mb-3">
-											<input type="text" class="form-control" placeholder="ID" aria-label="Name" aria-describedby="name-addon">
+											<input id="search" type="text" class="form-control" placeholder="ID" aria-label="Name" aria-describedby="name-addon">
 										</div>
 										<div class="card" style="box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;">
 									<div class="table-responsive">
-										<table class="table align-items-center mb-0">
+										<table style="display:none" class="table align-items-center mb-0">
 										<thead>
 											
 										</thead>
-										<tbody >
-											<tr>
-											<td>
-											<input
-												type="checkbox"
-												id="subscribeNews"
-												name="subscribe"
-												value="newsletter" />
-											</td>
-											<td>
-												<p id ="uid" class="m-auto text-secondary text-xs font-weight-bold">0001</p>
-											</td>
-											<td>
-												<p is="name" class=" m-auto  text-secondary text-xs font-weight-bold">Misael Gomez</p>
-											</td>
-											<td>
-												<p id="status" class="m-auto text-secondary text-xs font-weight-bold">Activo</p>
-											</td>
-											<td>
-												<p id="expire" class="m-auto text-secondary text-xs font-weight-bold">Caducidad</p>
-											</td>
-											</tr>
+											<tbody >
+												<tr>
+												<td>
+												<input
+													type="checkbox"
+													id="subscribeNews"
+													name="subscribe"
+													value="newsletter" />
+												</td>
+												<td>
+													<p id ="uid" class="m-auto text-secondary text-xs font-weight-bold">0001</p>
+												</td>
+												<td>
+													<p is="name" class=" m-auto  text-secondary text-xs font-weight-bold">Misael Gomez</p>
+												</td>
+												<td>
+													<p id="status" class="m-auto text-secondary text-xs font-weight-bold">Activo</p>
+												</td>
+												<td>
+													<p id="expire" class="m-auto text-secondary text-xs font-weight-bold">Caducidad</p>
+												</td>
+												</tr>
 
-											
-											
-										</tbody>
+												
+												
+											</tbody>
 										</table>
-									</div>
-								</div>
+										</div>
+										</div>
 									
 										<div class="text-center">
-										<button style="background: <?php echo $principalColor?>; color: white;" type="button" class="btn btn-lg btn-rounded w-100 mt-4 mb-0">Registrar</button>
+											<button id="register" style="background: <?php echo $principalColor?>; color: white;" type="button" class="btn btn-lg btn-rounded w-100 mt-4 mb-0">Registrar Visita</button>
 										</div>
 										</form>
 									</div>
@@ -150,183 +150,32 @@ $dotenv->load();
 	<script src="../assets/js/plugins/perfect-scrollbar.min.js"></script>
 	<script src="../assets/js/plugins/smooth-scrollbar.min.js"></script>
 	<script src="../assets/js/plugins/chartjs.min.js"></script>
+		
 	<script>
-		var ctx = document.getElementById("chart-bars").getContext("2d");
-
-		new Chart(ctx, {
-			type: "bar",
-			data: {
-				labels: ["Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
-				datasets: [{
-					label: "Sales",
-					tension: 0.4,
-					borderWidth: 0,
-					borderRadius: 4,
-					borderSkipped: false,
-					backgroundColor: "#fff",
-					data: [450, 200, 100, 220, 500, 100, 400, 230, 500],
-					maxBarThickness: 6
-				}, ],
-			},
-			options: {
-				responsive: true,
-				maintainAspectRatio: false,
-				plugins: {
-					legend: {
-						display: false,
-					}
-				},
-				interaction: {
-					intersect: false,
-					mode: 'index',
-				},
-				scales: {
-					y: {
-						grid: {
-							drawBorder: false,
-							display: false,
-							drawOnChartArea: false,
-							drawTicks: false,
-						},
-						ticks: {
-							suggestedMin: 0,
-							suggestedMax: 500,
-							beginAtZero: true,
-							padding: 15,
-							font: {
-								size: 14,
-								family: "Open Sans",
-								style: 'normal',
-								lineHeight: 2
-							},
-							color: "#fff"
-						},
-					},
-					x: {
-						grid: {
-							drawBorder: false,
-							display: false,
-							drawOnChartArea: false,
-							drawTicks: false
-						},
-						ticks: {
-							display: false
-						},
-					},
-				},
-			},
-		});
-
-
-		var ctx2 = document.getElementById("chart-line").getContext("2d");
-
-		var gradientStroke1 = ctx2.createLinearGradient(0, 230, 0, 50);
-
-		gradientStroke1.addColorStop(1, 'rgba(203,12,159,0.2)');
-		gradientStroke1.addColorStop(0.2, 'rgba(72,72,176,0.0)');
-		gradientStroke1.addColorStop(0, 'rgba(203,12,159,0)'); //purple colors
-
-		var gradientStroke2 = ctx2.createLinearGradient(0, 230, 0, 50);
-
-		gradientStroke2.addColorStop(1, 'rgba(20,23,39,0.2)');
-		gradientStroke2.addColorStop(0.2, 'rgba(72,72,176,0.0)');
-		gradientStroke2.addColorStop(0, 'rgba(20,23,39,0)'); //purple colors
-
-		new Chart(ctx2, {
-			type: "line",
-			data: {
-				labels: ["Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
-				datasets: [{
-						label: "Mobile apps",
-						tension: 0.4,
-						borderWidth: 0,
-						pointRadius: 0,
-						borderColor: "#cb0c9f",
-						borderWidth: 3,
-						backgroundColor: gradientStroke1,
-						fill: true,
-						data: [50, 40, 300, 220, 500, 250, 400, 230, 500],
-						maxBarThickness: 6
-
-					},
-					{
-						label: "Websites",
-						tension: 0.4,
-						borderWidth: 0,
-						pointRadius: 0,
-						borderColor: "#3A416F",
-						borderWidth: 3,
-						backgroundColor: gradientStroke2,
-						fill: true,
-						data: [30, 90, 40, 140, 290, 290, 340, 230, 400],
-						maxBarThickness: 6
-					},
-				],
-			},
-			options: {
-				responsive: true,
-				maintainAspectRatio: false,
-				plugins: {
-					legend: {
-						display: false,
-					}
-				},
-				interaction: {
-					intersect: false,
-					mode: 'index',
-				},
-				scales: {
-					y: {
-						grid: {
-							drawBorder: false,
-							display: true,
-							drawOnChartArea: true,
-							drawTicks: false,
-							borderDash: [5, 5]
-						},
-						ticks: {
-							display: true,
-							padding: 10,
-							color: '#b2b9bf',
-							font: {
-								size: 11,
-								family: "Open Sans",
-								style: 'normal',
-								lineHeight: 2
-							},
-						}
-					},
-					x: {
-						grid: {
-							drawBorder: false,
-							display: false,
-							drawOnChartArea: false,
-							drawTicks: false,
-							borderDash: [5, 5]
-						},
-						ticks: {
-							display: true,
-							color: '#b2b9bf',
-							padding: 20,
-							font: {
-								size: 11,
-								family: "Open Sans",
-								style: 'normal',
-								lineHeight: 2
-							},
-						}
-					},
-				},
-			},
-		});
-	</script>
-	<script>
-		var win = navigator.platform.indexOf('Win') > -1;
-		if (win && document.querySelector('#sidenav-scrollbar')) {
-			var options = {
-				damping: '0.5'
+		document.getElementById('register').addEventListener('click', function(){getUsers()});
+		function getUsers(){
+			let search = document.getElementById("search").value;
+			console.log(search);
+			if (search==""){
+				alert("campo vacio");
+        		return;
+        	}
+			
+        	if (window.XMLHttpRequest) {
+           		 // code for IE7+, Firefox, Chrome, Opera, Safari
+           		xmlhttp = new XMLHttpRequest();
+       		}
+       		xmlhttp.onreadystatechange = function() {
+				if (this.readyState == 4 && this.status == 200) {
+					let resut = JSON.parse(this.responseText);
+					console.log(resut);
+				
+				}
 			}
-			Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
+        	
+        			
+       		xmlhttp.open("GET","./scripts/find_user.php?search="+search);
+       		xmlhttp.send();	
 		}
 	</script>
 	<!-- Github buttons -->
