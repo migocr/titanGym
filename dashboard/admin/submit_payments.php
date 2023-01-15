@@ -35,7 +35,7 @@ page_protect();
           $payDate=date("Y-m-d"); //current date
           //$expiredate=date("Y-m-d",$d); //adding validity retrieve from plan to current date
           //inserting into enrolls_to table of corresponding userid
-          $query2="insert into enrolls_to(pid,uid,paid_date,expire, startDate) values('$plan','$memID','$payDate','$expireDate','$startDate')";
+          $query2="insert into enrolls_to(pid,uid,paid_date,expire, startDate, amount) values('$plan','$memID','$payDate','$expireDate','$startDate', '0')";
           if(mysqli_query($con,$query2)==1){
               $response->status = true;
           } else{
