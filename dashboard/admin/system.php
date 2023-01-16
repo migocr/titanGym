@@ -4,12 +4,17 @@
 	page_protect();
 	$principalColor = $_SESSION['principalColor'];
 	$backgroundColor =  $_SESSION['backgroundColor'];
-	$backgroundColor = $_SESSION['backgroundColor'];
-
+	///////////
+	$colorIcon = $_SESSION['colorIcon'];
+	$colorBackground = $_SESSION['colorBackgroundI'];
+	$siteTitle = $_SESSION['siteTitle'];
+	$colorFound = $_SESSION['getColorFound'];
+	$getLogo = $_SESSION['getLogo'];
 	$_DIR = dirname(dirname(dirname(__FILE__)));
 	require  $_DIR . '/vendor/autoload.php' ;
 	$dotenv = Dotenv\Dotenv::createImmutable($_DIR);
 	$dotenv->load();
+
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -70,14 +75,14 @@
 							<div class="row">
 								<?php
 	    
-									$query  = "SELECT config FROM system_settings WHERE nombre='color'";
-									$query1  = "SELECT config FROM system_settings WHERE nombre='backgroundColor';";
-									$query2  = "SELECT config FROM system_settings WHERE nombre='nombreSitio';";
-									$query3  = "SELECT config FROM system_settings WHERE nombre='colorFuente';";
-									$query4  = "SELECT config FROM system_settings WHERE nombre='logo'; ;";
+									//$query  = "SELECT config FROM system_settings WHERE nombre='color'";
+									//$query1  = "SELECT config FROM system_settings WHERE nombre='backgroundColor';";
+								    //$query2  = "SELECT config FROM system_settings WHERE nombre='nombreSitio';";
+									//$query3  = "SELECT config FROM system_settings WHERE nombre='colorFuente';";
+									//$query4  = "SELECT config FROM system_settings WHERE nombre='logo'; ;";
 									//echo $query;
 //query-----------------------------------------------------------------------------------------------------
-									$result = mysqli_query($con, $query);
+									/*$result = mysqli_query($con, $query);
 							
 									if (mysqli_affected_rows($con) == 1) {
 										while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
@@ -86,9 +91,9 @@
 									} else{
 										echo "<html><head><script>alert('Cambio Insatisfactorio');</script></head></html>";
 										echo mysqli_error($con);
-									}
+									}*/
 //query1-----------------------------------------------------------------------------------------------------
-									$result1 = mysqli_query($con, $query1);
+									/*$result1 = mysqli_query($con, $query1);
 									if (mysqli_affected_rows($con) == 1) {
 										while ($row = mysqli_fetch_array($result1, MYSQLI_ASSOC)) {
 											$configBC    = $row['config'];	
@@ -96,9 +101,9 @@
 									} else{
 										echo "<html><head><script>alert('Cambio Insatisfactorio');</script></head></html>";
 										echo mysqli_error($con);
-									}
+									}*/
 //query2-----------------------------------------------------------------------------------------------------
-									$result2 = mysqli_query($con, $query2);
+									/*$result2 = mysqli_query($con, $query2);
 									if (mysqli_affected_rows($con) == 1) {
 										while ($row = mysqli_fetch_array($result2, MYSQLI_ASSOC)) {
 											$configNS    = $row['config'];	
@@ -106,9 +111,9 @@
 									} else{
 										echo "<html><head><script>alert('Cambio Insatisfactorio');</script></head></html>";
 										echo mysqli_error($con);
-									}
+									}*/
 //query3-----------------------------------------------------------------------------------------------------
-									$result3 = mysqli_query($con, $query3);
+									/*$result3 = mysqli_query($con, $query3);
 									if (mysqli_affected_rows($con) == 1) {
 										while ($row = mysqli_fetch_array($result3, MYSQLI_ASSOC)) {
 											$configNC    = $row['config'];	
@@ -116,9 +121,9 @@
 									} else{
 										echo "<html><head><script>alert('Cambio Insatisfactorio');</script></head></html>";
 										echo mysqli_error($con);
-									}
+									}*/
 //query4-----------------------------------------------------------------------------------------------------
-									$result4 = mysqli_query($con, $query4);
+									/*$result4 = mysqli_query($con, $query4);
 									if (mysqli_affected_rows($con) == 1) {
 										while ($row = mysqli_fetch_array($result4, MYSQLI_ASSOC)) {
 											$configCF    = $row['config'];	
@@ -127,7 +132,7 @@
 										echo "<html><head><script>alert('Cambio Insatisfactorio');</script></head></html>";
 										echo mysqli_error($con);
 									}	
-															
+									*/						
 								?>
 								
 
@@ -144,7 +149,7 @@
 														<div class="col-md-6">
 															<div class="form-group">
 																<label for="example-text-input" class="form-control-label">Color Iconos</label>
-																<input class="form-control"  id="boxxe" type="text" name="uid" value="<?php echo $configC?>" readonly required />
+																<input class="form-control"  id="boxxe" type="text" name="uid" value="<?php echo $colorBackground?>" readonly required />
 															</div>
 														</div>
 
@@ -154,7 +159,7 @@
 														<div class="col-md-6">
 															<div class="form-group">
 																<label for="example-text-input" class="form-control-label">Color background</label>
-																<input class="form-control"  id="boxxe" type="text" name="uid" value="<?php echo $configBC?>" readonly required />
+																<input class="form-control"  id="boxxe" type="text" name="uid" value="<?php echo $colorIcon?>" readonly required />
 															</div>
 														</div>
 
@@ -164,7 +169,7 @@
 														<div class="col-md-6">
 															<div class="form-group">
 																<label for="example-text-input" class="form-control-label">Nombre del sitio</label>
-																<input class="form-control"  id="boxxe" type="text" name="uid" value="<?php echo $configNS?>" readonly required />
+																<input class="form-control"  id="boxxe" type="text" name="uid" value="<?php echo $siteTitle?>" readonly required />
 															</div>
 														</div>
 
@@ -174,7 +179,7 @@
 														<div class="col-md-6">
 															<div class="form-group">
 																<label for="example-text-input" class="form-control-label">Color de fuente</label>
-																<input class="form-control"  id="boxxe" type="text" name="uid" value="<?php echo $configNC?>" readonly required />
+																<input class="form-control"  id="boxxe" type="text" name="uid" value="<?php echo $colorFound?>" readonly required />
 															</div>
 														</div>
 
@@ -184,7 +189,7 @@
 														<div class="col-md-6">
 															<div class="form-group">
 																<label for="example-text-input" class="form-control-label">Logo</label>
-																<input class="form-control"  id="boxxe" type="text" name="uid" value="<?php echo $configCF?>" readonly required />
+																<input class="form-control"  id="boxxe" type="text" name="uid" value="<?php echo $getLogo?>" readonly required />
 															</div>
 														</div>
 												
