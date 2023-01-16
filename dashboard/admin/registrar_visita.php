@@ -63,32 +63,12 @@ $dotenv->load();
 										</div>
 										<div class="card" style="box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;">
 									<div class="table-responsive">
-										<table style="display:none" class="table align-items-center mb-0">
+										<table style="display:" class="table align-items-center mb-0">
 										<thead>
 											
 										</thead>
 											<tbody >
-												<tr>
-												<td>
-												<input
-													type="checkbox"
-													id="subscribeNews"
-													name="subscribe"
-													value="newsletter" />
-												</td>
-												<td>
-													<p id ="uid" class="m-auto text-secondary text-xs font-weight-bold">0001</p>
-												</td>
-												<td>
-													<p is="name" class=" m-auto  text-secondary text-xs font-weight-bold">Misael Gomez</p>
-												</td>
-												<td>
-													<p id="status" class="m-auto text-secondary text-xs font-weight-bold">Activo</p>
-												</td>
-												<td>
-													<p id="expire" class="m-auto text-secondary text-xs font-weight-bold">Caducidad</p>
-												</td>
-												</tr>
+												
 
 												
 												
@@ -96,10 +76,15 @@ $dotenv->load();
 										</table>
 										</div>
 										</div>
-									
-										<div class="text-center">
-											<button id="register" style="background: <?php echo $principalColor?>; color: white;" type="button" class="btn btn-lg btn-rounded w-100 mt-4 mb-0">Registrar Visita</button>
+										<div class="col-md-12 d-flex">
+											<div class="text-center col-md-6 px-4 ">
+												<button id="searchUser" style="background: <?php echo $principalColor?>; color: white;" type="button" class="btn btn-lg btn-rounded w-100 mt-4 mb-0">Buscar Usuario</button>
+											</div>
+											<div class="text-center col-md-6 px-4 ">
+												<button id="register" style="background: <?php echo $principalColor?>; color: white;" type="button" class="btn btn-lg btn-rounded w-100 mt-4 mb-0">Registrar Visita</button>
+											</div>
 										</div>
+										
 										</form>
 									</div>
 								
@@ -110,15 +95,6 @@ $dotenv->load();
 										</p>
 									</div>
 								</div>
-								
-								<?php
-	    
-									
-
-
-								?>
-								
-
 							</div>
 						</div>
 						<div class="card" style="background: transparent; box-shadow: none;">
@@ -152,7 +128,9 @@ $dotenv->load();
 	<script src="../assets/js/plugins/chartjs.min.js"></script>
 		
 	<script>
-		document.getElementById('register').addEventListener('click', function(){getUsers()});
+		document.getElementById('searchUser').addEventListener('click', function(){getUsers()});
+		document.getElementById('register').addEventListener('click', function(){registerVisit()});
+
 		function getUsers(){
 			let search = document.getElementById("search").value;
 			console.log(search);
@@ -161,22 +139,74 @@ $dotenv->load();
         		return;
         	}
 			
-        	if (window.XMLHttpRequest) {
-           		 // code for IE7+, Firefox, Chrome, Opera, Safari
-           		xmlhttp = new XMLHttpRequest();
-       		}
-       		xmlhttp.onreadystatechange = function() {
-				if (this.readyState == 4 && this.status == 200) {
-					let resut = JSON.parse(this.responseText);
-					console.log(resut);
-				
+        	
+			var url = "./scripts/find_user.php?search="+search;
+
+			var ajax = new XMLHttpRequest();
+			ajax.open("GET", url, true);
+			ajax.send(null);
+			ajax.onreadystatechange = function () {
+				if (ajax.readyState == 4 && (ajax.status == 200)) {
+					console.log("ready")            
+					var data = JSON.parse(ajax.responseText);
+					console.log(data);
+					console.log(JSON.parse(data.userData));
+					printUsers(JSON.parse(data.userData))
+				} else {
+					console.log("not ready yet")            
 				}
 			}
-        	
-        			
-       		xmlhttp.open("GET","./scripts/find_user.php?search="+search);
-       		xmlhttp.send();	
 		}
+
+		function registerVisit() {
+
+		}
+
+		function printUsers(users) {
+			const tBody = document.querySelector("tbody");
+			tBody.innerHTML = ""
+			for (let index = 0; index < users.length; index++) {
+				console.log("entra");
+				let user = users[index];
+				var template = `
+				<tr>
+					<td>
+						<input type="radio" id="subscribeNews" value="${user.userid}" name="register" radio>
+					</td>
+					<td>
+						<p id="uid" class="m-auto text-secondary text-xs font-weight-bold">${user.userid}</p>
+					</td>
+					<td>
+						<p is="name" class=" m-auto  text-secondary text-xs font-weight-bold">${user.username}</p>
+					</td>
+					<td>
+						<p id="status" class="m-auto text-secondary text-xs font-weight-bold">Activo</p>
+					</td>
+					<td>
+						<p id="expire" class="m-auto text-secondary text-xs font-weight-bold">${user.dob}</p>
+					</td>
+				</tr>`;
+				tBody.innerHTML += template;
+
+				// Seleccionar todas las etiquetas tr
+				let filas = document.querySelectorAll("tr");
+
+				// Agregar un evento 'click' a cada fila
+				filas.forEach(fila => {
+				fila.addEventListener("click", () => {
+					// Seleccionar el botón radio correspondiente a la fila
+					let radio = fila.querySelector("input[type='radio']");
+					// Seleccionar el botón
+					radio.checked = true;
+				});
+				});
+
+				
+			}
+			
+		}
+
+		
 	</script>
 	<!-- Github buttons -->
 	<script async defer src="../assets/js/buttons.js"></script>
