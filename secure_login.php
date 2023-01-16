@@ -11,10 +11,15 @@ $pass_key = rtrim($_POST['pass_key']);
 
 $user_id_auth = stripslashes($user_id_auth);
 $pass_key     = stripslashes($pass_key);
+
 $principalColor = getColor($con);
 $backgroundColor = getBackgroundColor($con);
-
-
+///////
+$sitetitle = getTitle($con);
+$colorIcon = getColorIcon($con);
+$colorBackground = getColorBackground($con);
+$getColorFound = getColorFound($con);
+$getLogo = getLogo($con);
 if($pass_key=="" &&  $user_id_auth==""){
    echo "<head><script>alert('Usuario y Contraseña no puede esta vacío');</script></head></html>";
                echo "<meta http-equiv='refresh' content='0; url=index.php'>";
@@ -49,6 +54,12 @@ if ($count == 1) {
     $_SESSION['username']=$row['Full_name'];
     $_SESSION['principalColor']     = $principalColor;
     $_SESSION['backgroundColor']     = $backgroundColor;
+    /////
+    $_SESSION['colorIcon']     = $colorIcon;
+    $_SESSION['colorBackgroundI']     = $colorBackground;
+    $_SESSION['siteTitle']     = $sitetitle;
+    $_SESSION['getColorFound']     = $getColorFound;
+    $_SESSION['getLogo']     = $getLogo;
     // $auth_l_x               = $_SESSION['auth_level'];
     // if ($auth_l_x == 5) {
         header("location: ./dashboard/admin/");
