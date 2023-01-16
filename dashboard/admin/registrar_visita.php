@@ -24,7 +24,7 @@ $dotenv->load();
 	</title>
 	<!--     Fonts and icons     -->
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" rel="stylesheet"/>
-
+	<script src="../assets/js/sweetalert.js"></script>
 	<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
 	<!-- Nucleo Icons -->
 	<link href="../assets/css/nucleo-icons.css" rel="stylesheet" />
@@ -129,7 +129,6 @@ $dotenv->load();
 		
 	<script>
 		document.getElementById('searchUser').addEventListener('click', function(){getUsers()});
-		document.getElementById('register').addEventListener('click', function(){registerVisit()});
 
 		function getUsers(){
 			let search = document.getElementById("search").value;
@@ -151,7 +150,7 @@ $dotenv->load();
 					var data = JSON.parse(ajax.responseText);
 					console.log(data);
 					console.log(JSON.parse(data.userData));
-					printUsers(JSON.parse(data.userData))
+					printUsers(JSON.parse(data.userData));
 				} else {
 					console.log("not ready yet")            
 				}
@@ -159,7 +158,57 @@ $dotenv->load();
 		}
 
 		function registerVisit() {
+			console.log("entra")
+			// Obtener el elemento input type radio checkeado
+			let checkedInput = document.querySelector("input[type='radio']:checked");
 
+			// Obtener la fila que contiene el elemento input type radio checkeado
+			let checkedRow = checkedInput.closest("tr");
+
+			// Obtener los valores de los elementos de la fila
+			let uid = checkedRow.querySelector("#uid-"+checkedInput.value).innerHTML;
+			let name = checkedRow.querySelector("#name-"+checkedInput.value).innerHTML;
+			let status = checkedRow.querySelector("#status-"+checkedInput.value).innerHTML;
+
+			console.log(uid);
+			console.log(name);
+			console.log(status);
+			if(status.toLowerCase() == "activo") {
+				var myhtml = document.createElement("div");
+				myhtml.innerHTML = "Registrar visita de <b>"+ name +"</b>. ";
+				swal({
+					title: "¿Estas seguro?",
+					content:myhtml,
+					icon: "warning",
+					buttons: {
+						cancel: {
+							text: "Cancelar",
+							value: false,
+							visible: true,
+							className: "",
+							closeModal: true,
+						},
+						confirm: {
+							text: "Registrar Visita",
+							value: true,
+							visible: true,
+							className: "",
+							closeModal: true
+						}
+					},
+					dangerMode: true,
+				})
+				.then((willDelete) => {
+					if (willDelete) {
+						swal("Visita registrada de "+ name, {
+						icon: "success",
+						});
+					} else {
+						
+					}
+				});
+			}
+			
 		}
 
 		function printUsers(users) {
@@ -171,19 +220,19 @@ $dotenv->load();
 				var template = `
 				<tr>
 					<td>
-						<input type="radio" id="subscribeNews" value="${user.userid}" name="register" radio>
+						<input type="radio" id="check-${user.userid}" value="${user.userid}" name="register" radio>
 					</td>
 					<td>
-						<p id="uid" class="m-auto text-secondary text-xs font-weight-bold">${user.userid}</p>
+						<p id="uid-${user.userid}" class="m-auto text-secondary text-xs font-weight-bold">${user.userid}</p>
 					</td>
 					<td>
-						<p is="name" class=" m-auto  text-secondary text-xs font-weight-bold">${user.username}</p>
+						<p id="name-${user.userid}" class=" m-auto  text-secondary text-xs font-weight-bold">${user.username}</p>
 					</td>
 					<td>
-						<p id="status" class="m-auto text-secondary text-xs font-weight-bold">Activo</p>
+						<p id="status-${user.userid}" class="m-auto text-secondary text-xs font-weight-bold">Activo</p>
 					</td>
 					<td>
-						<p id="expire" class="m-auto text-secondary text-xs font-weight-bold">${user.dob}</p>
+						<p id="expire-${user.userid}" class="m-auto text-secondary text-xs font-weight-bold">${user.dob}</p>
 					</td>
 				</tr>`;
 				tBody.innerHTML += template;
@@ -200,7 +249,8 @@ $dotenv->load();
 					radio.checked = true;
 				});
 				});
-
+				// Agregar un evento 'click' a cada registrar usuario
+				document.getElementById('register').addEventListener('click', function(){registerVisit()});
 				
 			}
 			
