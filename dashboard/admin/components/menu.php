@@ -5,7 +5,7 @@
 			aria-hidden="true" id="iconSidenav"></i>
 		<a class="navbar-brand m-0" href=" ./ ">
 			<img src="../assets/img/logo-ct-dark.png" class="navbar-brand-img h-100" alt="main_logo">
-			<span class="ms-1 font-weight-bold"><?php echo $_ENV["PAGE_NAME"] ?></span>
+			<span class="ms-1 font-weight-bold"> <?php echo $_SESSION['siteTitle'] ?></span>
 		</a>
 	</div>
 	<hr class="horizontal dark mt-0">
