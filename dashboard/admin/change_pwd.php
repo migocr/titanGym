@@ -1,6 +1,6 @@
 <?php
 	require '../../include/db_conn.php';
-	date_default_timezone_set('America/Mexico_City');
+	date_default_timezone_set('America/Mazatlan');
 	page_protect();
 
 	$principalColor = $_SESSION['principalColor'];

@@ -1,7 +1,7 @@
 <?php
 require '../../include/db_conn.php';
 
-date_default_timezone_set('America/Mexico_City'); 
+date_default_timezone_set('America/Mazatlan'); 
 page_protect();
 $principalColor = $_SESSION['principalColor'];
 $backgroundColor =  $_SESSION['backgroundColor'];
@@ -129,7 +129,7 @@ if (mysqli_affected_rows($con) == 1) {
                         <label for="example-date-input" class="form-control-label">Fecha Inicio</label>
                         <input id="start-date" class="form-control" type="date" value='<?php 
                         //echo $expDate; 
-                        date_default_timezone_set('America/Mexico_City'); 
+                        date_default_timezone_set('America/Mazatlan'); 
                         $hoy = date('Y-m-d');
                         
                         if ($expDate <= $hoy) {

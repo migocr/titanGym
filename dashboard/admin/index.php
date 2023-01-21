@@ -1,6 +1,6 @@
 ﻿<?php
 	require '../../include/db_conn.php';
-	date_default_timezone_set('America/Mexico_City');
+	date_default_timezone_set('America/Mazatlan');
 	page_protect();
 	$principalColor = $_SESSION['principalColor'];
 	$backgroundColor =  $_SESSION['backgroundColor'];
@@ -71,7 +71,7 @@
 										<p class="text-sm mb-0 text-capitalize font-weight-bold">Ingresos del mes</p>
 										<h5 class="font-weight-bolder mb-0">
 											<?php
-											date_default_timezone_set('America/Mexico_City');
+											date_default_timezone_set('America/Mazatlan');
 											$date  = date('Y-m');
 											$query = "select * from enrolls_to WHERE  paid_date LIKE '$date%'";
 
@@ -148,7 +148,7 @@
 										<p class="text-sm mb-0 text-capitalize font-weight-bold">Ingresos Anuales</p>
 										<h5 class="font-weight-bolder mb-0">
 											<?php
-											date_default_timezone_set('America/Mexico_City');
+											date_default_timezone_set('America/Mazatlan');
 											$date  = date('Y');
 											$query = "select * from enrolls_to WHERE  paid_date LIKE '$date%'";
 
@@ -262,7 +262,7 @@
 								<div class="card-header pb-0">
 									<div class="d-flex justify-content-between">
 									<h6>Miembros Proximos a Expirar</h6> 
-									
+																		
 									</div>
 									
 									
