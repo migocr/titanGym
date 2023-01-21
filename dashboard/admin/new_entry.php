@@ -24,7 +24,7 @@ $dotenv->load(); ?>
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" rel="stylesheet"/>
 
 	<title>
-		Soft UI Dashboard by Creative Tim
+		<?php echo $_SESSION['siteTitle']; ?>
 	</title>
 	<!--     Fonts and icons     -->
 	<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />

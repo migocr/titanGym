@@ -10,6 +10,7 @@
 	$siteTitle = $_SESSION['siteTitle'];
 	$colorFound = $_SESSION['getColorFound'];
 	$getLogo = $_SESSION['getLogo'];
+
 	$_DIR = dirname(dirname(dirname(__FILE__)));
 	require  $_DIR . '/vendor/autoload.php' ;
 	$dotenv = Dotenv\Dotenv::createImmutable($_DIR);
@@ -43,7 +44,7 @@
 	<link rel="icon" type="image/png" href="../assets/img/favicon.png">
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" rel="stylesheet"/>
 	<title>
-		<?php echo $_ENV["PAGE_NAME"] ?>
+		<?php echo $_SESSION['siteTitle'] ?>
 	</title>
 	<!--     Fonts and icons     -->
 	<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
@@ -142,7 +143,6 @@
 									<div class="card-body">
 										<div class="row">
 											<div class="col-12">
-												
 												<form id="form1" name="form1" method="post" class="a1-container"
 													action="edit_mem_submit.php">
 													<div class="row">
@@ -152,59 +152,39 @@
 																<input class="form-control"  id="boxxe" type="text" name="uid" value="<?php echo $colorBackground?>" readonly required />
 															</div>
 														</div>
-
-													<form id="form1" name="form1" method="post" class="a1-container"
-													action="edit_mem_submit.php">
-													<div class="row">
 														<div class="col-md-6">
 															<div class="form-group">
 																<label for="example-text-input" class="form-control-label">Color background</label>
 																<input class="form-control"  id="boxxe" type="text" name="uid" value="<?php echo $colorIcon?>" readonly required />
 															</div>
 														</div>
-
-													<form id="form1" name="form1" method="post" class="a1-container"
-													action="edit_mem_submit.php">
-													<div class="row">
 														<div class="col-md-6">
 															<div class="form-group">
 																<label for="example-text-input" class="form-control-label">Nombre del sitio</label>
 																<input class="form-control"  id="boxxe" type="text" name="uid" value="<?php echo $siteTitle?>" readonly required />
 															</div>
 														</div>
-
-													<form id="form1" name="form1" method="post" class="a1-container"
-													action="edit_mem_submit.php">
-													<div class="row">
 														<div class="col-md-6">
 															<div class="form-group">
 																<label for="example-text-input" class="form-control-label">Color de fuente</label>
 																<input class="form-control"  id="boxxe" type="text" name="uid" value="<?php echo $colorFound?>" readonly required />
 															</div>
 														</div>
-
-													<form id="form1" name="form1" method="post" class="a1-container"
-													action="edit_mem_submit.php">
-													<div class="row">
 														<div class="col-md-6">
 															<div class="form-group">
 																<label for="example-text-input" class="form-control-label">Logo</label>
 																<input class="form-control"  id="boxxe" type="text" name="uid" value="<?php echo $getLogo?>" readonly required />
 															</div>
-														</div>
-												
-																	
-													
-													<div style="width: auto; display: flex;justify-content: center;">
-														<input class="btn btn-primary" type="submit" name="submit" id="submit" value="Guardar">
-														<input class="btn btn-default" type="reset" name="reset" id="reset" value="Restaurar">
-													</div>
+														</div>											
 												</form>
+											</div>
+											<div style="width: auto; display: flex;justify-content: center;">
+												<input class="btn btn-primary" type="submit" name="submit" id="submit" value="Guardar">
+												<input class="btn btn-default" type="reset" name="reset" id="reset" value="Restaurar">
 											</div>
 										</div>
 									</div>
 								</div>
-
 					</div>
 				</div>
 				

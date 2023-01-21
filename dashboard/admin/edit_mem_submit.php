@@ -19,7 +19,7 @@
       <link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png">
       <link rel="icon" type="image/png" href="../assets/img/favicon.png">
       <title>
-         Soft UI Dashboard by Creative Tim
+         <?php echo $_SESSION['siteTitle']; ?>
       </title>
       <!--     Fonts and icons     -->
       <link rel="stylesheet" href="../assets/css/all-min.css"  />

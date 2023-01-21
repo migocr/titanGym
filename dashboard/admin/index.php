@@ -40,7 +40,7 @@
 	<link rel="stylesheet" type="text/css"  href="/gym_l/dashboard/assets/css/all-min.css">
 
 	<title>
-		<?php echo $_ENV["PAGE_NAME"] ?>
+		<?php echo $_SESSION['siteTitle'] ?>
 	</title>
 	<!--     Fonts and icons     -->
 	<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
