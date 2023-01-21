@@ -51,23 +51,30 @@ $dotenv->load();
 							
 							<div class="row">
 								<div class="card card-plain">
-									<div class="card-header pb-0 text-left">
+									<div class="card-header pb-0 text-center">
 										<h3 class="font-weight-bolder ">Registrar Ingreso</h3>
-										<p class="mb-0">Ingrese el Id del cliente</p>
+										<p class="mb-0">Ingrese el id o nombre del cliente</p>
 									</div>
 									<div class="card-body pb-3">
-										<form role="form text-left">
-									
-										<div class="input-group mb-3">
-											<input id="search" type="text" class="form-control" placeholder="ID" aria-label="Name" aria-describedby="name-addon">
-										</div>
-										<div class="card" style="box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;">
-									<div class="table-responsive">
-										<table style="display:" class="table align-items-center mb-0">
-										<thead>
+										<div role="form text-left">
 											
-										</thead>
-											<tbody >
+												<div class="col-md-12 d-flex" style="align-items: center;">
+													<input style="max-width:85%;" id="search" type="text" class="form-control " placeholder="ID" aria-label="Name" aria-describedby="name-addon">
+													<button id="searchUser" style=" margin: auto; background: <?php echo $principalColor?>; color: white;" type="button" class="btn btn-rounded"><i id="search" class="fas fa-search" aria-hidden="true"></i> Buscar</button>
+
+
+												</div>
+												
+											
+										
+										
+										<div class="card mt-3" style="box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;">
+										<div class="table-responsive">
+											<table style="display:" class="table align-items-center mb-0">
+											<thead>
+												
+											</thead>
+												<tbody >
 												
 
 												
@@ -77,23 +84,16 @@ $dotenv->load();
 										</div>
 										</div>
 										<div class="col-md-12 d-flex">
-											<div class="text-center col-md-6 px-4 ">
-												<button id="searchUser" style="background: <?php echo $principalColor?>; color: white;" type="button" class="btn btn-lg btn-rounded w-100 mt-4 mb-0">Buscar Usuario</button>
-											</div>
-											<div class="text-center col-md-6 px-4 ">
-												<button id="register" style="background: <?php echo $principalColor?>; color: white;" type="button" class="btn btn-lg btn-rounded w-100 mt-4 mb-0">Registrar Visita</button>
+											
+											<div class="text-center col-md-8 px-4 m-auto " >
+												<button id="register" style="background: <?php echo $principalColor?>; color: white;" type="button" class="btn btn-lg btn-rounded w-100 mt-4 mb-0 disabled">Registrar Visita</button>
 											</div>
 										</div>
 										
-										</form>
+									</div>
 									</div>
 								
-									<div class="card-footer text-center pt-0 px-sm-4 px-1">
-										<p class="mb-4 mx-auto">
-										¿Olvidaste tu ID?
-										<a href="javascrpt:;"  style="color: <?php echo $principalColor?>; " class="font-weight-bold">Buscar</a>
-										</p>
-									</div>
+									
 								</div>
 							</div>
 						</div>
@@ -128,6 +128,8 @@ $dotenv->load();
 	<script src="../assets/js/plugins/chartjs.min.js"></script>
 		
 	<script>
+		const meses = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
+
 		document.getElementById('searchUser').addEventListener('click', function(){getUsers()});
 
 		function getUsers(){
@@ -150,7 +152,7 @@ $dotenv->load();
 					var data = JSON.parse(ajax.responseText);
 					console.log(data);
 					console.log(JSON.parse(data.userData));
-					printUsers(JSON.parse(data.userData));
+					printUsers(JSON.parse(data.userData), search);
 				} else {
 					console.log("not ready yet")            
 				}
@@ -169,6 +171,7 @@ $dotenv->load();
 			let uid = checkedRow.querySelector("#uid-"+checkedInput.value).innerHTML;
 			let name = checkedRow.querySelector("#name-"+checkedInput.value).innerHTML;
 			let status = checkedRow.querySelector("#status-"+checkedInput.value).innerHTML;
+			let dob = checkedRow.querySelector("#expire-"+checkedInput.value).innerHTML;
 
 			console.log(uid);
 			console.log(name);
@@ -200,23 +203,87 @@ $dotenv->load();
 				})
 				.then((willDelete) => {
 					if (willDelete) {
-						swal("Visita registrada de "+ name, {
-						icon: "success",
-						});
+						submitVisit(uid);						
 					} else {
 						
 					}
 				});
+			} else {
+				var myhtml = document.createElement("div");
+				let fecha = new Date(dob);
+				let dia =  fecha.getDate();
+				let mes = meses[fecha.getMonth()];
+
+				myhtml.innerHTML = `El usuario que trata de ingresas <strong>expiro el dia: ${dia} de ${mes} </strong>, para poder registrar su visita primero requiere realizar un nuevo pago`;
+				swal({
+					title: 'Alerta!',
+					content: myhtml,
+					icon: 'warning',
+					buttons: {
+						cancel: "Cancelar",
+						confirm: "Agregar Pago"
+					}
+					}).then((value) => {
+					if (value) {
+						
+						window.location.href = window.location.href.replace("registrar_visita.php", "make_payments.php?userID="+uid)
+					} else {
+						// Cancelar
+					}
+					});
 			}
 			
 		}
 
-		function printUsers(users) {
+		function submitVisit(uid) {
+			fetch('./scripts/register_visit.php', {
+				method: 'POST',
+				headers: {
+				'Content-Type': 'application/x-www-form-urlencoded'
+			},
+			body: `userid=${uid}`
+			}).then(function (response) {
+				console.log(response);
+				return response.json();
+			}).then(function (data) {
+				console.log(data)
+				if(data.status) {
+					swal("Visita registrada de "+ name, {
+						icon: "success",
+					});
+				} else {
+					swal("No se pudo registrar visita de usuario ", {
+						icon: "error",
+					});
+				}
+			// aquí manejas la respuesta
+			});
+		}
+
+		function printUsers(users, search) {
 			const tBody = document.querySelector("tbody");
-			tBody.innerHTML = ""
+			console.log("print", users)
+			if (users.length < 1 || !users  || users.length == 0 ) {
+				var template = `<p class="m-auto p-3">No encontramos resultados para su busqueda: <strong>${search}</strong>, pruebe ingresando el nombre o el id a 4 digitos del cliente</p>`;
+				tBody.innerHTML = template;
+				document.getElementById('register').classList.add("disabled");
+				return;
+			}
+			
+			tBody.innerHTML = "";
 			for (let index = 0; index < users.length; index++) {
-				console.log("entra");
+				
 				let user = users[index];
+				console.log(user);
+				if (Date.parse(user.dob) <= Date.now()) {
+					stateString = "Expirado";
+					classBadget = 'bg-gradient-danger';
+					classInput = "disabled;"
+				} else {
+				
+					stateString = "Activo";
+					classBadget = 'bg-gradient-success';
+				}
 				var template = `
 				<tr>
 					<td>
@@ -229,7 +296,7 @@ $dotenv->load();
 						<p id="name-${user.userid}" class=" m-auto  text-secondary text-xs font-weight-bold">${user.username}</p>
 					</td>
 					<td>
-						<p id="status-${user.userid}" class="m-auto text-secondary text-xs font-weight-bold">Activo</p>
+						<span style="max-width:100px;" id="status-${user.userid}" class="w-100 m-auto  text-xs font-weight-bold badge badge-sm ${classBadget}">${stateString}</span>
 					</td>
 					<td>
 						<p id="expire-${user.userid}" class="m-auto text-secondary text-xs font-weight-bold">${user.dob}</p>
@@ -243,6 +310,7 @@ $dotenv->load();
 				// Agregar un evento 'click' a cada fila
 				filas.forEach(fila => {
 				fila.addEventListener("click", () => {
+					document.getElementById('register').classList.remove("disabled");
 					// Seleccionar el botón radio correspondiente a la fila
 					let radio = fila.querySelector("input[type='radio']");
 					// Seleccionar el botón
@@ -255,6 +323,15 @@ $dotenv->load();
 			}
 			
 		}
+
+		document.getElementById("search").addEventListener("keyup", function(event){
+			
+		if(event.keyCode === 13){
+			event.preventDefault();
+
+			getUsers();
+		}
+	});
 
 		
 	</script>

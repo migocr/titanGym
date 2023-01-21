@@ -66,21 +66,28 @@ $dotenv->load();
             
               <div class="card-header pb-0">
                 <div class="d-flex justify-content-between">
-                  <h6>Lista de miembros</h6> 
-                  <p>
-                  Total : <?php
-                          $query = "select COUNT(*) from users";
+                  
+                  <div class="">
+                    <h6 class="p-0 m-0">Lista de miembros</h6> 
+                    <p class="text-xs">
+                    Total : <?php
+                            $query = "select COUNT(*) from users";
 
-                          $result = mysqli_query($con, $query);
-                          $i      = 1;
-                          if (mysqli_affected_rows($con) != 0) {
-                            while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
-                              echo $row['COUNT(*)'];
+                            $result = mysqli_query($con, $query);
+                            $i      = 1;
+                            if (mysqli_affected_rows($con) != 0) {
+                              while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
+                                echo $row['COUNT(*)'];
+                              }
                             }
-                          }
-                          $i = 1;
-                          ?>
-                  </p>
+                            $i = 1;
+                            ?>
+                    </p>
+                  </div>
+                  <a href="./new_entry.php">
+                    <buttons style="background: <?php echo $principalColor ?>;" class="btn bg-gradient-primary"><i class="fa-solid fa-user-plus"></i> Agregar Cliente</button>
+                  </a>
+                  
                 </div>
                 <div class="input-group">
                   <span class="input-group-text text-body"><i class="fas fa-search" aria-hidden="true"></i></span>
@@ -169,7 +176,7 @@ $dotenv->load();
                                     
                                               
                                       echo "<td><p class='text-sm font-weight-bold mb-0'> $lastPaymentStr</p></td>";
-                                      echo "<td class='text-center'><span class='badge badge-sm ${statusClass}'>$statusString</span></td>";
+                                      echo "<td class='text-center'><span style='max-width:85px;' class='w-100 badge badge-sm ${statusClass}'>$statusString</span></td>";
 
                                       echo "<td class='text-center'><p class='text-sm font-weight-bold mb-0'>" . $userExpire . "</p></td>";
 

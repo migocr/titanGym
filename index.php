@@ -84,22 +84,22 @@ if(isset($_SESSION["user_data"]))
               </div>
             
               <div class="card-body">
-				<form role="form text-left" action="secure_login.php" method='post' id="bb">				
-					<div class="mb-3">				
-						<input type="text" placeholder="Usuario" class="form-control" name="user_id_auth" id="textfield" data-rule-minlength="6" data-rule-required="true">
-					</div>				
-									
-					<div class="mb-3">					
-						<input type="password" name="pass_key" id="pwfield" class="form-control" data-rule-required="true" data-rule-minlength="6" placeholder="Contraseña">			
-					</div>
-					
-					<div class="form-group">
-						<button type="submit" name="btnLogin" class="btn bg-gradient-dark w-100 my-4 mb-2">
-							Ingresar
-							<i class="entypo-login"></i>
-						</button>
-					</div>
-				</form>
+                <form role="form text-left" action="secure_login.php" method='post' id="bb">				
+                  <div class="mb-3">				
+                    <input type="text" placeholder="Usuario" class="form-control" name="user_id_auth" id="textfield" data-rule-minlength="6" data-rule-required="true">
+                  </div>				
+                          
+                  <div class="mb-3">					
+                    <input type="password" name="pass_key" id="pwfield" class="form-control" data-rule-required="true" data-rule-minlength="6" placeholder="Contraseña">			
+                  </div>
+                  
+                  <div class="form-group">
+                    <button type="submit" name="btnLogin" class="btn bg-gradient-dark w-100 my-4 mb-2">
+                      Ingresar
+                      <i class="entypo-login"></i>
+                    </button>
+                  </div>
+                </form>
 				
               </div>
             </div>

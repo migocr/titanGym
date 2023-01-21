@@ -181,11 +181,11 @@
                                   </div>
                                 </td>";
                                 echo "<td class='text-center'>
-                                <span class='badge badge-sm $statusClass'>$statusString</span>
+                                <span class='w-100 badge badge-sm $statusClass'>$statusString</span>
                                  
                                 </td>";
                                 echo "<td class='text-center'>
-                                <span class='badge badge-sm'><i style='color:black;' class='fa-solid fa-arrow-up-right-from-square'></i></span>
+                                <span style='max-width: 90px;' class='w-100 badge badge-sm'><i style='color:black;' class='fa-solid fa-arrow-up-right-from-square'></i></span>
                                  
                                 </td>";
                                 echo "</tr>";

@@ -335,7 +335,7 @@
 															$statusClass = "bg-gradient-success";
 														}
 														echo "<td ><p class='text-center'>" . $numberDays ."</p></td>";
-														echo "<td class='text-center'><span class='badge badge-sm bg-gradient-success $statusClass'>$statusString</span></td>";									
+														echo "<td class='text-center'><span class=' w-100 badge badge-sm bg-gradient-success $statusClass'>$statusString</span></td>";									
 														echo "<td><p class='text-center text-sm font-weight-bold mb-0 '>" . $row['dob'] . "</p></td>";
 														
 																

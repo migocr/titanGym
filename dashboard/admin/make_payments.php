@@ -5,46 +5,49 @@ date_default_timezone_set('America/Mexico_City');
 page_protect();
 $principalColor = $_SESSION['principalColor'];
 $backgroundColor =  $_SESSION['backgroundColor'];
-if (isset($_POST['userID'])) {
-    $uid  = $_POST['userID'];
-    
-    $query1 = "select * from users WHERE userid='$uid'";
-    
-    $result1 = mysqli_query($con, $query1);
-    
-    if (mysqli_affected_rows($con) == 1) {
-        while ($row1 = mysqli_fetch_array($result1, MYSQLI_ASSOC)) {
-            
-            $name = $row1['username'];
-            
-            $query = "SELECT * FROM enrolls_to WHERE uid = '$uid'";
-            $result = mysqli_query($con, $query);
-
-            if (mysqli_num_rows($result) > 0) {
-                // output data of each row
-                $lastExpireDate = 0;
-                while($row = mysqli_fetch_assoc($result)) {
-                    //echo "expire: " . $row["expire"]. "<br>";
-                    $expireDate = strtotime($row["expire"]);
-                    if($lastExpireDate == 0 || $expireDate > $lastExpireDate) {
-                      $lastExpireDate = $expireDate;
-                    }
-                    
-                }
-                $expDate = date('Y-m-d', $lastExpireDate);
-                //echo $expDate;
-            } else {
-                //echo "0 results";
-                $expDate = date('Y-m-d');
-            }
-        }
-    }
-?>
-<?php
 $_DIR = dirname(dirname(dirname(__FILE__)));
 require  $_DIR . '/vendor/autoload.php' ;
 $dotenv = Dotenv\Dotenv::createImmutable($_DIR);
 $dotenv->load(); 
+if (isset($_POST['userID'])) {
+    $uid  = $_POST['userID'];
+} else {
+  $uid  = $_GET['userID'];
+}
+  
+$query1 = "select * from users WHERE userid='$uid'";
+      
+$result1 = mysqli_query($con, $query1);
+      
+if (mysqli_affected_rows($con) == 1) {
+  while ($row1 = mysqli_fetch_array($result1, MYSQLI_ASSOC)) {
+             
+  $name = $row1['username'];
+           
+  $query = "SELECT * FROM enrolls_to WHERE uid = '$uid'";
+  $result = mysqli_query($con, $query);
+  
+  if (mysqli_num_rows($result) > 0) {
+    // output data of each row
+    $lastExpireDate = 0;
+    while($row = mysqli_fetch_assoc($result)) {
+    //echo "expire: " . $row["expire"]. "<br>";
+      $expireDate = strtotime($row["expire"]);
+      if($lastExpireDate == 0 || $expireDate > $lastExpireDate) {
+        $lastExpireDate = $expireDate;
+      }
+                      
+    }
+  $expDate = date('Y-m-d', $lastExpireDate);
+                  //echo $expDate;
+  } else {
+    //echo "0 results";
+    $expDate = date('Y-m-d');
+  }
+}
+}
+    
+    
 ?>
 
 <!--
@@ -336,8 +339,4 @@ $dotenv->load();
 
  		
 
-<?php
-} else {
-    
-}
-?>
+
