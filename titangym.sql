@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 13-01-2023 a las 19:53:30
+-- Tiempo de generación: 23-01-2023 a las 09:10:36
 -- Versión del servidor: 10.4.25-MariaDB
 -- Versión de PHP: 7.4.30
 
@@ -40,6 +40,42 @@ CREATE TABLE `admin` (
 
 INSERT INTO `admin` (`username`, `pass_key`, `securekey`, `Full_name`) VALUES
 ('titan', 'titan', '1234abcd..', 'TitanGym');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `bitacora`
+--
+
+CREATE TABLE `bitacora` (
+  `id` int(10) UNSIGNED ZEROFILL NOT NULL,
+  `uid` int(4) UNSIGNED ZEROFILL NOT NULL,
+  `datetime` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `bitacora`
+--
+
+INSERT INTO `bitacora` (`id`, `uid`, `datetime`) VALUES
+(0000000001, 0026, '2023-01-22 04:15:34'),
+(0000000002, 0025, '2023-01-21 08:24:10'),
+(0000000003, 0001, '2022-12-31 04:24:31'),
+(0000000004, 0025, '2023-01-23 04:25:36'),
+(0000000005, 0025, '2023-01-23 04:25:47'),
+(0000000006, 0014, '2023-01-23 04:26:24'),
+(0000000007, 0014, '2023-01-23 04:26:59'),
+(0000000008, 0026, '2023-01-23 04:27:13'),
+(0000000009, 0026, '2023-01-23 04:27:26'),
+(0000000010, 0023, '2023-01-23 04:28:01'),
+(0000000011, 0026, '2023-01-23 04:28:56'),
+(0000000012, 0023, '2023-01-23 04:29:42'),
+(0000000013, 0014, '2023-01-23 04:33:36'),
+(0000000014, 0019, '2023-01-23 04:34:52'),
+(0000000015, 0018, '2023-01-23 04:37:26'),
+(0000000016, 0016, '2023-01-23 05:23:28'),
+(0000000017, 0023, '2023-01-23 07:14:14'),
+(0000000018, 0006, '2023-01-23 07:16:50');
 
 -- --------------------------------------------------------
 
@@ -102,7 +138,12 @@ INSERT INTO `enrolls_to` (`et_id`, `pid`, `paid_date`, `expire`, `startDate`, `u
 (60, 'KBTODF', '2023-01-11', '2023-01-12', '2023-01-11', 0022, 0),
 (61, 'KBTODF', '2023-01-11', '2023-02-07', '2023-02-06', 0001, 0),
 (62, 'GXQUYF', '2023-01-11', '2023-04-08', '2023-03-08', 0006, 0),
-(63, 'KBTODF', '2023-01-11', '2023-01-12', '2023-01-13', 0023, 0);
+(63, 'KBTODF', '2023-01-11', '2023-01-12', '2023-01-13', 0023, 0),
+(64, 'GXQUYF', '2023-01-22', '2023-02-22', '2023-01-22', 0023, 650),
+(65, 'GXQUYF', '2023-01-22', '2023-02-22', '2023-01-22', 0024, 0),
+(66, 'GXQUYF', '2023-01-22', '2023-02-22', '2023-01-22', 0025, 0),
+(67, 'GXQUYF', '2023-01-22', '2023-02-22', '2023-01-22', 0026, 650),
+(68, 'VJLRNM', '2023-01-22', '2023-05-22', '2023-02-22', 0026, 1800);
 
 -- --------------------------------------------------------
 
@@ -125,10 +166,10 @@ CREATE TABLE `plan` (
 --
 
 INSERT INTO `plan` (`pid`, `planName`, `description`, `validity`, `amount`, `active`, `planType`) VALUES
-('GXQUYF', 'Plan Mensual', '', '1', 650, 'yes', 'm'),
+('GXQUYF', 'Plan Mensual', '1 mes', '1', 650, 'yes', 'm'),
 ('KBTODF', 'Visita', 'Visita 1 dia', '1', 50, 'yes', 'd'),
 ('ULJWQN', 'Semanal', '1 Semana', '7', 200, 'yes', 'd'),
-('VJLRNM', 'Plan Trimestral', '3 meses', '3', 1800, 'yes', 'm'),
+('VJLRNM', 'Plan Trimestral', '3 meses de suscripion', '3', 1800, 'no', 'm'),
 ('XWNHUS', 'Caduca', '', '0', 0, 'yes', 'd');
 
 -- --------------------------------------------------------
@@ -147,8 +188,15 @@ CREATE TABLE `system_settings` (
 --
 
 INSERT INTO `system_settings` (`nombre`, `config`) VALUES
-('color', 'linear-gradient(310deg, #141727 0%, #3A416F 100%)'),
-('backgroundColor', '#f2f2f2');
+('color', 'radial-gradient(circle, rgba(119,108,106,1) 0%, rgba(141,128,125,1) 100%)'),
+('backgroundColor', '#4f4f4f'),
+('nombreSitio', 'TitaniumGYM'),
+('colorFuente', 'black'),
+('logo', ''),
+('fixedNav', 'true'),
+('navbarColor', ''),
+('asideColor', '#dedede'),
+('asideTransparency', '47');
 
 -- --------------------------------------------------------
 
@@ -188,7 +236,10 @@ INSERT INTO `users` (`userid`, `username`, `gender`, `phone`, `dob`, `joining_da
 (0020, 'Prueba', 'Hombre', '3111543829', '2023-01-12', '2023-01-11'),
 (0021, 'Prueba', 'Hombre', '', '2023-01-12', '2023-01-11'),
 (0022, 'Prueba', 'Hombre', '3111543829', '2023-01-12', '2023-01-11'),
-(0023, 'Misael G', 'Hombre', '3111543829', '2023-01-12', '2023-01-13');
+(0023, 'Misael G', 'Hombre', '3111543829', '2023-02-22', '2023-01-13'),
+(0024, 'Prueba Dos', 'Hombre', '3111543829', '2023-02-22', '2023-01-22'),
+(0025, 'aaaaaaaaaaaa', 'Hombre', '1111111111', '2023-02-22', '2023-01-22'),
+(0026, 'aaaaaaaaaaaa', 'Hombre', '1111111111', '2023-05-22', '2023-01-22');
 
 --
 -- Índices para tablas volcadas
@@ -199,6 +250,12 @@ INSERT INTO `users` (`userid`, `username`, `gender`, `phone`, `dob`, `joining_da
 --
 ALTER TABLE `admin`
   ADD PRIMARY KEY (`username`) USING BTREE;
+
+--
+-- Indices de la tabla `bitacora`
+--
+ALTER TABLE `bitacora`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indices de la tabla `enrolls_to`
@@ -226,16 +283,22 @@ ALTER TABLE `users`
 --
 
 --
+-- AUTO_INCREMENT de la tabla `bitacora`
+--
+ALTER TABLE `bitacora`
+  MODIFY `id` int(10) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+
+--
 -- AUTO_INCREMENT de la tabla `enrolls_to`
 --
 ALTER TABLE `enrolls_to`
-  MODIFY `et_id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=64;
+  MODIFY `et_id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=69;
 
 --
 -- AUTO_INCREMENT de la tabla `users`
 --
 ALTER TABLE `users`
-  MODIFY `userid` int(4) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `userid` int(4) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- Restricciones para tablas volcadas
