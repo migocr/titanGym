@@ -59,11 +59,11 @@
     <!-- End Navbar -->
     <div class="container-fluid py-4">
 
-      <div class="row">
+      <div class="">
         <div class="card" style="box-shadow: none;">
           <div class="card-header pb-0">
             <div class="d-flex justify-content-between">
-              <h6>Lista de miembros</h6>
+              <h6>Lista de Miembros</p>
               <p>
                 Total : 4</p>
             </div>
@@ -80,16 +80,18 @@
                   <table class="table align-items-center mb-0">
                     <thead>
                       <tr>
-                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">ID</th>
-                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Nombre</th>
-                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Fecha de pago</th>
-                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Inicio de Suscripcion</th>
-                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Fin de suscripcion</th>
-                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Plan
+                        <th class="text-uppercase text-secondary text-xs font-weight-bolder">ID</th>
+                        <th class="text-uppercase text-secondary text-xs font-weight-bolder">Nombre</th>
+                        <th class="text-uppercase text-secondary text-xs font-weight-bolder">Fecha de pago</th>
+                        <th class="text-uppercase text-secondary text-xs font-weight-bolder ps-2">Inicio de Suscripcion</th>
+                        <th class="text-uppercase text-secondary text-xs font-weight-bolder ps-2">Fin de suscripcion</th>
+                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder">Plan
                         </th>
-                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder">Pago
+                        </th>
+                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder">
                           Status</th>
-                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder">
                           Detalles</th>
                        
                       </tr>
@@ -109,6 +111,7 @@
                               $uid   = $row['uid'];
                               $planid=$row['pid'];
                               $etId = $row['et_id'];
+                              $amount =  $row['amount'];
                               setlocale(LC_TIME, 'es_ES', 'Spanish_Spain', 'Spanish'); 
                               $_paidDate = date("Y-m-d", strtotime($row['paid_date']));
                               $paidDate= strftime('%d %b %Y', strtotime($_paidDate));
@@ -152,32 +155,37 @@
 
                               echo "<td>
                                   <div class='d-flex px-2'>
-                                    <h6 class='mb-0 text-sm'>$etId</h6>
+                                    <p class='mb-0 text-sm'>$etId</p>
                                   </div>
                                 </td>";
                               echo "<td>
                                   <div class='d-flex px-2'>
-                                    <h6 class='mb-0 text-sm'>$userName</h6>
+                                    <p class='mb-0 text-sm'>$userName</p>
                                   </div>
                                 </td>";
                                 echo "<td>
                                   <div class='d-flex px-2'>
-                                    <h6 class='mb-0 text-sm'>$paidDate</h6>
+                                    <p class='mb-0 text-sm'>$paidDate</p>
                                   </div>
                                 </td>";
                                 echo "<td>
                                   <div class='d-flex px-2'>
-                                    <h6 class='mb-0 text-sm'>$startDateString</h6>
+                                    <p class='mb-0 text-sm'>$startDateString</p>
                                   </div>
                                 </td>";
                                 echo "<td>
                                   <div class='d-flex px-2'>
-                                    <h6 class='mb-0 text-sm'>$expireDateString</h6>
+                                    <p class='mb-0 text-sm'>$expireDateString</p>
                                   </div>
                                 </td>";
                                 echo "<td>
                                   <div class='d-flex px-2'>
-                                    <h6 class='mb-0 text-sm'>$planName</h6>
+                                    <p class='mb-0 text-sm'>$planName</p>
+                                  </div>
+                                </td>";
+                                echo "<td>
+                                  <div class='d-flex px-2'>
+                                    <p class='mb-0 text-sm'>$amount</p>
                                   </div>
                                 </td>";
                                 echo "<td class='text-center'>

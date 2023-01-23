@@ -42,11 +42,11 @@ $dotenv->load(); ?>
 	<?php $active = 'new'; include 'components/menu.php'; ?>
 	<main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
 		<!-- Navbar -->
-		<?php $titlePage = 'Nuevo Registro'; include 'components/navbar.php'; ?>
+		<?php $titlePage = 'Nuevo Miembro'; include 'components/navbar.php'; ?>
 		<!-- End Navbar -->
 		<div class="container-fluid py-4">
 			
-			<div class="row">
+			<div class="">
 				<div class="card" style="box-shadow: none;">
 					<div class="card-body pt-3 py-3 pb-0">
 						<div class="row">
@@ -62,7 +62,7 @@ $dotenv->load(); ?>
 													<div class="row">
 														<div class="col-md-6">
 															<div class="form-group">
-																<label for="example-search-input" class="form-control-label">Nombre</label>
+																<label for="example-search-input" class="form-control-label text-uppercase  text-xs font-weight-bolder ">Nombre</label>
 																
 																<input class="form-control" type="text" placeholder="Nombre del nuevo miembro" value=""
 																	name="u_name" id="boxx" required>
@@ -71,21 +71,21 @@ $dotenv->load(); ?>
 														</div>
 														<div class="col-md-6">
 														<div class="form-group">
-															<label for="example-tel-input" class="form-control-label">Telefono</label>
-															<input class="form-control" type="tel" name="phone" placeholder="Numero a 10 digitos" id="example-tel-input">
+															<label for="example-tel-input" class="form-control-label text-uppercase  text-xs font-weight-bolder">Telefono</label>
+															<input class="form-control"   type="tel" pattern="[0-9]{10}" maxlength="10" name="phone" placeholder="Numero a 10 digitos" id="example-tel-input">
 														</div>
 														</div>
 																											
 														<div class="col-md-6">
 															<div class="form-group">
-																<label for="example-date-input" class="form-control-label">Fecha de ingreso</label>
+																<label for="example-date-input" class="form-control-label text-uppercase  text-xs font-weight-bolder">Fecha de ingreso</label>
 																<input class="form-control" type="date" value='<?php echo str_replace("/","-",date("Y/m/d"));?>'
 																	name="jdate" id="boxx">
 															</div>
 														</div>
 														<div class="col-md-6">
 															<div class="form-group">
-																<label for="example-date-input" class="form-control-label">Fecha Caduca</label>
+																<label for="example-date-input" class="form-control-label text-uppercase  text-xs font-weight-bolder">Fecha Caduca</label>
 																<input class="form-control" type="date" value='<?php echo str_replace("/","-",date("Y/m/d"));?>'
 																	name="dob" id="expire-date" required>
 																	
@@ -93,7 +93,7 @@ $dotenv->load(); ?>
 														</div>
 														<div class="col-md-6">
 															<div class="form-group">
-																<label for="example-color-input" class="form-control-label">Plan</label>
+																<label for="example-color-input" class="form-control-label text-uppercase  text-xs font-weight-bolder">Plan</label>
 																<select  style="width: 100%;
 																	border: 1px #e9ecef solid;
 																	border-radius: 5px;

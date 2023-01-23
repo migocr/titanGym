@@ -3,7 +3,7 @@
 			
     <li id="dash"><a href="index.php"><i class="entypo-gauge"></i><span>Panel de Control</span></a></li>
                 
-	<li id="regis"><a href="new_entry.php"><i class="entypo-user-add"></i><span>Nuevo Registro</span></a>                
+	<li id="regis"><a href="nuevo_miembro.php"><i class="entypo-user-add"></i><span>Nuevo Miembro</span></a>                
 				
 	<li id="paymnt"><a href="payments.php"><i class="entypo-star"></i><span>Pago</span></a></li>
 

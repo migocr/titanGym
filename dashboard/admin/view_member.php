@@ -43,7 +43,7 @@ if (isset($_GET['id'])) {
 	<?php $active = 'members'; include 'components/menu.php'; ?>
 	<main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ps ">
 		<!-- Navbar -->
-		<?php $titlePage = 'Resumen'; include 'components/navbar.php'; ?>
+		<?php $titlePage = 'Miembro'; include 'components/navbar.php'; ?>
 		<!-- End Navbar -->
 		<div class="container-fluid py-4">
 		
@@ -171,13 +171,13 @@ if (isset($_GET['id'])) {
 														<table class="table align-items-center mb-0">
 														<thead>
 															<tr>
-															<th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">ID</th>
-															<th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Fecha de Pago</th>
-															<th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Comienza</th>
-															<th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Finaliza</th>
-															<th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Membresia</th>
-															<th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Pago</th>
-															<th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Status</th>
+															<th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder">ID</th>
+															<th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder">Fecha de Pago</th>
+															<th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder">Comienza</th>
+															<th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder">Finaliza</th>
+															<th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder">Membresia</th>
+															<th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder">Pago</th>
+															<th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder">Status</th>
 	
 														</tr>
 														</thead>
@@ -231,7 +231,7 @@ if (isset($_GET['id'])) {
 																				<p class='text-center text-xs font-weight-bold mb-0'>$amount </p>
 																			</td>
 																			<td class='text-center'>
-																				<span class='badge badge-sm $statusClass'>$statusString</span>
+																				<span class='badge badge-sm w-100 $statusClass'>$statusString</span>
 																			</td>
 																		</tr>
 																	";

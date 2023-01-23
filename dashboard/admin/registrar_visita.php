@@ -113,6 +113,7 @@ $dotenv->load();
 								</div>
 
 					</div>
+					
 				</div>
 				
 			</div>
@@ -236,28 +237,37 @@ $dotenv->load();
 		}
 
 		function submitVisit(uid) {
-			fetch('./scripts/register_visit.php', {
-				method: 'POST',
-				headers: {
-				'Content-Type': 'application/x-www-form-urlencoded'
-			},
-			body: `userid=${uid}`
-			}).then(function (response) {
-				console.log(response);
-				return response.json();
-			}).then(function (data) {
-				console.log(data)
-				if(data.status) {
-					swal("Visita registrada de "+ name, {
-						icon: "success",
-					});
-				} else {
-					swal("No se pudo registrar visita de usuario ", {
-						icon: "error",
-					});
-				}
-			// aquí manejas la respuesta
-			});
+			try {
+				fetch('./scripts/register_visit.php', {
+					method: 'POST',
+					headers: {
+					'Content-Type': 'application/x-www-form-urlencoded'
+				},
+				body: `userid=${uid}`
+				}).then(function (response) {
+					console.log(response);
+					return response.json();
+				}).then(function (data) {
+					console.log(data)
+					
+					if(data.status) {
+						swal("Visita registrada de "+ name, {
+							icon: "success",
+						}).then((value) => {window.location.reload()});
+					} else {
+						swal("No se pudo registrar visita de usuario ", {
+							icon: "error",
+						});
+					}
+				// aquí manejas la respuesta
+				});
+			} catch (error) {
+				swal("No se pudo registrar visita de usuario ", {
+							icon: "error",
+						});
+						console.log(error)
+			}
+
 		}
 
 		function printUsers(users, search) {

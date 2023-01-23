@@ -4,12 +4,10 @@
 	page_protect();
 	$principalColor = $_SESSION['principalColor'];
 	$backgroundColor =  $_SESSION['backgroundColor'];
-	///////////
-	$colorIcon = $_SESSION['colorIcon'];
-	$colorBackground = $_SESSION['colorBackgroundI'];
+
 	$siteTitle = $_SESSION['siteTitle'];
-	$colorFound = $_SESSION['getColorFound'];
-	$getLogo = $_SESSION['getLogo'];
+	$colorFont = $_SESSION['colorFont'];
+	$logo = $_SESSION['logo'];
 
 	$_DIR = dirname(dirname(dirname(__FILE__)));
 	require  $_DIR . '/vendor/autoload.php' ;
@@ -66,12 +64,12 @@
 		<!-- End Navbar -->
 		<div class="container-fluid py-4">
 		
-			<div class="row ">
+			<div class="">
 				<div class="col-lg-12 col-md-6 mb-md-0 mb-4">
 					<div class="card">
 						<div class="card-header pb-0">
 							<div class="">
-								<h6>Systema</h6>
+								<h6>Configuracion de Sistema</h6>
 							</div>
 							<div class="row">
 								<?php
@@ -149,13 +147,13 @@
 														<div class="col-md-6">
 															<div class="form-group">
 																<label for="example-text-input" class="form-control-label">Color Iconos</label>
-																<input class="form-control"  id="boxxe" type="text" name="uid" value="<?php echo $colorBackground?>" readonly required />
+																<input class="form-control"  id="boxxe" type="text" name="uid" value="<?php echo $backgroundColor?>" readonly required />
 															</div>
 														</div>
 														<div class="col-md-6">
 															<div class="form-group">
 																<label for="example-text-input" class="form-control-label">Color background</label>
-																<input class="form-control"  id="boxxe" type="text" name="uid" value="<?php echo $colorIcon?>" readonly required />
+																<input class="form-control"  id="boxxe" type="text" name="uid" value="<?php echo $principalColor?>" readonly required />
 															</div>
 														</div>
 														<div class="col-md-6">
@@ -167,13 +165,13 @@
 														<div class="col-md-6">
 															<div class="form-group">
 																<label for="example-text-input" class="form-control-label">Color de fuente</label>
-																<input class="form-control"  id="boxxe" type="text" name="uid" value="<?php echo $colorFound?>" readonly required />
+																<input class="form-control"  id="boxxe" type="text" name="uid" value="<?php echo $colorFont?>" readonly required />
 															</div>
 														</div>
 														<div class="col-md-6">
 															<div class="form-group">
 																<label for="example-text-input" class="form-control-label">Logo</label>
-																<input class="form-control"  id="boxxe" type="text" name="uid" value="<?php echo $getLogo?>" readonly required />
+																<input class="form-control"  id="boxxe" type="text" name="uid" value="<?php echo $logo?>" readonly required />
 															</div>
 														</div>											
 												</form>

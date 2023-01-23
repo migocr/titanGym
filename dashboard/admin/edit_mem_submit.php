@@ -38,7 +38,7 @@
    <body class="g-sidenav-show  bg-gray-100" style="<?php echo "background:$backgroundColor !important;"?>">
       <?php $active = 'members'; include 'components/menu.php'; ?>
       <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
-         <?php $titlePage = 'Nuevo Registro'; include 'components/navbar.php'; ?>
+         <?php $titlePage = 'Nuevo Miembro'; include 'components/navbar.php'; ?>
          <div class="container-fluid py-4">
 
          <div class="row">
@@ -64,14 +64,14 @@
          echo "<html><head><script>
                     document.addEventListener('DOMContentLoaded', function () {
                       swal('Guardado' ,  'Miembro actualizado exitosamente' ,  'success').then((event) => {window.location.href = window.location.href.replace('edit_mem_submit.php', 'members.php');});
-                      //setTimeout(function(){ window.location.href = window.location.href.replace('new_submit.php', 'new_entry.php'); }, 3000);
+                      //setTimeout(function(){ window.location.href = window.location.href.replace('new_submit.php', 'nuevo_miembro.php'); }, 3000);
                     });
                     </script></head></html>";
       }else{
          echo "<html><head><script>
          document.addEventListener('DOMContentLoaded', function () {
            swal('Error' ,  'Error al intentar actualizar usuario' ,  'error').then((event) => {window.location.href = window.location.href.replace('edit_mem_submit.php', 'members.php');});
-           //setTimeout(function(){ window.location.href = window.location.href.replace('new_submit.php', 'new_entry.php'); }, 3000);
+           //setTimeout(function(){ window.location.href = window.location.href.replace('new_submit.php', 'nuevo_miembro.php'); }, 3000);
          });
          </script></head></html>";
       }

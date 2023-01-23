@@ -36,7 +36,7 @@
   <body class="g-sidenav-show  bg-gray-100" style="<?php echo "background:$backgroundColor !important;"?>">
     <?php $active = 'new'; include 'components/menu.php'; ?>
     <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
-      <?php $titlePage = 'Nuevo Registro'; include 'components/navbar.php'; ?>
+      <?php $titlePage = 'Nuevo Miembro'; include 'components/navbar.php'; ?>
       <div class="container-fluid py-4">
 
         <div class="row">
@@ -71,6 +71,7 @@
           if($result){
             $value=mysqli_fetch_row($result);
             $isDayOrMonth = $value[6];
+            $amount = $value[4];
             if ($isDayOrMonth == "d") {
               $timeType = " Days";
             }
@@ -83,7 +84,7 @@
             echo $cdate;
             $expiredate=date("Y-m-d",$d); //adding validity retrieve from plan to current date
             //inserting into enrolls_to table of corresponding userid
-            $query2="insert into enrolls_to(pid,uid,paid_date,expire, startDate) values('$plan','$memID','$cdate','$expiredate','$jdate')";
+            $query2="insert into enrolls_to(pid,uid,paid_date,expire, startDate, amount) values('$plan','$memID','$cdate','$expiredate','$jdate','$amount')";
             if(mysqli_query($con,$query2)==1){
 
               echo "<html><head><script>
@@ -97,8 +98,8 @@
             else{
               echo "<html><head><script>
               document.addEventListener('DOMContentLoaded', function () {
-                swal('Error' ,  'Error al intentar guardar' ,  'error').then((event) => {window.location.href = window.location.href.replace('new_submit.php', 'new_entry.php');});
-                //setTimeout(function(){ window.location.href = window.location.href.replace('new_submit.php', 'new_entry.php'); }, 3000);
+                swal('Error' ,  'Error al intentar guardar' ,  'error').then((event) => {window.location.href = window.location.href.replace('new_submit.php', 'nuevo_miembro.php');});
+                //setTimeout(function(){ window.location.href = window.location.href.replace('new_submit.php', 'nuevo_miembro.php'); }, 3000);
               });
               </script></head></html>";
               echo "error: ".mysqli_error($con);
@@ -113,8 +114,8 @@
           {
             echo "<html><head><script>
             document.addEventListener('DOMContentLoaded', function () {
-              swal('Error' ,  'Error al intentar guardar' ,  'error').then((event) => {window.location.href = window.location.href.replace('new_submit.php', 'new_entry.php');});
-              //setTimeout(function(){ window.location.href = window.location.href.replace('new_submit.php', 'new_entry.php'); }, 3000);
+              swal('Error' ,  'Error al intentar guardar' ,  'error').then((event) => {window.location.href = window.location.href.replace('new_submit.php', 'nuevo_miembro.php');});
+              //setTimeout(function(){ window.location.href = window.location.href.replace('new_submit.php', 'nuevo_miembro.php'); }, 3000);
             });
             </script></head></html>";
             echo "error: ".mysqli_error($con);
@@ -127,8 +128,8 @@
       else{
         echo "<html><head><script>
                   document.addEventListener('DOMContentLoaded', function () {
-                    swal('Error' ,  'Error al intentar guardar' ,  'error').then((event) => {window.location.href = window.location.href.replace('new_submit.php', 'new_entry.php');});
-                    //setTimeout(function(){ window.location.href = window.location.href.replace('new_submit.php', 'new_entry.php'); }, 3000);
+                    swal('Error' ,  'Error al intentar guardar' ,  'error').then((event) => {window.location.href = window.location.href.replace('new_submit.php', 'nuevo_miembro.php');});
+                    //setTimeout(function(){ window.location.href = window.location.href.replace('new_submit.php', 'nuevo_miembro.php'); }, 3000);
                   });
                   </script></head></html>";
         echo "error: ".mysqli_error($con);

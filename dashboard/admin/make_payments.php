@@ -114,7 +114,7 @@ if (mysqli_affected_rows($con) == 1) {
                   <div class="row">
                     <div class="col-md-6">
                       <div class="form-group">
-                              <label for="example-text-input" class="form-control-label">ID de Cliente</label>
+                              <label for="example-text-input" class="form-control-label">ID de Miembro</label>
                               <input  class="form-control" type="text" name="m_id" id="idMembresia" value="<?php echo $uid; ?>" readonly/>
                       </div>
                     </div>
@@ -138,7 +138,7 @@ if (mysqli_affected_rows($con) == 1) {
                             echo $expDate;
                         }
                         ?>'
-                        name="startdate" id="start-date" required>
+                        name="startdate" required>
                         
                       </div>
                     </div>
@@ -146,7 +146,7 @@ if (mysqli_affected_rows($con) == 1) {
                       <div class="form-group">
                         <label for="example-date-input" class="form-control-label">Fecha Fin</label>
                         <input id="expire-date" class="form-control" type="date" value=''
-                          name="dob" id="expire-date" required readonly>
+                          name="dob" id="expire-date" required>
                           
                       </div>
                     </div>
@@ -218,120 +218,139 @@ if (mysqli_affected_rows($con) == 1) {
   <!-- Github buttons -->
   <script async defer src="../assets/js/buttons.js"></script>
   <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
-  <script src="../assets/js/soft-ui-dashboard.min.js?v=1.0.6"></script>
-  		<script>
-          function changeExpireDate(str, duration, durationType){
-            console.log(str);
-        		if(str==""){
-        			document.getElementById("plandetls").innerHTML = "";
-        			return;
-        		} else{
-        		  if (window.XMLHttpRequest) {
-           		 // code for IE7+, Firefox, Chrome, Opera, Safari
-           		  xmlhttp = new XMLHttpRequest();
-       				}
-       			 	xmlhttp.onreadystatechange = function() {
-            	if (this.readyState == 4 && this.status == 200) {
-               		 document.getElementById("plandetls").innerHTML=this.responseText;
-                
-            	}
-        		};
-        			
-       				 xmlhttp.open("GET","plandetail.php?q="+str,true);
-       				 xmlhttp.send();	
-        	}
-
-            var expireDateInput = document.getElementById("expire-date");
-            console.log(expireDateInput.value)
-            var expireQty = parseInt(duration); //cantidad de dias o meses
-            var inputStartDate = document.getElementById("start-date").value; //input fecha inicial
-            console.log("inputStartDate ", inputStartDate);
-            console.log(expireQty);
-            //let date = new Date(inputStartDate);
-            var parts = inputStartDate.split('-');
-            // Please pay attention to the month (parts[1]); JavaScript counts months from 0:
-            // January - 0, February - 1, etc.
-            var date = new Date(parts[0], parts[1] - 1, parts[2]); 
-            if(durationType == "m") { // si es un plan con meses
-              var expireDate = date.setMonth(date.getMonth() + expireQty);
-              
-            }
-            if(durationType == "d") {// si es un plan con dias
-              var expireDate = date.setDate(date.getDate() + expireQty);
-            }
-            console.log("expire date: ", expireDate)
-            let formatedDate = `${new Date(expireDate).getFullYear()}-${new Date(expireDate).getMonth()+1 > 9 ? new Date(expireDate).getMonth()+1 : '0' + (new Date(expireDate).getMonth()+1)}-${new Date(expireDate).getDate() > 9 ? new Date(expireDate).getDate() : '0'+new Date(expireDate).getDate()}`
-            expireDateInput.value = formatedDate;
-            expireDateInput.setAttribute("value", formatedDate);
-        		
-        	}
-        </script>
-
-        <script>
-          async function savePayment() {
-            let formData = new FormData();
-            let id = document.getElementById("idMembresia").value;
-            let plan =document.getElementById("planSelector").value;
-            let startDate = document.getElementById("start-date").value;
-            if(!plan || plan == "" || plan == undefined){
-              swal("Selecciona un Plan" ,  "Por favor selecciona un plan antes de guardar" ,  "warning");
-              return;
-            }
-          
-            let dob = document.getElementById("expire-date").value;
-            console.log(id,"-",plan,"-",dob)
-            formData.append('m_id', id);
-            formData.append('plan', plan);
-            formData.append('dob', dob);
-            formData.append('startdate', startDate);
-
-
-            const url = "./submit_payments.php";
-            const XHR = new XMLHttpRequest();
-             // Define what happens on successful data submission
-            await XHR.addEventListener('load', (event) => {
-              console.log(event);
-              console.log(XHR.responseText);
-              var response = JSON.parse(JSON.parse(XHR.responseText));
-            //  JSON.parse(response, true);
-              console.log(response)
-              if(response.status) {
-                swal({
-                  icon: "success",
-                  text: "Pago Guardado",
-                  value: true,
-                  visible: true,
-                  className: "",
-                  closeModal: true,
-                }).then(function() {
-                  window.location = './view_member.php?id=' + id;
-                });
-              } else {
-                swal({
-                icon: "error",
-                text: "Error al guardar",
-                value: true,
-                visible: true,
-                className: "",
-                closeModal: true,
-              })
-              }
-              
-              
-            });
-
-            // Define what happens in case of an error
-            XHR.addEventListener('error', (event) => {
-              swal("Error" ,  "Ocurrio un error al intentar guardar el pago" ,  "error");
-            });
-
-            // Set up our request
-            await XHR.open('POST', url);
-
-            // Send our FormData object; HTTP headers are set automatically
-            await XHR.send(formData);
+<script src="../assets/js/soft-ui-dashboard.min.js?v=1.0.6"></script>
+<script>
+  function changeExpireDate(str, duration, durationType) {
+      console.log(str);
+      if (str == "") {
+          document.getElementById("plandetls").innerHTML = "";
+          return;
+      } else {
+          if (window.XMLHttpRequest) {
+              // code for IE7+, Firefox, Chrome, Opera, Safari
+              xmlhttp = new XMLHttpRequest();
           }
-        </script>
+          xmlhttp.onreadystatechange = function() {
+              if (this.readyState == 4 && this.status == 200) {
+                  document.getElementById("plandetls").innerHTML = this.responseText;
+
+              }
+          };
+
+          xmlhttp.open("GET", "plandetail.php?q=" + str, true);
+          xmlhttp.send();
+      }
+
+      var expireDateInput = document.getElementById("expire-date");
+      console.log(expireDateInput.value)
+      var expireQty = parseInt(duration); //cantidad de dias o meses
+      var inputStartDate = document.getElementById("start-date").value; //input fecha inicial
+      console.log("inputStartDate ", inputStartDate);
+      console.log(expireQty);
+      //let date = new Date(inputStartDate);
+      var parts = inputStartDate.split('-');
+      // Please pay attention to the month (parts[1]); JavaScript counts months from 0:
+      // January - 0, February - 1, etc.
+      var date = new Date(parts[0], parts[1] - 1, parts[2]);
+      if (durationType == "m") { // si es un plan con meses
+          var expireDate = date.setMonth(date.getMonth() + expireQty);
+
+      }
+      if (durationType == "d") { // si es un plan con dias
+          var expireDate = date.setDate(date.getDate() + expireQty);
+      }
+      console.log("expire date: ", expireDate)
+      let formatedDate = `${new Date(expireDate).getFullYear()}-${new Date(expireDate).getMonth()+1 > 9 ? new Date(expireDate).getMonth()+1 : '0' + (new Date(expireDate).getMonth()+1)}-${new Date(expireDate).getDate() > 9 ? new Date(expireDate).getDate() : '0'+new Date(expireDate).getDate()}`
+      expireDateInput.value = formatedDate;
+      expireDateInput.setAttribute("value", formatedDate);
+
+  }
+</script>
+<script>
+  document.getElementById('start-date').addEventListener('change', function() {
+    console.log("si")
+    if (planSelector.value && validityPlan) {
+      let validity = parseInt(validityPlan.getAttribute("validity")) ;
+      let planType = validityPlan.getAttribute("planType");
+      let startDate = document.getElementById("start-date").value;
+      if (planType == "m") {
+        // Creamos una fecha
+       
+        var expireDate = new Date(startDate.split("-"));
+        // Sumamos la cantidad de meses que deseamos
+        //expireDate.setMonth(expireDate.getMonth() + validity);
+        // Obtenemos la fecha resultante
+       // var newDate = expireDate.getDate() + '/' + (expireDate.getMonth() + 1) + '/' + expireDate.getFullYear();
+        console.log(expireDate)
+        let _expireDate =  expireDate.getFullYear()  + "-"  + ("0" + (expireDate.getMonth() + 1 + validity)).slice(-2)  + "-" + (expireDate.getDate() < 10 ? '0' + expireDate.getDate() : expireDate.getDate() );
+        document.getElementById("expire-date").value = _expireDate;
+      }
+    }
+  });
+    async function savePayment() {
+        let formData = new FormData();
+        let id = document.getElementById("idMembresia").value;
+        let plan = document.getElementById("planSelector").value;
+        let startDate = document.getElementById("start-date").value;
+        if (!plan || plan == "" || plan == undefined) {
+            swal("Selecciona un Plan", "Por favor selecciona un plan antes de guardar", "warning");
+            return;
+        }
+
+        let dob = document.getElementById("expire-date").value;
+        console.log(id, "-", plan, "-", dob)
+        formData.append('m_id', id);
+        formData.append('plan', plan);
+        formData.append('dob', dob);
+        formData.append('startdate', startDate);
+
+
+        const url = "./submit_payments.php";
+        const XHR = new XMLHttpRequest();
+        // Define what happens on successful data submission
+        await XHR.addEventListener('load', (event) => {
+            console.log(event);
+            console.log(XHR.responseText);
+            var response = JSON.parse(JSON.parse(XHR.responseText));
+            //  JSON.parse(response, true);
+            console.log(response)
+            if (response.status) {
+                swal({
+                    icon: "success",
+                    text: "Pago Guardado",
+                    value: true,
+                    visible: true,
+                    className: "",
+                    closeModal: true,
+                }).then(function() {
+                    window.location = './view_member.php?id=' + id;
+                });
+            } else {
+                swal({
+                    icon: "error",
+                    text: "Error al guardar",
+                    value: true,
+                    visible: true,
+                    className: "",
+                    closeModal: true,
+                })
+            }
+
+
+        });
+
+        // Define what happens in case of an error
+        XHR.addEventListener('error', (event) => {
+            swal("Error", "Ocurrio un error al intentar guardar el pago", "error");
+        });
+
+        // Set up our request
+        await XHR.open('POST', url);
+
+        // Send our FormData object; HTTP headers are set automatically
+        await XHR.send(formData);
+    }
+</script>
 </body>
 
 </html>

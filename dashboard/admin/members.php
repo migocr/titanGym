@@ -60,7 +60,7 @@ $dotenv->load();
 
 			
     
-      <div class="row">
+      <div class="">
         <div class="card" style="box-shadow: none;">
           
             
@@ -68,7 +68,7 @@ $dotenv->load();
                 <div class="d-flex justify-content-between">
                   
                   <div class="">
-                    <h6 class="p-0 m-0">Lista de miembros</h6> 
+                    <h6 class="p-0 m-0">Lista de Miembros</h6> 
                     <p class="text-xs">
                     Total : <?php
                             $query = "select COUNT(*) from users";
@@ -84,8 +84,8 @@ $dotenv->load();
                             ?>
                     </p>
                   </div>
-                  <a href="./new_entry.php">
-                    <buttons style="background: <?php echo $principalColor ?>;" class="btn bg-gradient-primary"><i class="fa-solid fa-user-plus"></i> Agregar Cliente</button>
+                  <a href="./nuevo_miembro.php">
+                    <buttons style="background: <?php echo $principalColor ?>;" class="btn bg-gradient-primary"><i class="fa-solid fa-user-plus"></i> Agregar Miembro</button>
                   </a>
                   
                 </div>
@@ -105,14 +105,17 @@ $dotenv->load();
                       <table class="table align-items-center mb-0">
                         <thead>
                           <tr>
-                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">ID</th>
-                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Nombre</th>
-                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Ultimo Pago</th>
-                            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Suscripcion</th>
-                            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Caduca</th>
-                            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Editar</th>
-                            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Ver</th>
-                            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Pagar</th>
+                            <th class="text-uppercase text-secondary text-xs font-weight-bolder">ID</th>
+                            <th class="text-uppercase text-secondary text-xs font-weight-bolder px-3">Nombre</th>
+                            <th class="text-uppercase text-secondary text-xs font-weight-bolder ps-2">Ultimo Pago</th>
+                            <th class="text-center text-uppercase text-secondary text-xs font-weight-bolder">Suscripcion</th>
+                            <th class="text-center text-uppercase text-secondary text-xs font-weight-bolder">Caduca</th>
+                            <th class="text-center  d-flex" style="justify-content: space-around;">
+                              <p class="text-uppercase text-secondary text-xs font-weight-bolder my-auto">Editar</p> 
+                              <p class="text-uppercase text-secondary text-xs font-weight-bolder my-auto">Ver</p> 
+                              <p class="text-uppercase text-secondary text-xs font-weight-bolder my-auto">pagar</p>
+                            </th>
+                            
                           </tr>
                         </thead>
                         <tbody id="membersTable">
@@ -132,11 +135,11 @@ $dotenv->load();
                                       $rowGender = $row['gender'];
                                       echo "<td> 
                                       <div class='d-flex px-2'>
-                                        <h6 class='mb-0 text-sm'>". $uid ." </h6>
+                                        <p class='mb-0 text-sm'>". $uid ." </p>
                                       </td>";
                                       echo "<td> 
                                       <div class='d-flex px-2'>
-                                        <h6 class='mb-0 text-sm'>". $row['username'] ." </h6>
+                                        <p class='mb-0 text-sm'>". $row['username'] ." </p>
                                       </td>";
                                       // convertimos las fechas a formato Unix
                                       $expireDate =  str_replace('-', '/', $row['dob']);
@@ -175,35 +178,35 @@ $dotenv->load();
                                     
                                     
                                               
-                                      echo "<td><p class='text-sm font-weight-bold mb-0'> $lastPaymentStr</p></td>";
+                                      echo "<td><p class='text-sm  mb-0'> $lastPaymentStr</p></td>";
                                       echo "<td class='text-center'><span style='max-width:85px;' class='w-100 badge badge-sm ${statusClass}'>$statusString</span></td>";
 
-                                      echo "<td class='text-center'><p class='text-sm font-weight-bold mb-0'>" . $userExpire . "</p></td>";
+                                      echo "<td class='text-center'><p class='text-sm  mb-0'>" . $userExpire . "</p></td>";
 
                                             
 
                                               
                                               
                                               $sno++;
-                                              echo "<td class='text-center'><form action='edit_member.php' method='post'>
+                                              echo "<td class='text-center d-flex' style='justify-content: space-evenly;'><form action='edit_member.php' method='post'>
                                                     
-                                                    <button type='submit' style='border: 0; background: none;'>
+                                                    <button type='submit' style='border: 0; background: none;transform: scale(1.3); filter: opacity(0.7);'>
                                                       <i class='fa-solid fa-pen-to-square'></i>
                                                     </button>
                                                     
                                                     <input type='hidden' name='name' value='" . $uid . "'/>
-                                                    </form></td>";
-                                                    echo "<td class='text-center'>
-                                                    <a href='view_member.php?id=$uid'><i class='fa-solid fa-arrow-up-right-from-square'></i></a>
-                                                    <button type='submit' style='border: 0; background: none;'>
-                                                      
+                                                    </form>";
+                                                    echo "
+                                                    <button style='border: 0; background: none;  transform: scale(1.2);'>
+                                                    <a href='view_member.php?id=$uid' style=''><i class='fa-solid fa-arrow-up-right-from-square'></i></a>
+
                                                     </button>
                                                     
                                                     
-                                                   </td>";
-                                          echo "<td class='text-center'><form action='make_payments.php' method='post'>
+                                                  ";
+                                          echo "<form action='make_payments.php' method='post'>
                                                     
-                                                    <button type='submit' style='border: 0; background: none;'>
+                                                    <button type='submit' style='border: 0; background: none; transform: scale(1.2); filter: opacity(0.7);'>
                                                     <i class='fa-sharp fa-solid fa-credit-card'></i>
                                                     </button>
                                                     

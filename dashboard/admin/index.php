@@ -38,6 +38,8 @@
 	<link rel="icon" type="image/png" href="../assets/img/favicon.png">
 	<link rel="stylesheet" href="../assets/css/all-min.css"  />
 	<link rel="stylesheet" type="text/css"  href="/gym_l/dashboard/assets/css/all-min.css">
+	<script src="https://unpkg.com/@popperjs/core@2"></script>
+	<script src="https://unpkg.com/tippy.js@6"></script>
 
 	<title>
 		<?php echo $_SESSION['siteTitle'] ?>
@@ -78,14 +80,10 @@
 											//echo $query;
 											$result  = mysqli_query($con, $query);
 											$revenue = 0;
+											
 											if (mysqli_affected_rows($con) != 0) {
 												while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
-													$query1="select * from plan where pid='".$row['pid']."'";
-													$result1=mysqli_query($con,$query1);
-													if($result1){
-														$value=mysqli_fetch_row($result1);
-													$revenue = $value[4] + $revenue;
-													}
+													$revenue = $row['amount'] + $revenue;
 												}
 											}
 											echo "$".$revenue;
@@ -109,12 +107,7 @@
 													$revenuePassMonth = 0;
 													if (mysqli_affected_rows($con) != 0) {
 														while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
-															$query1="select * from plan where pid='".$row['pid']."'";
-															$result1=mysqli_query($con,$query1);
-															if($result1){
-																$value=mysqli_fetch_row($result1);
-																$revenuePassMonth = $value[4] + $revenuePassMonth;
-															}
+															$revenuePassMonth = $row['amount'] + $revenuePassMonth;
 														}
 													}
 													if($revenuePassMonth < $revenue) {
@@ -157,12 +150,7 @@
 											$revenue = 0;
 											if (mysqli_affected_rows($con) != 0) {
 												while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
-													$query1="select * from plan where pid='".$row['pid']."'";
-													$result1=mysqli_query($con,$query1);
-													if($result1){
-														$value=mysqli_fetch_row($result1);
-													$revenue = $value[4] + $revenue;
-													}
+													$revenue =$revenuePassMonth = $row['amount'] + $revenuePassMonth; + $revenue;
 												}
 											}
 											echo "$".$revenue;
@@ -277,15 +265,18 @@
 										<table class="table align-items-center mb-0">
 											<thead>
 											<tr>
-												<th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">ID</th>
-												<th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 px-2">Nombre</th>
-												<th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2 text-center">Dias Restantes</th>
-												<th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Status</th>
-												<th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Caduca</th>
+												<th class="text-uppercase text-secondary text-xs font-weight-bolder">ID</th>
+												<th class="text-uppercase text-secondary text-xs font-weight-bolder px-2">Nombre</th>
+												<th class="text-uppercase text-secondary text-xs font-weight-bolder ps-2 text-center">Dias Restantes</th>
+												<th class="text-center text-uppercase text-secondary text-xs font-weight-bolder">Status</th>
+												<th class="text-center text-uppercase text-secondary text-xs font-weight-bolder">Caduca</th>
 
-												<th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Editar</th>
-												<th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Ver</th>
-												<th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Pagar</th>
+												<th class="text-center  d-flex" style="justify-content: space-around;">
+													<p class="text-uppercase text-secondary text-xs font-weight-bolder my-auto">Editar</p> 
+													<p class="text-uppercase text-secondary text-xs font-weight-bolder my-auto">Ver</p> 
+													<p class="text-uppercase text-secondary text-xs font-weight-bolder my-auto">pagar</p>
+													
+												</th>
 
 											</tr>
 											</thead>
@@ -307,11 +298,11 @@
 														$rowGender = $row['gender'];
 														echo "<td> 
 														<div class='d-flex px-2'>
-															<h6 class='mb-0 text-sm'>". $uid ." </h6>
+															<p class='mb-0 text-sm'>". $uid ." </p>
 														</td>";
 														echo "<td> 
 														<div class='d-flex px-2'>
-															<h6 class='mb-0 text-sm'>". $row['username'] ." </h6>
+															<p class='mb-0 text-sm'>". $row['username'] ." </p>
 														</td>";
 
 														$expireDate = strtotime($row['dob']);
@@ -334,31 +325,31 @@
 															$statusString = "Activo";
 															$statusClass = "bg-gradient-success";
 														}
-														echo "<td ><p class='text-center'>" . $numberDays ."</p></td>";
-														echo "<td class='text-center'><span class=' w-100 badge badge-sm bg-gradient-success $statusClass'>$statusString</span></td>";									
-														echo "<td><p class='text-center text-sm font-weight-bold mb-0 '>" . $row['dob'] . "</p></td>";
+														echo "<td ><p class='text-center my-auto'>" . $numberDays ."</p></td>";
+														echo "<td class='text-center'><span class=' w-100 badge badge-sm  $statusClass'>$statusString</span></td>";									
+														echo "<td><p class='text-center text-sm font-semi-bold mb-0 '>" . $row['dob'] . "</p></td>";
 														
 																
 																$sno++;
-																echo "<td class='text-center'><form action='edit_member.php' method='post'>
+																echo "<td class='text-center d-flex' style='justify-content: space-evenly; padding: .2em!important;'><form action='edit_member.php' method='post'>
 																		
-																		<button type='submit' style='border: 0; background: none;'>
+																		<button class='edit-member' type='submit' style='border: 0; background: none; transform: scale(1.3); filter: opacity(0.7);'>
 																		<i class='fa-solid fa-pen-to-square'></i>
 																		</button>
 																		
 																		<input type='hidden' name='name' value='" . $uid . "'/>
-																		</form></td>";
-																		echo "<td class='text-center'>
-																		<a href='view_member.php?id=$uid'><i class='fa-solid fa-arrow-up-right-from-square'></i></a>
-																		<button type='submit' style='border: 0; background: none;'>
+																		</form>";
+																		echo "
 																		
+																		<button type='submit' style='border: 0; background: none; transform: scale(1.2)'>
+																			<a href='view_member.php?id=$uid'><i class='fa-solid fa-arrow-up-right-from-square'></i></a>
 																		</button>
 																		
 																		
-																	</td>";
-															echo "<td class='text-center'><form action='make_payments.php' method='post'>
+																	";
+															echo "<form action='make_payments.php' method='post'>
 																		
-																		<button type='submit' style='border: 0; background: none;'>
+																		<button type='submit' style='border: 0; background: none;transform: scale(1.2)'>
 																		<i class='fa-sharp fa-solid fa-credit-card'></i>
 																		</button>
 																		
@@ -587,6 +578,12 @@
 			}
 			Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
 		}
+		tippy('.edit-member', {
+			content: "Editar informacion del usuario",
+		});
+		
+														
+												
 	</script>
 	<!-- Github buttons -->
 	<script async defer src="../assets/js/buttons.js"></script>

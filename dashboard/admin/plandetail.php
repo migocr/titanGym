@@ -23,13 +23,13 @@ if ($res){
 		<div class='col-md-6'>
 			<div class='form-group'>
 				<label class='form-control-label'>Costo:</label>
-				<input class='form-control'id='boxx' type='text' value='$".$row['amount']."' readonly></input>
+				<input class='form-control'id='boxx' name='amount' type='text' value='$".$row['amount']."' readonly></input>
 			</div>
 		</div>
 		<div class='col-md-6'>
 			<div class='form-group'>
 				<label class='form-control-label'>Validez:</label>
-				<input class='form-control' type='text' id='boxx' value='".$row['validity']." $planTypeString' readonly></input>
+				<input class='form-control' validity='".$row['validity']."' planType='".$row['planType']."'  type='text' id='validityPlan' value='".$row['validity']." $planTypeString'  readonly></input>
 			</div>
 		</div>
 		

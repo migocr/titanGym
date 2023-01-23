@@ -21445,7 +21445,7 @@ fieldset:disabled .btn {
 
 .fixed-plugin .badge:hover,
 .fixed-plugin .badge.active {
-  border-color: #344767;
+  box-shadow: rgb(0 0 0) 0px 1px 2px 0px, rgb(0 0 0 / 19%) 0px 2px 6px 2px
 }
 
 .fixed-plugin .btn.bg-gradient-primary:not(:disabled):not(.disabled) {
@@ -23245,8 +23245,9 @@ hr.horizontal.gray-light {
 }
 
 .navbar-vertical .navbar-nav>.nav-item .nav-link.active {
-  color: #344767;
-  background-color: #fff;
+ 
+  background: #00000047;
+    color: white;
 }
 
 .navbar-vertical .navbar-nav>.nav-item .nav-link.active .icon {

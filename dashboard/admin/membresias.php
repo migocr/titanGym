@@ -54,13 +54,13 @@ $dotenv->load();
                 <table class="table align-items-center justify-content-center mb-0">
 					<thead>
 						<tr class='text-center'>
-							<th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">#</th>
-							<th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">ID de Membresia</th>
-							<th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Nombre de Membresia</th>
-							<th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Detalles de Membresia</th>
-							<th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Duracion</th>
-							<th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Costo</th>
-							<th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Opciones</th>
+							<th class="text-uppercase text-secondary text-xs font-weight-bolder">#</th>
+							<th class="text-uppercase text-secondary text-xs font-weight-bolder">ID de Membresia</th>
+							<th class="text-uppercase text-secondary text-xs font-weight-bolder">Nombre de Membresia</th>
+							<th class="text-uppercase text-secondary text-xs font-weight-bolder">Detalles de Membresia</th>
+							<th class="text-uppercase text-secondary text-xs font-weight-bolder">Duracion</th>
+							<th class="text-uppercase text-secondary text-xs font-weight-bolder">Costo</th>
+							<th class="text-uppercase text-secondary text-xs font-weight-bolder">Opciones</th>
 						</tr>
 					</thead>		
 					<tbody>

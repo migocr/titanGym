@@ -5,6 +5,7 @@ page_protect();
 
   $memID=$_POST['m_id'];
   $plan=$_POST['plan'];
+
   $expireDate = date('Y-m-d', strtotime($_POST['dob']));
   $startDate = date('Y-m-d', strtotime($_POST['startdate']));
   
@@ -27,6 +28,7 @@ page_protect();
         if($result){
           $value=mysqli_fetch_row($result);
           $timeType = $value[6];
+          $amount = $value[4];
           if ($timeType == "m") {
             $d= strtotime("+".$value[3]." Months");
           } else {
@@ -35,7 +37,7 @@ page_protect();
           $payDate=date("Y-m-d"); //current date
           //$expiredate=date("Y-m-d",$d); //adding validity retrieve from plan to current date
           //inserting into enrolls_to table of corresponding userid
-          $query2="insert into enrolls_to(pid,uid,paid_date,expire, startDate, amount) values('$plan','$memID','$payDate','$expireDate','$startDate', '0')";
+          $query2="insert into enrolls_to(pid,uid,paid_date,expire, startDate, amount) values('$plan','$memID','$payDate','$expireDate','$startDate', '${amount}')";
           if(mysqli_query($con,$query2)==1){
               $response->status = true;
           } else{

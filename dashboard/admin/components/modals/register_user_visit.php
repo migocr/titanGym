@@ -8,7 +8,7 @@
             <div class="card card-plain">
               <div class="card-header pb-0 text-left">
                   <h3 class="font-weight-bolder text-primary text-gradient">Registrar Ingreso</h3>
-                  <p class="mb-0 text-center">Ingrese el Id del cliente</p>
+                  <p class="mb-0 text-center">Ingrese el Id del Miembro</p>
               </div>
               <div class="card-body pb-3">
                 <form role="form text-left">
