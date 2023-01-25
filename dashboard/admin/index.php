@@ -346,7 +346,7 @@
 																		</form>";
 																		echo "
 																		
-																		<button type='submit' style='border: 0; background: none; transform: scale(1.2)'>
+																		<button class='view-member'  type='submit' style='border: 0; background: none; transform: scale(1.2)'>
 																			<a href='view_member.php?id=$uid'><i class='fa-solid fa-arrow-up-right-from-square'></i></a>
 																		</button>
 																		
@@ -354,7 +354,7 @@
 																	";
 															echo "<form action='make_payments.php' method='post'>
 																		
-																		<button type='submit' style='border: 0; background: none;transform: scale(1.2)'>
+																		<button class='do-payment'  type='submit' style='border: 0; background: none;transform: scale(1.2)'>
 																		<i class='fa-sharp fa-solid fa-credit-card'></i>
 																		</button>
 																		
@@ -585,6 +585,12 @@
 		}
 		tippy('.edit-member', {
 			content: "Editar informacion del usuario",
+		});
+		tippy('.view-member', {
+			content: "Ver informacion del usuario",
+		});
+		tippy('.do-payment', {
+			content: "Agregar pago a usuario",
 		});
 		
 														

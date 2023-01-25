@@ -102,9 +102,9 @@ $dotenv->load(); ?>
 																<select  style="width: 100%;
 																	border: 1px #e9ecef solid;
 																	border-radius: 5px;
-																	padding: 5px;"  class="selectpicker " data-style="select-with-transition" title="Single Select" data-size="7"  name="plan" id="boxx" required
+																	padding: 5px;"  class="selectpicker " data-style="select-with-transition" title="Single Select" data-size="7"  name="plan" id="boxx" 
 																							onchange="changeExpireDate(this.value,this.options[this.selectedIndex].getAttribute('duration'),this.options[this.selectedIndex].getAttribute('durationtype'))">
-																							<option value="">--Favor Seleccionar--</option>
+																							<option value="">Seleccionar Membresia (Opcional)</option>
 																							<?php
 																							$query="select * from plan where active='yes'";
 																							$result=mysqli_query($con,$query);

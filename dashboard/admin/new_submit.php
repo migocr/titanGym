@@ -57,7 +57,7 @@
     $jdate= date('Y-m-d', strtotime($_POST['jdate']));
     //echo $jdate;
     echo $jdate;
-    $plan=$_POST['plan'];
+    $plan= $_POST['plan'];
     $phone=$_POST['phone'];
 
 //inserting into users table
@@ -65,9 +65,9 @@
       if(mysqli_query($con,$query)==1){
         $memID = $con->insert_id;
         //Retrieve information of plan selected by user
-        $query1="select * from plan where pid='$plan'";
-        $result=mysqli_query($con,$query1);
-
+        if($plan) {
+          $query1="select * from plan where pid='$plan'";
+          $result=mysqli_query($con,$query1);
           if($result){
             $value=mysqli_fetch_row($result);
             $isDayOrMonth = $value[6];
@@ -109,12 +109,10 @@
             }
 
           
-          }
-          else
-          {
+          } else {
             echo "<html><head><script>
             document.addEventListener('DOMContentLoaded', function () {
-              swal('Error' ,  'Error al intentar guardar' ,  'error').then((event) => {window.location.href = window.location.href.replace('new_submit.php', 'nuevo_miembro.php');});
+              swal('Error' ,  'Error al intentar guardar la membresia del usuario' ,  'error').then((event) => {window.location.href = window.location.href.replace('new_submit.php', 'nuevo_miembro.php');});
               //setTimeout(function(){ window.location.href = window.location.href.replace('new_submit.php', 'nuevo_miembro.php'); }, 3000);
             });
             </script></head></html>";
@@ -123,6 +121,16 @@
             $query3 = "DELETE FROM users WHERE userid='$memID'";
             mysqli_query($con,$query3);
           }
+        }
+        echo "<html><head><script>
+                    document.addEventListener('DOMContentLoaded', function () {
+                      swal('Guardado' ,  'Miembro agregado exitosamente' ,  'success').then((event) => {window.location.href = window.location.href.replace('new_submit.php', 'view_member.php?id=$memID');});
+                      //setTimeout(function(){ window.location.href = window.location.href.replace('new_submit.php', 'view_member.php?id=$uid'); }, 3000);
+                    });
+                    </script></head></html>";
+        
+
+          
 
       }
       else{

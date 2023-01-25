@@ -23,7 +23,7 @@ $dotenv->load();
 		<?php echo $_SESSION['siteTitle']; ?>
 	</title>
 	<!--     Fonts and icons     -->
-	<link href="<link href="../assets/css/font-awesome.css" rel="stylesheet"/>" rel="stylesheet"/>
+	<link href="../assets/css/font-awesome.css" rel="stylesheet"/>
 	<script src="../assets/js/sweetalert.js"></script>
 	<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
 	<!-- Nucleo Icons -->
