@@ -91,7 +91,7 @@
 					<span class="nav-link-text ms-1">Historial de Visitas</span>
 				</a>
 			</li>
-			<li class="nav-item mt-3">
+			<li class="nav-item mt-3" style="cursor: pointer;">
 				<h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Ajustes</h6>
 			</li>
 			<li class="nav-item">

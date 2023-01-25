@@ -63,17 +63,23 @@
         <div class="card" style="box-shadow: none;">
           <div class="card-header pb-0">
             <div class="d-flex justify-content-between">
-              <h6>Lista de Miembros</p>
+              <div class="d-flex align-items-center">
+               
+                <h6 style="margin:inherit;"> <i class="fa-solid fa-file-invoice px-1"></i>Historial de Pagos</p>
+              </div>
+              
               <p>
                 Total : 4</p>
             </div>
+            
             <div class="input-group">
               <span class="input-group-text text-body"><i class="fas fa-search" aria-hidden="true"></i></span>
               <input id="buscador" type="text" class="form-control" placeholder="Buscar pago por nombre o id..."
                 onfocus="focused(this)" onfocusout="defocused(this)">
             </div>
           </div>
-          <div class="card-body p-3">
+          <hr class="px-0 py-0 my-2" style="background: #00000099;height: .5px;">
+          <div class="card-body px-3 py-1">
             <div class="row">
               <div class="col-12">
                 <div class="table-responsive p-0">
@@ -81,17 +87,17 @@
                     <thead>
                       <tr>
                         <th class="text-uppercase text-secondary text-xs font-weight-bolder">ID</th>
-                        <th class="text-uppercase text-secondary text-xs font-weight-bolder">Nombre</th>
-                        <th class="text-uppercase text-secondary text-xs font-weight-bolder">Fecha de pago</th>
-                        <th class="text-uppercase text-secondary text-xs font-weight-bolder ps-2">Inicio de Suscripcion</th>
-                        <th class="text-uppercase text-secondary text-xs font-weight-bolder ps-2">Fin de suscripcion</th>
-                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder">Plan
+                        <th class="text-uppercase text-secondary text-xs font-weight-bolder px-3">Nombre</th>
+                        <th class="text-uppercase text-secondary text-xs font-weight-bolder px-3">Fecha de pago</th>
+                        <th class="text-uppercase text-secondary text-xs font-weight-bolder ps-2 px-3">Inicio de Suscripcion</th>
+                        <th class="text-uppercase text-secondary text-xs font-weight-bolder ps-2 px-3">Fin de suscripcion</th>
+                        <th class="text-uppercase text-secondary text-xs font-weight-bolder ps-2 px-3">Plan
                         </th>
-                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder">Pago
+                        <th class="text-uppercase text-secondary text-xs font-weight-bolder ps-2">Pago
                         </th>
-                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder">
+                        <th class="text-center text-uppercase text-secondary text-xs font-weight-bolder">
                           Status</th>
-                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder">
+                        <th class="text-center text-uppercase text-secondary text-xs font-weight-bolder">
                           Detalles</th>
                        
                       </tr>

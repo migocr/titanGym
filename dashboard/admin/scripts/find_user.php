@@ -1,10 +1,10 @@
 <?php
     require '../../../include/db_conn.php';
     $response = new stdClass();
-    
+    header("Content-Type: application/json");
     if (isset($_GET['search'])) {
         $search  = $_GET['search'];
-        $sql = "select * from users where userid LIKE '%${search}%' OR username LIKE '%${search}%'";
+        $sql = "select * from users where userid LIKE '%${search}%' OR username LIKE '%${search}%' ";
         $result = $con->query($sql);
         if ($result) {
             //echo "Registro actualizado exitosamente";
@@ -26,7 +26,7 @@
     $responseJSON = json_encode($response);
     
     echo $responseJSON;
-    header("Content-Type: application/json");
+    
     exit();
 
 

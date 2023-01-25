@@ -68,7 +68,11 @@ $dotenv->load();
                 <div class="d-flex justify-content-between">
                   
                   <div class="">
-                    <h6 class="p-0 m-0">Lista de Miembros</h6> 
+                    <div class="d-flex align-items-center">
+                      <i style="padding-right: 5px;" class="fa-solid fa-list pr-2"></i>
+                      <h6 class="p-0 m-0">Lista de Miembros</h6> 
+                    </div>
+                    
                     <p class="text-xs">
                     Total : <?php
                             $query = "select COUNT(*) from users";
@@ -89,6 +93,7 @@ $dotenv->load();
                   </a>
                   
                 </div>
+                
                 <div class="input-group">
                   <span class="input-group-text text-body"><i class="fas fa-search" aria-hidden="true"></i></span>
                   <input id="buscador" type="text" class="form-control" placeholder="Buscar miembro..." onfocus="focused(this)" onfocusout="defocused(this)">
@@ -97,7 +102,7 @@ $dotenv->load();
                 
                 
               </div>
-              
+              <hr class="px-0 py-0 mb-1 mt-3" style="background: #00000099;">
               <div class="card-body p-3">
                 <div class="row">
                   <div class="col-12">
@@ -167,8 +172,13 @@ $dotenv->load();
                                       $result2 = mysqli_query($con, $query2);
                                       $lastPayment = mysqli_fetch_array($result2);
                                       setlocale(LC_TIME, 'es_ES', 'Spanish_Spain', 'Spanish'); 
-                                      $_lastPaymentStr =  $lastPayment ? date("Y-m-d",strtotime($lastPayment['paid_date'])) : '';
-                                      $lastPaymentStr= strftime('%d %b %Y', strtotime($_lastPaymentStr));
+                                      if( $lastPayment){
+                                        $_lastPaymentStr =  $lastPayment ? date("Y-m-d",strtotime($lastPayment['paid_date'])) : '';
+                                        $lastPaymentStr= strftime('%d %b %Y', strtotime($_lastPaymentStr));
+                                      } else {
+                                        $lastPaymentStr = "No hay pagos registrados";
+                                      }
+                                     
                                       
                                       $_userExpire = $row['dob'] ? date("Y-m-d",strtotime($row['dob'])) : '';
                                       

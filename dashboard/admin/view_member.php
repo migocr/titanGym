@@ -26,7 +26,7 @@ if (isset($_GET['id'])) {
 		<?php echo $_SESSION['siteTitle']; ?>
 	</title>
 	<!--     Fonts and icons     -->
-	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" rel="stylesheet"/>
+	<link href="<link href="../assets/css/font-awesome.css" rel="stylesheet"/>" rel="stylesheet"/>
 
 	<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
 	<!-- Nucleo Icons -->
@@ -121,29 +121,35 @@ if (isset($_GET['id'])) {
 												<form id="form1" name="form1" method="post" class="a1-container"
 													action="edit_mem_submit.php">
 													<div class="row">
-														<div class="col-md-6">
+														<div class="col-md-2">
 															<div class="form-group">
-																<label for="example-text-input" class="form-control-label">ID de Membresia</label>
+																<label for="example-text-input" class="form-control-label">ID de Usuario</label>
 																<input class="form-control"  id="boxxe" type="text" name="uid" value="<?php echo $memid?>" readonly required />
 															</div>
 														</div>
-														<div class="col-md-6">
+														<div class="col-md-4">
 															<div class="form-group">
 																<label for="example-search-input" class="form-control-label">Nombre</label>
 																<input class="form-control" type="text" placeholder="Nombre del nuevo miembro" 
 																name="uname" id="boxxe" value="<?php echo $name?>" readonly>
 															</div>
 														</div>
-														<div class="col-md-6">
+														<div class="col-md-2">
 															<div class="form-group">
 																<label for="example-email-input" class="form-control-label">Genero</label>
 																<input type="text" class="form-control" value="<?php echo $gender?>" readonly>
 															</div>
 														</div>
-														<div class="col-md-6">
+														<div class="col-md-2">
 															<div class="form-group">
 																<label for="example-tel-input" class="form-control-label">Telefono</label>
 																<input class="form-control" type="tel" name="phone" placeholder="Numero a 10 digitos" value='<?php echo $phone ?>' id="example-tel-input" onfocus="focused(this)" onfocusout="defocused(this)" readonly>
+															</div>
+														</div>
+														<div class="col-md-2">
+															<div class="form-group">
+																<label for="example-tel-input" class="form-control-label">Fecha de registro</label>
+																<input class="form-control" type="tel" name="phone" placeholder="Numero a 10 digitos" value='<?php echo $dob ?>' id="example-tel-input" onfocus="focused(this)" onfocusout="defocused(this)" readonly>
 															</div>
 														</div>
 													</div>														

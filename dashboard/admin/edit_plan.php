@@ -20,8 +20,8 @@
 	<link rel="icon" type="image/png" href="../assets/img/favicon.png">
 	<link rel="stylesheet" href="../assets/css/all-min.css"  />
 	<link rel="stylesheet" type="text/css"  href="/gym_l/dashboard/assets/css/all-min.css">
-	<script src="https://unpkg.com/@popperjs/core@2"></script>
-	<script src="https://unpkg.com/tippy.js@6"></script>
+	<script src="../assets/js/popper.js"></script>
+	<script src="../assets/js/tippy.js"></script>
 
 	<title>
 		<?php echo $_SESSION['siteTitle'] ?>
@@ -49,7 +49,7 @@
 					<div class="card">
 						<div class="card-header pb-0">
 							<div>
-								<h6>Actualizar membresia</h6>
+								<h6><i class="fa-regular fa-pen-to-square"></i>  Actualizar membresía</h6>
 							</div>
 						</div>
 						<div class="card-body">
@@ -72,28 +72,23 @@
 											<div class="form-group">
 												<label for="example-text-input" class="form-control-label">ID de Membresia: </label>
 												<input class="form-control id-membresia" type="text" name="planid" id="planID" readonly value='<?php echo $row['pid'] ?>'></td>
-												<script>
-													tippy('.id-membresia', {
-													content: "El ID de membresia no es editable",
-													});
-												</script>
 											</div>
 										</div>
 										<div class="col-md-10">
 											<div class="form-group">
-												<label for="example-text-input" class="form-control-label">Nombre de Membresia:</label>
+												<label for="example-text-input" class="form-control-label"><i class="fa-regular fa-circle-question nombre"></i> Nombre de Membresia:</label>
 												<input class="form-control" name="planname" id="planName" type="text" value='<?php echo $row['planName'] ?>'  >
 											</div>
 										</div>
 										<div class="col-md-12">
-											<div class="form-group">
-												<label for="example-text-input" class="form-control-label">Descripcion de Membresia:</label>
+											<div class="form-group ">
+												<label for="example-text-input" class="form-control-label"><i class="fa-regular fa-circle-question descripcion"></i> Descripcion de Membresia:</label>
 												<input class="form-control"  type="text" name="desc" id="planDesc"  value='<?php echo $row['description'] ?>' >
 											</div>
 										</div>
 										<div class="col-md-4">
 											<div class="form-group">
-												<label for="example-text-input" class="form-control-label">Costo de Membresia:</label>
+												<label for="example-text-input" class="form-control-label"><i class="fa-regular fa-circle-question costo"></i> Costo de Membresia:</label>
 												
 												<div class="input-group input-group-alternative mb-4">
 													<span class="input-group-text"><i class="fa-solid fa-dollar-sign"></i></span>
@@ -102,15 +97,15 @@
 											</div>
 											
 										</div>
-										<div class="col-md-4">
+										<div class="col-md-4 duracion">
 											<div class="form-group">
-												<label for="example-text-input" class="form-control-label">Validez de Membresia:</label>
+												<label for="example-text-input" class="form-control-label">Duración de Membresia:</label>
 												<input class="form-control"  type="number" name="planval" id="planVal" value='<?php echo $row['validity'] ?>' readonly>
 											</div>
 										</div>
-										<div class="col-md-4">
-											<div style="margin-left:1em;">
-												<div class="form-check mb-3">
+										<div class="col-md-2 ">
+											<div style="margin-left:1em;" class="duracion">
+												<div class="form-check mb-3 ">
 													<input class="form-check-input" type="radio" name="planTimeType" value="m" id="customRadio1" required="" <?php echo $row['planType'] == 'm' ? 'checked' : ''; ?> readonly disabled>
 													<label class="custom-control-label" for="customRadio1">Meses</label>
 												</div>
@@ -143,6 +138,24 @@
 		</div>
 	</main>
     </body>
+	<script>
+		tippy('.id-membresia', {
+			content: "El ID de membresía no es editable",
+		});
+
+		tippy('.duracion', {
+			content: "La duracion del plan no es editable"
+		});
+		tippy('.descripcion', {
+			content: "Ingrese una descripcion de lo que incluye la membresía"
+		});
+		tippy('.nombre', {
+			content: "Ingrese el nombre de membresía"
+		});
+		tippy('.costo', {
+			content: "Ingrese el costo de membresía en pesos (mxn)"
+		});
+	</script>
 </html>
 
 

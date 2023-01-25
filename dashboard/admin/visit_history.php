@@ -70,11 +70,11 @@
         <div class="card" style="box-shadow: none;">
           <div class="card-header pb-0">
             <div class="m-auto">
-              <h6 class="m-auto">Historial de visitas</h6>
+              <h6 class="m-auto"><i class="fa-regular fa-address-book"></i> Historial de visitas</h6>
               <p id="totalCount" class="text-sm">Total: <?php echo $num_rows;?></p>
               
             </div>
-           
+            <hr class="px-0 py-0 my-2" style="background: #00000099;height: .5px;">
             <div class="nav-wrapper position-relative end-0">
               <ul class="nav nav-pills nav-fill p-1" role="tablist">
                   <li class="nav-item menu-switcher"  period="today">

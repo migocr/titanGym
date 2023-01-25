@@ -47,8 +47,14 @@ $dotenv->load();
         <div class="col-12">
           <div class="card mb-4">
             <div class="card-header pb-0">
-              <h6>Lista de membresias</h6>
+              <div class="d-flex align-items-center">
+                <i class="fa-solid fa-bars px-1 "></i>
+                <h6 style="margin: inherit; padding-left:5px;">Lista de membresias</h6>
+              </div>
+              
             </div>
+            <hr class="px-0 py-0 my-2" style="background: #00000099;height: .5px;">
+
             <div class="card-body px-0 pt-0 pb-2">
               <div class="table-responsive p-0">
                 <table class="table align-items-center justify-content-center mb-0">

@@ -4,7 +4,7 @@
 	page_protect();
 	$principalColor = $_SESSION['principalColor'];
 	$backgroundColor =  $_SESSION['backgroundColor'];
-
+	setlocale(LC_TIME, 'es_ES', 'Spanish_Spain', 'Spanish'); 
 	$_DIR = dirname(dirname(dirname(__FILE__)));
 	require  $_DIR . '/vendor/autoload.php' ;
 	$dotenv = Dotenv\Dotenv::createImmutable($_DIR);
@@ -247,9 +247,9 @@
 							<div class="row">
 							
 							<div class="card" style="box-shadow: none;">
-								<div class="card-header pb-0">
+								<div class="card-header pb-0 pt-0">
 									<div class="d-flex justify-content-between">
-									<h6>Miembros Proximos a Expirar</h6> 
+									<h6><i class="fa-solid fa-circle-exclamation"></i>  Miembros Proximos a Expirar</h6> 
 																		
 									</div>
 									
@@ -257,15 +257,15 @@
 									
 									
 								</div>
-								
-								<div class="card-body p-3">
+								<hr class="px-0 py-0 mb-1 mt-1" style="background: #00000099;">
+								<div class="card-body px-3 py-0">
 									<div class="row">
 									<div class="col-12">
 										<div class="table-responsive p-0">
 										<table class="table align-items-center mb-0">
 											<thead>
 											<tr>
-												<th class="text-uppercase text-secondary text-xs font-weight-bolder">ID</th>
+												<th class="text-uppercase text-secondary text-xs font-weight-bolder px-2">ID</th>
 												<th class="text-uppercase text-secondary text-xs font-weight-bolder px-2">Nombre</th>
 												<th class="text-uppercase text-secondary text-xs font-weight-bolder ps-2 text-center">Dias Restantes</th>
 												<th class="text-center text-uppercase text-secondary text-xs font-weight-bolder">Status</th>
@@ -304,7 +304,7 @@
 														<div class='d-flex px-2'>
 															<p class='mb-0 text-sm'>". $row['username'] ." </p>
 														</td>";
-
+ 
 														$expireDate = strtotime($row['dob']);
 														$today = strtotime(date("Y-m-d"));
 														$timeDiff = abs($expireDate - $today);
@@ -327,7 +327,12 @@
 														}
 														echo "<td ><p class='text-center my-auto'>" . $numberDays ."</p></td>";
 														echo "<td class='text-center'><span class=' w-100 badge badge-sm  $statusClass'>$statusString</span></td>";									
-														echo "<td><p class='text-center text-sm font-semi-bold mb-0 '>" . $row['dob'] . "</p></td>";
+														
+														$_userExpire = $row['dob'] ? date("Y-m-d",strtotime($row['dob'])) : '';
+                                      
+														$userExpire=  strftime('%d %b %Y',  strtotime($row['dob']));
+														
+														echo "<td><p class='text-center text-sm font-semi-bold mb-0 '>" . $userExpire . "</p></td>";
 														
 																
 																$sno++;

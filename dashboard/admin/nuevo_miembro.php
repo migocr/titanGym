@@ -21,7 +21,7 @@ $dotenv->load(); ?>
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png">
 	<link rel="icon" type="image/png" href="../assets/img/favicon.png">
-	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" rel="stylesheet"/>
+	<link href="../assets/css/font-awesome.css" rel="stylesheet"/>
 
 	<title>
 		<?php echo $_SESSION['siteTitle']; ?>
@@ -36,6 +36,8 @@ $dotenv->load(); ?>
 	<link href="../assets/css/nucleo-svg.css" rel="stylesheet" />
 	<!-- CSS Files -->
 	<link id="pagestyle" href="../assets/css/soft-ui-dashboard.css?v=1.0.6" rel="stylesheet" />
+	<script src="../assets/js/popper.js"></script>
+	<script src="../assets/js/tippy.js"></script>
 </head>
 
 <body class="g-sidenav-show  bg-gray-100" style="<?php echo "background:$backgroundColor !important;"?>">
@@ -55,14 +57,17 @@ $dotenv->load(); ?>
 									<div class="card-body px-0 pt-0 pb-0">
 										<div class="table-responsive p-0">
 											<div class="" style="margin:1em 1em 0 1em;">
+												<div class="d-flex align-items-center">
+													<i class="fa-solid fa-user-plus px-1"></i>
+													<h6 style="    margin: inherit;">Agregar Miembro</h6>
+												</div>
 												
-												<h6>Agregar Miembro</h6>
-												
+												<hr class="px-0 py-0 my-2" style="background: #00000099;height: .5px;">
 												<form id="form1" name="form1" method="post" action="new_submit.php">
 													<div class="row">
 														<div class="col-md-6">
 															<div class="form-group">
-																<label for="example-search-input" class="form-control-label text-uppercase  text-xs font-weight-bolder ">Nombre</label>
+																<label for="example-search-input" class="form-control-label   text-xs font-weight-bolder "><i class="fa-regular fa-circle-question user-name"></i> Nombre</label>
 																
 																<input class="form-control" type="text" placeholder="Nombre del nuevo miembro" value=""
 																	name="u_name" id="boxx" required>
@@ -71,21 +76,21 @@ $dotenv->load(); ?>
 														</div>
 														<div class="col-md-6">
 														<div class="form-group">
-															<label for="example-tel-input" class="form-control-label text-uppercase  text-xs font-weight-bolder">Telefono</label>
+															<label for="example-tel-input" class="form-control-label   text-xs font-weight-bolder"><i class="fa-regular fa-circle-question phone"></i> Telefono</label>
 															<input class="form-control"   type="tel" pattern="[0-9]{10}" maxlength="10" name="phone" placeholder="Numero a 10 digitos" id="example-tel-input">
 														</div>
 														</div>
 																											
 														<div class="col-md-6">
 															<div class="form-group">
-																<label for="example-date-input" class="form-control-label text-uppercase  text-xs font-weight-bolder">Fecha de ingreso</label>
+																<label for="example-date-input" class="form-control-label   text-xs font-weight-bolder"><i class="fa-regular fa-circle-question join-date"></i> Inicio de Suscripcion</label>
 																<input class="form-control" type="date" value='<?php echo str_replace("/","-",date("Y/m/d"));?>'
 																	name="jdate" id="boxx">
 															</div>
 														</div>
 														<div class="col-md-6">
 															<div class="form-group">
-																<label for="example-date-input" class="form-control-label text-uppercase  text-xs font-weight-bolder">Fecha Caduca</label>
+																<label for="example-date-input" class="form-control-label   text-xs font-weight-bolder"><i class="fa-regular fa-circle-question expire-date"></i> Fin de Suscripcion</label>
 																<input class="form-control" type="date" value='<?php echo str_replace("/","-",date("Y/m/d"));?>'
 																	name="dob" id="expire-date" required>
 																	
@@ -93,7 +98,7 @@ $dotenv->load(); ?>
 														</div>
 														<div class="col-md-6">
 															<div class="form-group">
-																<label for="example-color-input" class="form-control-label text-uppercase  text-xs font-weight-bolder">Plan</label>
+																<label for="example-color-input" class="form-control-label  text-xs font-weight-bolder"><i class="fa-regular fa-circle-question membership"></i> Membresia</label>
 																<select  style="width: 100%;
 																	border: 1px #e9ecef solid;
 																	border-radius: 5px;
@@ -116,7 +121,7 @@ $dotenv->load(); ?>
 														</div>
 														<div class="col-md-6">
 															<div class="form-group">
-																<label for="example-email-input" class="form-control-label">Genero</label>
+																<label for="example-email-input" class="form-control-label"><i class="fa-regular fa-circle-question genre"></i> Genero</label>
 																<select style="width: 100%;
 																	border: 1px #e9ecef solid;
 																	border-radius: 5px;
@@ -217,6 +222,26 @@ $dotenv->load(); ?>
 
 
 	}
+
+	//help tippys
+	tippy('.user-name', {
+		content: "Ingrese el nombre completo del usuario"
+	});
+	tippy('.phone', {
+		content: "Ingrese el numero celular del cliente"
+	});
+	tippy('.join-date', {
+		content: "Fecha en que comienza la suscripcion"
+	});
+	tippy('.expire-date', {
+		content: "Fecha en que finaliza la suscripcion"
+	});
+	tippy('.membership', {
+		content: "Puedes elegir la membresia con el que se registra el nuevo cliente o puedes dejarlo en blanco para no asignar ninguna"
+	});
+	tippy('.genre', {
+		content: "Elige el genero del cliente"
+	});
 </script>
 
 </html>

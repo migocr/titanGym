@@ -73,8 +73,8 @@ $backgroundColor =  $_SESSION['backgroundColor'];
 										width: 100%;
 										align-items: center;">
 								<div class="form-group" style="width:50%;">
-									<label for="example-text-input" class="form-control-label">Validez de membresia</label>
-									<input class="form-control" type="number" name="planval" id="planVal" placeholder="Ingrese el tiempo de validez en meses" size="40" required>
+									<label for="example-text-input" class="form-control-label">Duraciónde Membresia</label>
+									<input class="form-control" type="number" name="planval" id="planVal" placeholder="Ingrese el tiempo de duracion en meses" size="40" required>
 								</div>
 								<div style="margin-left:1em;">
 									<div class="form-check mb-3">
