@@ -54,8 +54,8 @@
 					</li>
 					<li class="nav-item submenu my-1 <?php echo ($active == 'new') ? "active"  : ""; ?>">
 						<a class="nav-link " href="./nuevo_miembro.php" style="margin: 0 10px 0 0; border-radius: 5px;">
-							<i class="fa-solid fa-user-plus sidenav-mini-icon"></i>
-							<span class="sidenav-normal">Agregar miembro</span>
+							
+							<span class="sidenav-normal"><i class="fa-solid fa-user-plus sidenav-mini-icon"></i> Agregar miembro</span>
 						</a>
 					</li>
 				
@@ -83,8 +83,8 @@
 					</li>
 					<li class="nav-item submenu my-1 <?php echo ($active == 'new_membership') ? "active"  : ""; ?>">
 						<a class="nav-link " href="./new_plan.php" style="margin: 0 10px 0 0; border-radius: 5px;">
-							<i class="fa-regular fa-square-plus"></i>
-							<span class="sidenav-normal">Nueva membresia</span>
+							
+							<span class="sidenav-normal"><i class="fa-regular fa-square-plus"></i> Nueva membresia</span>
 						</a>
 					</li>
 				

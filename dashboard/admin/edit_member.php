@@ -26,7 +26,8 @@ if (isset($_POST['name'])) {
 	</title>
 	<!--     Fonts and icons     -->
 	<link href="../assets/css/font-awesome.css" rel="stylesheet"/>
-
+	<script src="../assets/js/popper.js"></script>
+	<script src="../assets/js/tippy.js"></script>
 	<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
 	<!-- Nucleo Icons -->
 	<link href="../assets/css/nucleo-icons.css" rel="stylesheet" />
@@ -50,8 +51,8 @@ if (isset($_POST['name'])) {
 				<div class="col-lg-12 col-md-6 mb-md-0 mb-4">
 					<div class="card">
 						<div class="card-header pb-0">
-							<div class="">
-								<h6>Editar Usuario</h6>
+							<div>
+								<h6><i class="fa-solid fa-user-pen"></i> Editar Usuario</h6>
 							</div>
 							<div class="row">
 								<?php
@@ -86,6 +87,7 @@ if (isset($_POST['name'])) {
 
 							</div>
 						</div>
+						<hr class="px-0 py-0 mb-1 mt-3" style="background: #00000099; max-height:.5px">
 						<div class="card" style="background: transparent; box-shadow: none;">
 									<div class="card-body">
 										<div class="row">
@@ -94,9 +96,9 @@ if (isset($_POST['name'])) {
 												<form id="form1" name="form1" method="post" class="a1-container"
 													action="edit_mem_submit.php">
 													<div class="row">
-														<div class="col-md-6">
+														<div class="col-md-6 " id="userid">
 															<div class="form-group">
-																<label for="example-text-input" class="form-control-label">ID de Membresia</label>
+																<label for="example-text-input" class="form-control-label">ID de cliente</label>
 																<input class="form-control"  id="boxxe" type="text" name="uid" value="<?php echo $memid?>" readonly required />
 															</div>
 														</div>
@@ -127,7 +129,7 @@ if (isset($_POST['name'])) {
 														<div class="col-md-6">
 															<div class="form-group">
 																<label for="example-tel-input" class="form-control-label">Telefono</label>
-																<input class="form-control" type="tel" name="phone" placeholder="Numero a 10 digitos" value='<?php echo $phone ?>' id="example-tel-input" onfocus="focused(this)" onfocusout="defocused(this)">
+																<input class="form-control" type="number" pattern="^[0-9]{3,45}$"  maxlength="10" name="phone" placeholder="Numero a 10 digitos" value='<?php echo $phone ?>' id="example-tel-input" onfocus="focused(this)" onfocusout="defocused(this)">
 															</div>
 														</div>
 													</div>														
@@ -136,7 +138,7 @@ if (isset($_POST['name'])) {
 																	
 													
 													<div style="width: auto; display: flex;justify-content: center;">
-														<input class="btn btn-primary" type="submit" name="submit" id="submit" value="Guardar">
+														<input class="btn btn-primary" type="submit" name="submit" id="submit" value="Guardar" style="background: <?php echo $principalColor?>;">
 														<input class="btn btn-default" type="reset" name="reset" id="reset" value="Restaurar">
 													</div>
 												</form>
@@ -337,6 +339,9 @@ if (isset($_POST['name'])) {
 			}
 			Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
 		}
+		tippy('#userid', {
+			content: "El id del usuario no es editable",
+		});
 	</script>
 	<!-- Github buttons -->
 	<script async defer src="../assets/js/buttons.js"></script>

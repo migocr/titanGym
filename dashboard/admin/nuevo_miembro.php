@@ -92,7 +92,7 @@ $dotenv->load(); ?>
 															<div class="form-group">
 																<label for="example-date-input" class="form-control-label   text-xs font-weight-bolder"><i class="fa-regular fa-circle-question expire-date"></i> Fin de Suscripcion</label>
 																<input class="form-control" type="date" value=''
-																	name="dob" id="expire-date" readonly>
+																	name="dob" id="expire-date" >
 																	
 															</div>
 														</div>
@@ -242,6 +242,7 @@ $dotenv->load(); ?>
 	tippy('.genre', {
 		content: "Elige el genero del cliente"
 	});
+	
 </script>
 
 </html>

@@ -88,13 +88,14 @@ if (isset($_GET['id'])) {
 											$result1 = mysqli_query($con, $query1);
 											if (mysqli_num_rows($result) > 0) {
 												$dataPayments = array();
-												
+												$enablePaymentTab = false;
 												while ($row1 = mysqli_fetch_array($result1, MYSQLI_ASSOC)) {
 													
 													$payment= $row1;
 													//echo $row1["uid"];
 													//echo json_encode($dataPayments) ;
 													array_push($dataPayments, $payment);
+													$enablePaymentTab = true;
 
 													
 												}
@@ -172,8 +173,8 @@ if (isset($_GET['id'])) {
 													</form>
 												</div>
 												
-												<div class="card">
-													<div class="table-responsive">
+												<div class="card" style="">
+													<div class="table-responsive <?php echo $enablePaymentTab ? '' : 'd-none'; ?>">
 														<table class="table align-items-center mb-0">
 														<thead>
 															<tr>
@@ -246,6 +247,9 @@ if (isset($_GET['id'])) {
 															
 														</tbody>
 														</table>
+													</div>
+													<div class="<?php echo $enablePaymentTab ? 'd-none' : ''; ?>">
+														<p>No hay pagos registrados de este cliente aun</p>
 													</div>
 												</div>
 												

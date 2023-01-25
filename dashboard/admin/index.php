@@ -38,8 +38,8 @@
 	<link rel="icon" type="image/png" href="../assets/img/favicon.png">
 	<link rel="stylesheet" href="../assets/css/all-min.css"  />
 	<link rel="stylesheet" type="text/css"  href="/gym_l/dashboard/assets/css/all-min.css">
-	<script src="https://unpkg.com/@popperjs/core@2"></script>
-	<script src="https://unpkg.com/tippy.js@6"></script>
+	<script src="../assets/js/popper.js"></script>
+	<script src="../assets/js/tippy.js"></script>
 
 	<title>
 		<?php echo $_SESSION['siteTitle'] ?>

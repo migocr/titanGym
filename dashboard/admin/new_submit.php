@@ -53,7 +53,7 @@
     //$memID=$_POST['m_id'];
     $uname=$_POST['u_name'];
     $gender=$_POST['gender'];
-    $dob= date('Y-m-d', strtotime($_POST['dob']));
+    $dob= $_POST['dob'] ? date('Y-m-d', strtotime($_POST['dob'])) : "";
     $jdate= date('Y-m-d', strtotime($_POST['jdate']));
     //echo $jdate;
     echo $jdate;

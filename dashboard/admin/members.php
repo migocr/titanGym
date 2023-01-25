@@ -147,13 +147,13 @@ $dotenv->load();
                                         <p class='mb-0 text-sm'>". $row['username'] ." </p>
                                       </td>";
                                       // convertimos las fechas a formato Unix
-                                      $expireDate =  str_replace('-', '/', $row['dob']);
+                                      $expireDate = $row['dob'] ?  str_replace('-', '/', $row['dob']) : false;
                                       $today = date('Y/m/d');
                                       //$my_date = date('d/m/Y', strtotime($date));
 
                                       $now = strtotime($today);
 
-                                      $timestamp1 = strtotime($expireDate);
+                                      $timestamp1 = $expireDate ? strtotime($expireDate) : strtotime($today);
                                       $timestamp2 = strtotime($today);
                                       //echo $today;
                                       if (date('Ymd', $timestamp1) <= date('Ymd', $timestamp2)) {
@@ -180,9 +180,9 @@ $dotenv->load();
                                       }
                                      
                                       
-                                      $_userExpire = $row['dob'] ? date("Y-m-d",strtotime($row['dob'])) : '';
+                                      $_userExpire = $row['dob'] && $expireDate ? date("Y-m-d",strtotime($row['dob'])) : '';
                                       
-                                      $userExpire=  strftime('%d %b %Y',  strtotime($row['dob']));
+                                      $userExpire= $expireDate ? strftime('%d %b %Y',  strtotime($row['dob'])) : "No hay registro";
                                       
                                       
                                     
