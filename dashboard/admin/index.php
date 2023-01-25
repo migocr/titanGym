@@ -283,7 +283,7 @@
 											<tbody id="membersTable">
 											
 											<?php
-												$query = "select * FROM users WHERE cast(dob as DATE) >= CURDATE() ORDER BY cast(dob as DATE) ASC";
+												$query = "select * FROM users WHERE cast(dob as DATE) >= CURDATE() ORDER BY cast(dob as DATE) ASC LIMIT 30";
 												//echo $query;
 												$result = mysqli_query($con, $query);
 												$sno    = 1;

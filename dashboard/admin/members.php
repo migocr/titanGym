@@ -50,8 +50,8 @@ $dotenv->load();
   <link id="pagestyle" href="../assets/css/soft-ui-dashboard.css?v=1.0.6" rel="stylesheet" />
 </head>
 
-<body class="g-sidenav-show  bg-gray-100" style="<?php echo "background:$backgroundColor !important;"?>">
-  <?php $active = 'members'; include 'components/menu.php'; ?>
+<body class="g-sidenav-show " style="<?php echo "background:$backgroundColor !important;"?>">
+  <?php $active = 'member-list'; include 'components/menu.php'; ?>
   <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
     <!-- Navbar -->
     <?php $titlePage = 'Miembros'; include 'components/navbar.php'; ?>

@@ -33,7 +33,7 @@
     <link rel="stylesheet" href="../assets/css/all-min.css"  />
 
   </head>
-  <body class="g-sidenav-show  bg-gray-100" style="<?php echo "background:$backgroundColor !important;"?>">
+  <body class="g-sidenav-show " style="<?php echo "background:$backgroundColor !important;"?>">
     <?php $active = 'new'; include 'components/menu.php'; ?>
     <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
       <?php $titlePage = 'Nuevo Miembro'; include 'components/navbar.php'; ?>

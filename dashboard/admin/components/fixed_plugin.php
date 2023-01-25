@@ -151,10 +151,12 @@
 		let asideMenu = document.getElementById("sidenav-main");
 		
 		dataColor.addEventListener("input", function(event){
+			console.log("cambiando color");
 			dataColorSave.setAttribute("data-color", dataColor.value);
 			document.body.style.backgroundColor = dataColor.value;
 		});
 		dataColorMenu.addEventListener("input", function(event){
+			console.log("cambiando color");
 			asideColor.setAttribute("data-color", dataColorMenu.value);
 			asideMenu.style.backgroundColor = dataColorMenu.value;
 		});

@@ -23320,7 +23320,7 @@ hr.horizontal.gray-light {
 
 .navbar-vertical .navbar-nav .nav-item .collapse .nav .nav-item .nav-link:before,
 .navbar-vertical .navbar-nav .nav-item .collapsing .nav .nav-item .nav-link:before {
-  content: "";
+  /*content: "";
   position: absolute;
   left: -18px;
   top: 50%;
@@ -23328,7 +23328,9 @@ hr.horizontal.gray-light {
   height: 5px;
   width: 5px;
   border-radius: 1.5rem;
-  background: rgba(58, 65, 111, 0.5);
+  background: rgba(58, 65, 111, 0.5);*/
+  width: 0;
+  height: 0;
 }
 
 .navbar-vertical .navbar-nav .nav-item .collapse .nav .nav-item .nav-link.active,
@@ -23350,9 +23352,11 @@ hr.horizontal.gray-light {
 
 .navbar-vertical .navbar-nav .nav-item .collapse .nav .nav-item.active .nav-link:before,
 .navbar-vertical .navbar-nav .nav-item .collapsing .nav .nav-item.active .nav-link:before {
-  height: 8px;
+  /*height: 8px;
   width: 8px;
-  background: #3A416F;
+  background: #3A416F;*/
+  width: 0;
+  height: 0;
 }
 
 .navbar-vertical .navbar-nav .nav-item .collapse .nav .nav-item .nav-item .nav-link:before,

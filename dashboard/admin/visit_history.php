@@ -58,7 +58,7 @@
   <link id="pagestyle" href="../assets/css/soft-ui-dashboard.css?v=1.0.6" rel="stylesheet" />
 </head>
 
-<body class="g-sidenav-show  bg-gray-100" style="<?php echo "background:$backgroundColor !important;"?>">
+<body class="g-sidenav-show " style="<?php echo "background:$backgroundColor !important;"?>">
   <?php $active = 'history'; include 'components/menu.php'; ?>
   <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
     <!-- Navbar -->
@@ -231,9 +231,11 @@
               var year = d.getFullYear();
               var hours = d.getHours();
               var minutes = d.getMinutes();
-              var seconds = d.getSeconds();
+              minutes <= 9 ? minutes = "0" + minutes : minutes = minutes;
+              hours <= 9 ? hours = "0" + hours : hours = hours;
+              
               var stringDate = day + " de " + month + " de " + year;
-              var stringTime = hours + ":" + minutes + ":" + seconds;
+              var stringTime = hours + ":" + minutes;
               tableContent = tableContent +  `<tr json-data=''><td>
                           <div class="d-flex px-3">
                             <p class="mb-0 text-sm">${stringTime}</p>

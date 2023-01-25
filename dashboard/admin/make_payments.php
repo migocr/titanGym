@@ -96,7 +96,7 @@ if (mysqli_affected_rows($con) == 1) {
   <script src="../assets/js/soft-ui-dashboard.min.js"></script>
 </head>
 
-<body class="g-sidenav-show  bg-gray-100" style="<?php echo "background:$backgroundColor !important;"?>">
+<body class="g-sidenav-show " style="<?php echo "background:$backgroundColor !important;"?>">
 	<?php $active = 'payment'; include 'components/menu.php'; ?>
   <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
     <!-- Navbar -->

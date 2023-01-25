@@ -40,7 +40,7 @@ $dotenv->load(); ?>
 	<script src="../assets/js/tippy.js"></script>
 </head>
 
-<body class="g-sidenav-show  bg-gray-100" style="<?php echo "background:$backgroundColor !important;"?>">
+<body class="g-sidenav-show " style="<?php echo "background:$backgroundColor !important;"?>">
 	<?php $active = 'new'; include 'components/menu.php'; ?>
 	<main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
 		<!-- Navbar -->
@@ -91,8 +91,8 @@ $dotenv->load(); ?>
 														<div class="col-md-6">
 															<div class="form-group">
 																<label for="example-date-input" class="form-control-label   text-xs font-weight-bolder"><i class="fa-regular fa-circle-question expire-date"></i> Fin de Suscripcion</label>
-																<input class="form-control" type="date" value='<?php echo str_replace("/","-",date("Y/m/d"));?>'
-																	name="dob" id="expire-date" required>
+																<input class="form-control" type="date" value=''
+																	name="dob" id="expire-date" readonly>
 																	
 															</div>
 														</div>

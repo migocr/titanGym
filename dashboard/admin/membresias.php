@@ -36,7 +36,7 @@ $dotenv->load();
   <link id="pagestyle" href="../assets/css/soft-ui-dashboard.css?v=1.0.6" rel="stylesheet" />
 </head>
 
-<body class="g-sidenav-show  bg-gray-100" style="<?php echo "background:$backgroundColor !important;"?>">
+<body class="g-sidenav-show " style="<?php echo "background:$backgroundColor !important;"?>">
   <?php $active = 'memberships'; include 'components/menu.php'; ?>
   <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
     <!-- Navbar -->
@@ -49,7 +49,7 @@ $dotenv->load();
             <div class="card-header pb-0">
               <div class="d-flex align-items-center">
                 <i class="fa-solid fa-bars px-1 "></i>
-                <h6 style="margin: inherit; padding-left:5px;">Lista de membresias</h6>
+                <h6 style="margin: inherit; padding-left:5px;">Lista de membresías</h6>
               </div>
               
             </div>
@@ -122,6 +122,7 @@ $dotenv->load();
   <script src="../assets/js/core/bootstrap.min.js"></script>
   <script src="../assets/js/plugins/perfect-scrollbar.min.js"></script>
   <script src="../assets/js/plugins/smooth-scrollbar.min.js"></script>
+  <script src="../assets/js/plugins/chartjs.min.js"></script>
   <script>
     var win = navigator.platform.indexOf('Win') > -1;
     if (win && document.querySelector('#sidenav-scrollbar')) {

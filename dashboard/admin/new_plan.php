@@ -31,12 +31,16 @@ $backgroundColor =  $_SESSION['backgroundColor'];
   <link href="../assets/css/nucleo-svg.css" rel="stylesheet" />
   <!-- Font Awesome Icons -->
   <script src="../assets/js/kit-font-awesome.js" crossorigin="anonymous"></script>
+  <script src="../assets/js/core/popper.min.js"></script>
+  <script src="../assets/js/core/bootstrap.min.js"></script>
+  <script src="../assets/js/plugins/perfect-scrollbar.min.js"></script>
+  <script src="../assets/js/plugins/smooth-scrollbar.min.js"></script>
   <link href="../assets/css/nucleo-svg.css" rel="stylesheet" />
   <!-- CSS Files -->
   <link id="pagestyle" href="../assets/css/soft-ui-dashboard.css?v=1.0.6" rel="stylesheet" />
 </head>
-	<body class="g-sidenav-show  bg-gray-100" style="<?php echo "background:$backgroundColor !important;"?>">
-		<?php $active = 'memberships'; include 'components/menu.php'; ?>
+	<body class="g-sidenav-show " style="<?php echo "background:$backgroundColor !important;"?>">
+		<?php $active = 'new_membership'; include 'components/menu.php'; ?>
 		<main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
 			<!-- Navbar -->
 			<?php $titlePage = 'Miembros'; include 'components/navbar.php'; ?>

@@ -39,7 +39,7 @@ if (isset($_GET['id'])) {
 	<link id="pagestyle" href="../assets/css/soft-ui-dashboard.css?v=1.0.6" rel="stylesheet" />
 </head>
 
-<body class="g-sidenav-show  bg-gray-100" style="<?php echo "background:$backgroundColor !important;"?>">
+<body class="g-sidenav-show " style="<?php echo "background:$backgroundColor !important;"?>">
 	<?php $active = 'members'; include 'components/menu.php'; ?>
 	<main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ps ">
 		<!-- Navbar -->
@@ -149,7 +149,7 @@ if (isset($_GET['id'])) {
 														<div class="col-md-2">
 															<div class="form-group">
 																<label for="example-tel-input" class="form-control-label">Fecha de registro</label>
-																<input class="form-control" type="tel" name="phone" placeholder="Numero a 10 digitos" value='<?php echo $dob ?>' id="example-tel-input" onfocus="focused(this)" onfocusout="defocused(this)" readonly>
+																<input class="form-control" type="tel" name="phone" placeholder="Numero a 10 digitos" value='<?php echo $jdate ?>' id="example-tel-input" onfocus="focused(this)" onfocusout="defocused(this)" readonly>
 															</div>
 														</div>
 													</div>														
