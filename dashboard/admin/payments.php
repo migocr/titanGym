@@ -86,17 +86,15 @@
                   <table class="table align-items-center mb-0">
                     <thead>
                       <tr>
-                        <th class="text-uppercase text-secondary text-xs font-weight-bolder">ID</th>
+                        <th class="text-uppercase text-secondary text-xs font-weight-bolder text-center">ID</th>
                         <th class="text-uppercase text-secondary text-xs font-weight-bolder px-3">Nombre</th>
                         <th class="text-uppercase text-secondary text-xs font-weight-bolder px-3">Fecha de pago</th>
-                        <th class="text-uppercase text-secondary text-xs font-weight-bolder ps-2 px-3">Inicio de Suscripcion</th>
-                        <th class="text-uppercase text-secondary text-xs font-weight-bolder ps-2 px-3">Fin de suscripcion</th>
-                        <th class="text-uppercase text-secondary text-xs font-weight-bolder ps-2 px-3">Plan
+                       
+                        <th class="text-uppercase text-secondary text-xs font-weight-bolder ps-2 px-3">Membresia
                         </th>
                         <th class="text-uppercase text-secondary text-xs font-weight-bolder ps-2">Pago
                         </th>
-                        <th class="text-center text-uppercase text-secondary text-xs font-weight-bolder">
-                          Status</th>
+                      
                         <th class="text-center text-uppercase text-secondary text-xs font-weight-bolder">
                           Detalles</th>
                        
@@ -121,10 +119,7 @@
                               setlocale(LC_TIME, 'es_ES', 'Spanish_Spain', 'Spanish'); 
                               $_paidDate = date("Y-m-d", strtotime($row['paid_date']));
                               $paidDate= strftime('%d %b %Y', strtotime($_paidDate));
-                              $_expireDateString = date("Y-m-d", strtotime($row['expire']));
-                              $_startDateString = date("Y-m-d",strtotime($row['startDate']));
-                              $expireDateString= strftime('%d %b %Y', strtotime($_expireDateString));
-                              $startDateString =  strftime('%d %b %Y', strtotime($_startDateString));                            
+                                                    
                              
                               echo "<tr json-data=''>";
                               $query2  = "select * from users where userid = $uid limit 1";
@@ -137,30 +132,13 @@
                               $planData = mysqli_fetch_array($result3);
                               $planName = $planData['planName'];
 
-                              // convertimos las fechas a formato Unix
-                              $expireDate =  $row['expire'];
-                              $today = date('Y/m/d');
-                              //$my_date = date('d/m/Y', strtotime($date));
+                             
                                   
-                              $now = strtotime($today);
-
-                              $timestamp1 = strtotime($expireDate);
-                              $timestamp2 = strtotime($today);
-                              //echo $today;
-                              if (date('Ymd', $timestamp1) <= date('Ymd', $timestamp2)) {
-                                  //echo $today . 'es menor que' . $expireDate;
-                                  $memberStatus = false;
-                                  $statusString = "Expirado";
-                                  $statusClass = "bg-gradient-danger";
-                              } else {
-                                  //echo  $today . 'es mayor o igual que'. $expireDate;
-                                  $memberStatus = true;
-                                  $statusString = "Activo";
-                                  $statusClass = "bg-gradient-success";
-                              }
+                       
+                              
 
                               echo "<td>
-                                  <div class='d-flex px-2'>
+                                  <div class='d-flex justify-content-center'>
                                     <p class='mb-0 text-sm'>$etId</p>
                                   </div>
                                 </td>";
@@ -174,30 +152,20 @@
                                     <p class='mb-0 text-sm'>$paidDate</p>
                                   </div>
                                 </td>";
+                               
                                 echo "<td>
-                                  <div class='d-flex px-2'>
-                                    <p class='mb-0 text-sm'>$startDateString</p>
-                                  </div>
-                                </td>";
-                                echo "<td>
-                                  <div class='d-flex px-2'>
-                                    <p class='mb-0 text-sm'>$expireDateString</p>
-                                  </div>
-                                </td>";
-                                echo "<td>
-                                  <div class='d-flex px-2'>
+                                  <div class='d-flex '>
                                     <p class='mb-0 text-sm'>$planName</p>
                                   </div>
                                 </td>";
                                 echo "<td>
-                                  <div class='d-flex px-2'>
-                                    <p class='mb-0 text-sm'>$amount</p>
+                                  <div class='d-flex '>
+                                    <p class='mb-0 text-sm'><i class='fa-solid fa-dollar-sign'></i> $amount</p>
                                   </div>
                                 </td>";
-                                echo "<td class='text-center'>
-                                <span class='w-100 badge badge-sm $statusClass'>$statusString</span>
+                             
                                  
-                                </td>";
+                             
                                 echo "<td class='text-center'>
                                 <span style='max-width: 90px;' class='w-100 badge badge-sm'><i style='color:black;' class='fa-solid fa-arrow-up-right-from-square'></i></span>
                                  

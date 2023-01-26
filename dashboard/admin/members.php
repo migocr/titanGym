@@ -9,6 +9,25 @@ $_DIR = dirname(dirname(dirname(__FILE__)));
 require  $_DIR . '/vendor/autoload.php' ;
 $dotenv = Dotenv\Dotenv::createImmutable($_DIR);
 $dotenv->load(); 
+
+$query = "select COUNT(*) from users";
+$result = mysqli_query($con, $query);
+
+$currentPage = isset($_GET['page']) ?  $_GET['page'] : 1;
+$prevPage =  $currentPage - 1;
+$nextPage =  $currentPage + 1;
+$enablePaginator;
+$userTotal;    
+$dataPerPage = 50;    
+$dataSkip = ($currentPage *  $dataPerPage ) - $dataPerPage;  
+
+     
+if (mysqli_affected_rows($con) != 0) {
+  while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
+    $userTotal = $row['COUNT(*)'];
+    $enablePaginator = $userTotal > 50 ? true : false;
+  }
+}
 ?>
 
 <!--
@@ -74,18 +93,9 @@ $dotenv->load();
                     </div>
                     
                     <p class="text-xs">
-                    Total : <?php
-                            $query = "select COUNT(*) from users";
-
-                            $result = mysqli_query($con, $query);
-                            $i      = 1;
-                            if (mysqli_affected_rows($con) != 0) {
-                              while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
-                                echo $row['COUNT(*)'];
-                              }
-                            }
-                            $i = 1;
-                            ?>
+                    <?php
+                       echo " Total " . $userTotal . " usuarios";
+                    ?>
                     </p>
                   </div>
                   <a href="./nuevo_miembro.php">
@@ -125,7 +135,7 @@ $dotenv->load();
                         </thead>
                         <tbody id="membersTable">
                           <?php
-                              $query  = "select * from users ORDER BY userid DESC";
+                              $query  =  "select * from users ORDER BY userid DESC limit $dataPerPage OFFSET $dataSkip";
                               //echo $query;
                               $result = mysqli_query($con, $query);
                               $sno    = 1;
@@ -233,14 +243,40 @@ $dotenv->load();
                             ?>	
                         </tbody>
 
-                  
+                              
                       </table>
                     </div>
                   </div>
                 </div>
                
               </div>
-            
+              <nav aria-label="Page navigation example" class="<?php echo $enablePaginator ? '' : 'd-none'?>">
+                
+                <ul class="pagination justify-content-center">
+                  <li class="page-item <?php echo $currentPage == 1 ? 'disabled' : 'enabled';?> ">
+                    <a class="page-link" href="<?php echo $currentPage == 1 ?  'javascript:;' :  'members.php?page=' . $prevPage;?>" tabindex="-1">
+                      <i class="fa fa-angle-left"></i>
+                      <span class="sr-only">Previous</span>
+                    </a>
+                  </li>
+                  <?php 
+                    $pages = ceil($userTotal/$dataPerPage);
+                    
+                    for($i=1; $i<=$pages; $i++){
+                      $active = $currentPage == $i ? "active" : "";
+                      echo "<li class='page-item $active'><a class='page-link' href='members.php?page=$i'>$i</a></li>";
+                        
+                    }
+                  ?>
+                 
+                  <li class="page-item <?php echo $currentPage == $pages ? 'disabled' : 'enabled'?>">
+                    <a class="page-link" href="<?php echo $currentPage == $pages ?  'javascript:;' :  'members.php?page=' . $nextPage;?>">
+                      <i class="fa fa-angle-right"></i>
+                      <span class="sr-only">Next</span>
+                    </a>
+                  </li>
+                </ul>
+              </nav>
           
         </div>
         
@@ -249,6 +285,16 @@ $dotenv->load();
       <?php include 'components/footer.php';?>
     </div>
   </main>
+  <style>
+    .page-item.active .page-link{
+      background: <?php echo $principalColor?>!important;
+      border-color: gray!important;
+      color: white;
+    }
+    .page-item.disabled {
+      filter: opacity(0.3);
+    }
+  </style>
   <?php include 'components/fixed_plugin.php';?>
   <!--   Core JS Files   -->
   <script src="../assets/js/core/popper.min.js"></script>

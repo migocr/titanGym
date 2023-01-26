@@ -26,7 +26,7 @@
 			</li>
 			
 			
-			<li class="nav-item" >
+			<li class="nav-item miembros" >
 				<a  data-bs-toggle="collapse" href="#pagesExamples" class="nav-link  <?php echo ($active == 'members' || $active == 'new') ? "active"  : "collapsed"; ?>" aria-controls="pagesExamples" role="button" aria-expanded="false">
 					<div style=<?php echo "'background-image:$principalColor;'"?> class="icon icon-shape icon-sm shadow border-radius-md  text-center d-flex align-items-center justify-content-center  me-2">
 						<i class="fa-solid fa-users opacity-10"></i>			
@@ -193,6 +193,11 @@
 	</div>
 
 </aside>
+
+<script>
+	
+		
+</script>
 
 <style>
 	.navbar-vertical.navbar-expand-xs .navbar-nav .nav-link:hover {
