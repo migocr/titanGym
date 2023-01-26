@@ -107,7 +107,7 @@ if (mysqli_affected_rows($con) == 1) {
         <div class="col-12">
           <div class="card mb-4">
             <div class="card-header pb-0" style="border-radius:10px;!important">
-              <h6>Registrar pago</h6>
+              <h6><i class="fa-solid fa-hand-holding-dollar"></i> Registrar pago</h6>
               <div class="card-body px-0 pt-0 pb-2">
               <div class="">
                 <form id="form1" name="form1">
@@ -124,6 +124,32 @@ if (mysqli_affected_rows($con) == 1) {
                             <input class="form-control" type="text" name="u_name" id="nameCustomer" value="<?php echo $name; ?>" placeholder="Member Name" maxlength="30" readonly/>
                       </div>
                     </div>
+                    <div class="col-md-12">
+                      <div class="form-group">
+                        <label for="example-color-input" class="form-control-label">Plan</label>	
+                        <select style="width: 100%; border: 1px #e9ecef solid; border-radius: 5px;
+                                  padding: 5px;" class="selectpicker" data-style="select-with-transition" 
+                                  name="plan" id="planSelector" 
+                                  onchange="changeExpireDate(this.value,this.options[this.selectedIndex].getAttribute('duration'),this.options[this.selectedIndex].getAttribute('durationtype'))" required>
+                          <option value="">-- Favor Seleccionar --</option>
+                            <?php
+                    
+                              $query = "select * from plan where active='yes'";
+                                  
+                                  //echo $query;
+                              $result = mysqli_query($con, $query);
+                                  
+                              if (mysqli_affected_rows($con) != 0) {
+                                while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
+                                  echo "<option value=" . $row['pid'] . " duration=".$row['validity']. " durationtype=".$row['planType']. ">" . $row['planName'] . "</option>";				
+                                }
+                              }
+                                  
+                            ?>
+                              </select>
+                        </div>
+                      </div>
+                    
                     <div class="col-md-6">
                       <div class="form-group">
                         <label for="example-date-input" class="form-control-label">Fecha Inicio</label>
@@ -153,31 +179,7 @@ if (mysqli_affected_rows($con) == 1) {
                   </div>
                   
                  
-                  <div class="col-md-12">
-                  <div class="form-group">
-                    <label for="example-color-input" class="form-control-label">Plan</label>	
-                    <select style="width: 100%; border: 1px #e9ecef solid; border-radius: 5px;
-                              padding: 5px;" class="selectpicker" data-style="select-with-transition" 
-                              name="plan" id="planSelector" 
-                              onchange="changeExpireDate(this.value,this.options[this.selectedIndex].getAttribute('duration'),this.options[this.selectedIndex].getAttribute('durationtype'))" required>
-                      <option value="">-- Favor Seleccionar --</option>
-                        <?php
-                
-                          $query = "select * from plan where active='yes'";
-                              
-                              //echo $query;
-                          $result = mysqli_query($con, $query);
-                              
-                          if (mysqli_affected_rows($con) != 0) {
-                            while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
-                              echo "<option value=" . $row['pid'] . " duration=".$row['validity']. " durationtype=".$row['planType']. ">" . $row['planName'] . "</option>";				
-                            }
-                          }
-                              
-                        ?>
-                          </select>
-                    </div>
-                  </div>
+                 
                   
                 </form>
                 <div id="plandetls" class="row"></div>

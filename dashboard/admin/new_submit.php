@@ -63,6 +63,11 @@
     $query="insert into users(username,gender,dob,joining_date, phone) values('$uname','$gender','$dob','$nowDate', '$phone')";
       if(mysqli_query($con,$query)==1){
         $memID = $con->insert_id;
+        $ceros = 4 - strlen($memID);
+        $memIDFormated =   str_repeat("0",$ceros).$memID;
+
+       
+        
         //Retrieve information of plan selected by user
         if($plan) {
           $query1="select * from plan where pid='$plan'";
@@ -88,7 +93,7 @@
 
               echo "<html><head><script>
                     document.addEventListener('DOMContentLoaded', function () {
-                      swal('Guardado' ,  'Miembro agregado exitosamente' ,  'success').then((event) => {window.location.href = window.location.href.replace('new_submit.php', 'view_member.php?id=$memID');});
+                      swal('Usuario Guardado' ,  'Numero de control <strong> #$memIDFormated</strong>',  'success').then((event) => {window.location.href = window.location.href.replace('new_submit.php', 'view_member.php?id=$memID');});
                       //setTimeout(function(){ window.location.href = window.location.href.replace('new_submit.php', 'view_member.php?id=$uid'); }, 3000);
                     });
                     </script></head></html>";
@@ -123,7 +128,7 @@
         }
         echo "<html><head><script>
                     document.addEventListener('DOMContentLoaded', function () {
-                      swal('Guardado' ,  'Miembro agregado exitosamente' ,  'success').then((event) => {window.location.href = window.location.href.replace('new_submit.php', 'view_member.php?id=$memID');});
+                      swal('Usuario Guardado' ,  'Numero de control #$memIDFormated',  'success').then((event) => {window.location.href = window.location.href.replace('new_submit.php', 'view_member.php?id=$memID');});
                       //setTimeout(function(){ window.location.href = window.location.href.replace('new_submit.php', 'view_member.php?id=$uid'); }, 3000);
                     });
                     </script></head></html>";

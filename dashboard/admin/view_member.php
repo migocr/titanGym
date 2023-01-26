@@ -11,6 +11,8 @@ $dotenv->load();
 
 if (isset($_GET['id'])) {
     $memid = $_GET['id'];
+	$ceros = 4 - strlen($memid);
+
 ?>
 
 
@@ -60,7 +62,7 @@ if (isset($_GET['id'])) {
 										<span>Editar <i class="fa-solid fa-user-pen"></i> </span>
 									</button>
 									
-									<input type='hidden' name='name' value='<?php echo $memid?>'/>
+									<input type='hidden' name='name' value='<?php echo str_repeat("0", $ceros).$memid;?>'/>
 								</form>
 							</div>
 							<div class="row">
@@ -125,7 +127,7 @@ if (isset($_GET['id'])) {
 														<div class="col-md-2">
 															<div class="form-group">
 																<label for="example-text-input" class="form-control-label">ID de Usuario</label>
-																<input class="form-control"  id="boxxe" type="text" name="uid" value="<?php echo $memid?>" readonly required />
+																<input class="form-control"  id="boxxe" type="text" name="uid" value="<?php echo str_repeat("0", $ceros).$memid;?>" readonly required />
 															</div>
 														</div>
 														<div class="col-md-4">
