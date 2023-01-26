@@ -81,28 +81,14 @@ $dotenv->load(); ?>
 														</div>
 														</div>
 																											
-														<div class="col-md-6">
-															<div class="form-group">
-																<label for="example-date-input" class="form-control-label   text-xs font-weight-bolder"><i class="fa-regular fa-circle-question join-date"></i> Inicio de Suscripcion</label>
-																<input class="form-control" type="date" value='<?php echo str_replace("/","-",date("Y/m/d"));?>'
-																	name="jdate" id="boxx">
-															</div>
-														</div>
-														<div class="col-md-6">
-															<div class="form-group">
-																<label for="example-date-input" class="form-control-label   text-xs font-weight-bolder"><i class="fa-regular fa-circle-question expire-date"></i> Fin de Suscripcion</label>
-																<input class="form-control" type="date" value=''
-																	name="dob" id="expire-date" >
-																	
-															</div>
-														</div>
+														
 														<div class="col-md-6">
 															<div class="form-group">
 																<label for="example-color-input" class="form-control-label  text-xs font-weight-bolder"><i class="fa-regular fa-circle-question membership"></i> Membresia</label>
 																<select  style="width: 100%;
 																	border: 1px #e9ecef solid;
 																	border-radius: 5px;
-																	padding: 5px;"  class="selectpicker " data-style="select-with-transition" title="Single Select" data-size="7"  name="plan" id="boxx" 
+																	padding: 5px;"  class="selectpicker " id="planSelector" data-style="select-with-transition" title="Single Select" data-size="7"  name="plan" 
 																							onchange="changeExpireDate(this.value,this.options[this.selectedIndex].getAttribute('duration'),this.options[this.selectedIndex].getAttribute('durationtype'))">
 																							<option value="">Seleccionar Membresia (Opcional)</option>
 																							<?php
@@ -132,6 +118,23 @@ $dotenv->load(); ?>
 																</select>
 															</div>
 														</div>
+														<div class="col-md-6 member-date">
+															<div class="form-group">
+																<label for="example-date-input" class="form-control-label   text-xs font-weight-bolder"><i class="fa-regular fa-circle-question join-date"></i> Inicio de Suscripcion</label>
+																<input id="start-date" class="form-control" type="date" value='<?php echo str_replace("/","-",date("Y/m/d"));?>'
+																	name="jdate" id="boxx">
+															</div>
+														</div>
+														<div class="col-md-6 member-date ">
+															<div class="form-group">
+																<label for="example-date-input" class="form-control-label   text-xs font-weight-bolder"><i class="fa-regular fa-circle-question expire-date"></i> Fin de Suscripcion</label>
+																<input class="form-control" type="date" value=''
+																	name="dob" id="expire-date" >
+																	
+															</div>
+														</div>
+														
+														
 													</div>
 													
 													
@@ -195,6 +198,9 @@ $dotenv->load(); ?>
 			}
 			xmlhttp.onreadystatechange = function () {
 				if (this.readyState == 4 && this.status == 200) {
+					
+					let formatedDate = `${new Date().getFullYear()}-${new Date().getMonth()+1 > 9 ? new Date().getMonth()+1 : '0' + (new Date().getMonth()+1)}-${new Date().getDate() > 9 ? new Date().getDate() : '0'+new Date().getDate()}`
+					document.getElementById("start-date").value = formatedDate;
 					document.getElementById("plandetls").innerHTML = this.responseText;
 
 				}
@@ -222,6 +228,30 @@ $dotenv->load(); ?>
 
 
 	}
+	//ajusta las fechas del selector de fechas al elegir plan y modificar start date
+	document.getElementById('start-date').addEventListener('change', function() {
+		console.log("si")
+		if (planSelector.value && validityPlan) {
+			let validity = parseInt(validityPlan.getAttribute("validity")) ;
+			let planType = validityPlan.getAttribute("planType");
+			let startDate = document.getElementById("start-date").value;
+			if (planType == "m") {			
+				var expireDate = new Date(startDate.split("-"));
+				expireDate.setMonth(expireDate.getMonth() +  validity); 
+				
+				console.log(expireDate)
+				let _expireDate =  expireDate.getFullYear()  + "-"  + ("0" + (expireDate.getMonth() + 1)).slice(-2)  + "-" + (expireDate.getDate() < 10 ? '0' + expireDate.getDate() : expireDate.getDate() );
+				document.getElementById("expire-date").value = _expireDate;
+			}
+			if (planType == "d") {
+				var expireDate = new Date(startDate.split("-"));
+				expireDate.setDate(expireDate.getDate() + validity); 
+				console.log(expireDate);
+				_expireDate =  expireDate.getFullYear()  + "-"  + ("0" + (expireDate.getMonth() + 1)).slice(-2)  + "-" + (expireDate.getDate() < 10 ? '0' + expireDate.getDate() : expireDate.getDate() );
+				document.getElementById("expire-date").value = _expireDate;
+			}
+		}
+ 	 });
 
 	//help tippys
 	tippy('.user-name', {

@@ -1,7 +1,7 @@
 <?php
 	require '../../include/db_conn.php';
 
-  date_default_timezone_set('America/Tijuana');
+  date_default_timezone_set('America/Mazatlan');
 	page_protect();
 	$principalColor = $_SESSION['principalColor'];
 	$backgroundColor =  $_SESSION['backgroundColor'];
@@ -48,20 +48,19 @@
       
   </body>
   <?php
-    date_default_timezone_set('America/Tijuana');
+    date_default_timezone_set('America/Mazatlan');
     //echo date("d-m-Y H:i:s");  
     //$memID=$_POST['m_id'];
     $uname=$_POST['u_name'];
     $gender=$_POST['gender'];
     $dob= $_POST['dob'] ? date('Y-m-d', strtotime($_POST['dob'])) : "";
-    $jdate= date('Y-m-d', strtotime($_POST['jdate']));
-    //echo $jdate;
-    echo $jdate;
+    $startDate= date('Y-m-d', strtotime($_POST['jdate']));
+    $nowDate = date('Y-m-d');
     $plan= $_POST['plan'];
     $phone=$_POST['phone'];
 
 //inserting into users table
-    $query="insert into users(username,gender,dob,joining_date, phone) values('$uname','$gender','$dob','$jdate', '$phone')";
+    $query="insert into users(username,gender,dob,joining_date, phone) values('$uname','$gender','$dob','$nowDate', '$phone')";
       if(mysqli_query($con,$query)==1){
         $memID = $con->insert_id;
         //Retrieve information of plan selected by user
@@ -84,7 +83,7 @@
             echo $cdate;
             $expiredate=date("Y-m-d",$d); //adding validity retrieve from plan to current date
             //inserting into enrolls_to table of corresponding userid
-            $query2="insert into enrolls_to(pid,uid,paid_date,expire, startDate, amount) values('$plan','$memID','$cdate','$expiredate','$jdate','$amount')";
+            $query2="insert into enrolls_to(pid,uid,paid_date,expire, startDate, amount) values('$plan','$memID','$cdate','$expiredate','$startDate','$amount')";
             if(mysqli_query($con,$query2)==1){
 
               echo "<html><head><script>

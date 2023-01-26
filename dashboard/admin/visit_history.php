@@ -78,27 +78,27 @@
             <div class="nav-wrapper position-relative end-0">
               <ul class="nav nav-pills nav-fill p-1" role="tablist">
                   <li class="nav-item menu-switcher"  period="today">
-                    <a period="today" class="nav-link mb-0 px-0 py-1 active" data-bs-toggle="tab" href="#profile-tabs-simple" role="tab" aria-controls="profile" aria-selected="true">
+                    <a index="0" period="today" class="nav-link mb-0 px-0 py-1 active" data-bs-toggle="tab" href="#profile-tabs-simple" role="tab" aria-controls="profile" aria-selected="true">
                     Hoy
                     </a>
                   </li>
                   <li class="nav-item menu-switcher"  period="yesterday">
-                    <a period="yesterday" class="nav-link mb-0 px-0 py-1" data-bs-toggle="tab" href="#dashboard-tabs-simple" role="tab" aria-controls="dashboard" aria-selected="false">
+                    <a index="1" period="yesterday" class="nav-link mb-0 px-0 py-1" data-bs-toggle="tab" href="#dashboard-tabs-simple" role="tab" aria-controls="dashboard" aria-selected="false">
                     Ayer
                     </a>
                   </li>
                   <li class="nav-item menu-switcher"  period="week">
-                    <a period="week" class="nav-link mb-0 px-0 py-1" data-bs-toggle="tab" href="#dashboard-tabs-simple" role="tab" aria-controls="dashboard" aria-selected="false">
+                    <a  index="2" period="week" class="nav-link mb-0 px-0 py-1" data-bs-toggle="tab" href="#dashboard-tabs-simple" role="tab" aria-controls="dashboard" aria-selected="false">
                     Esta Semana
                     </a>
                   </li>
-                  <li  class="nav-item menu-switcher" period="month">
-                    <a period="month" class="nav-link mb-0 px-0 py-1" data-bs-toggle="tab" href="#dashboard-tabs-simple" role="tab" aria-controls="dashboard" aria-selected="false">
+                  <li   class="nav-item menu-switcher" period="month">
+                    <a index="3" period="month" class="nav-link mb-0 px-0 py-1" data-bs-toggle="tab" href="#dashboard-tabs-simple" role="tab" aria-controls="dashboard" aria-selected="false">
                     Este mes
                     </a>
                   </li>
-                  <li class="nav-item menu-switcher" period="custom">
-                    <a period="custom" class="nav-link mb-0 px-0 py-1" data-bs-toggle="tab" href="#dashboard-tabs-simple" role="tab" aria-controls="dashboard" aria-selected="false">
+                  <li  class="nav-item menu-switcher" period="custom">
+                    <a index="4" period="custom" class="nav-link mb-0 px-0 py-1" data-bs-toggle="tab" href="#dashboard-tabs-simple" role="tab" aria-controls="dashboard" aria-selected="false">
                     Personalizado
                     </a>
                   </li>
@@ -195,9 +195,18 @@
   <script src="../assets/js/plugins/perfect-scrollbar.min.js"></script>
   <script src="../assets/js/plugins/smooth-scrollbar.min.js"></script>
   <script>
+  var activeTab = 0;
   var elements = document.querySelectorAll(".menu-switcher");
   elements.forEach(function(element){
     element.addEventListener("click", function(event){
+      
+      let activeIndex = parseInt(event.target.getAttribute("index"));
+      if (activeIndex == activeTab) {
+        return;
+      } else {
+        activeTab = parseInt(event.target.getAttribute("index"));
+      }
+   
       var period = event.target.getAttribute('period');
       console.log(period);
       getData(period)

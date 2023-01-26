@@ -23,7 +23,7 @@ if ($res){
 		<div class='col-md-6'>
 			<div class='form-group'>
 				<label class='form-control-label'>Costo:</label>
-				<input class='form-control'id='boxx' name='amount' type='text' value='$".$row['amount']."' readonly></input>
+				<input class='form-control'id='boxx' name='amount' type='text' value='".$row['amount']."' readonly></input>
 			</div>
 		</div>
 		<div class='col-md-6'>

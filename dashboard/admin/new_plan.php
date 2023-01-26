@@ -19,6 +19,8 @@ $backgroundColor =  $_SESSION['backgroundColor'];
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png">
   <link rel="icon" type="image/png" href="../assets/img/favicon.png">
+  <script src="../assets/js/popper.js"></script>
+  <script src="../assets/js/tippy.js"></script>
   <title>
     <?php echo $_SESSION['siteTitle']; ?>
   </title>
@@ -55,8 +57,8 @@ $backgroundColor =  $_SESSION['backgroundColor'];
 					</div>
 					<div class="card-body">
 					<form id="form1" name="form1" method="post" class="a1-container" action="submit_plan_new.php">
-							<div class="form-group">
-								<label for="example-text-input" class="form-control-label">ID de Membresia</label>
+							<div class="form-group" >
+								<label for="example-text-input" class="form-control-label"><i class="fa-regular fa-circle-question id-membresia"></i> ID de Membresia</label>
 								<?php
 									function getRandomWord($len = 6)
 									{
@@ -68,11 +70,11 @@ $backgroundColor =  $_SESSION['backgroundColor'];
 								<input class="form-control" type="text" name="planid" id="planID" readonly value="<?php echo getRandomWord(); ?>" required></td>		
 							</div>
 							<div class="form-group">
-								<label for="example-text-input" class="form-control-label">Nombre de membresia</label>
+								<label for="example-text-input" class="form-control-label"><i class="fa-regular fa-circle-question nombre-membresia"></i> Nombre de membresia</label>
 								<input class="form-control" name="planname" id="planName" type="text" placeholder="Ingrese el nombre del plan" size="40" required>
 							</div>
 							<div class="form-group">
-								<label for="example-text-input" class="form-control-label">Descripción de membresia</label>
+								<label for="example-text-input" class="form-control-label"><i class="fa-regular fa-circle-question descripcion-membresia"></i> Descripción de membresia</label>
 								<input class="form-control" type="text" name="desc" id="planDesc" placeholder="Ingrese la descripción del plan" size="40">
 							</div>
 							<div style="display: inline-flex;
@@ -80,7 +82,7 @@ $backgroundColor =  $_SESSION['backgroundColor'];
 										width: 100%;
 										align-items: center;">
 								<div class="form-group" style="width:50%;">
-									<label for="example-text-input" class="form-control-label">Duraciónde Membresia</label>
+									<label for="example-text-input" class="form-control-label"><i class="fa-regular fa-circle-question duracion-membresia"></i> Duraciónde Membresia</label>
 									<input class="form-control" type="number" name="planval" id="planVal" placeholder="Ingrese el tiempo de duracion y escoja entre meses o dias" size="40" required>
 								</div>
 								<div style="margin-left:1em;">
@@ -98,11 +100,14 @@ $backgroundColor =  $_SESSION['backgroundColor'];
 							
 							<div class="form-group">
 								<label for="example-text-input" class="form-control-label"><i class="fa-regular fa-circle-question costo"></i> Costo de membresia</label>
-								<input class="form-control" type="number" name="amount" id="planAmnt" placeholder="Ingrese el costo de membresia" size="40" required>
-								
+								<div class="input-group input-group-alternative">
+									<span class="input-group-text"><i class="fa-solid fa-dollar-sign"></i></span>
+									<input class="form-control form-control-alternative" type="number" name="amount" id="planAmnt" placeholder="Ingrese el costo de membresia" size="40" required>
+								</div>
 								
 
 							</div>
+							
 							
 							<div class="form-group d-flex justify-content-center">
 								<input class="btn btn-primary center text-center mx-1" type="submit" name="submit" id="submit" value="Crear Plan" >
@@ -118,6 +123,23 @@ $backgroundColor =  $_SESSION['backgroundColor'];
                 
         <script src="../assets/js/plugins/perfect-scrollbar.min.js"></script>
         <script src="../assets/js/soft-ui-dashboard.min.js?v=1.0.6"></script>
+		<script>
+			tippy('.id-membresia', {
+				content: "El ID de membresia se genera automaticamente por el sistema"
+			});
+			tippy('.nombre-membresia', {
+				content: "Escribe el nombre que llevara la membresia"
+			});
+			tippy('.descripcion-membresia', {
+				content: "Escribe una breve descripcion de la membresia"
+			});
+			tippy('.duracion-membresia', {
+				content: "Escribe el tiempo de validez que tendra la membresia y selecciona si son meses o dias"
+			});
+			tippy('.costo', {
+				content: "Escribe el costo de la nueva membresia"
+			});
+		</script>
 	</body>
 </html>
 

@@ -63,9 +63,9 @@ $dotenv->load();
 							<th class="text-uppercase text-secondary text-xs font-weight-bolder">#</th>
 							<th class="text-uppercase text-secondary text-xs font-weight-bolder">ID de Membresia</th>
 							<th class="text-uppercase text-secondary text-xs font-weight-bolder">Nombre de Membresia</th>
-							<th class="text-uppercase text-secondary text-xs font-weight-bolder">Detalles de Membresia</th>
+							<th class="text-uppercase text-secondary text-xs font-weight-bolder">Descripcion de Membresia</th>
 							<th class="text-uppercase text-secondary text-xs font-weight-bolder">Duracion</th>
-							<th class="text-uppercase text-secondary text-xs font-weight-bolder">Costo</th>
+							<th class="text-uppercase text-secondary text-xs font-weight-bolder" style="text-align: left;">Costo</th>
 							<th class="text-uppercase text-secondary text-xs font-weight-bolder">Opciones</th>
 						</tr>
 					</thead>		
@@ -91,7 +91,7 @@ $dotenv->load();
 									echo "<td><p class='text-sm font-weight-bold mb-0 text-center'>" . $row['planName'] . "</p></td>";
 									echo "<td><p class='text-sm font-weight-bold mb-0 text-center'>" . $row['description'] . "</p></td>";
 									echo "<td><p class='text-sm font-weight-bold mb-0 text-center'>" . $row['validity'] . " " . $planTimeType . "</p></td>";
-									echo "<td><p class='text-sm font-weight-bold mb-0 text-center'>$" . $row['amount'] . "</p></td>";
+									echo "<td><p class='text-sm font-weight-bold mb-0 px-3'><i class='fa-solid fa-dollar-sign'></i> " . $row['amount'] . "</p></td>";
 
 									$sno++;
 
