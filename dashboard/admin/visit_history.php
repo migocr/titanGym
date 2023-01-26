@@ -97,11 +97,12 @@
                     Este mes
                     </a>
                   </li>
+                  <!--
                   <li  class="nav-item menu-switcher" period="custom">
                     <a index="4" period="custom" class="nav-link mb-0 px-0 py-1" data-bs-toggle="tab" href="#dashboard-tabs-simple" role="tab" aria-controls="dashboard" aria-selected="false">
                     Personalizado
                     </a>
-                  </li>
+                  </li>-->
                 </ul>
             </div>
             
@@ -111,6 +112,7 @@
               <div class="col-12">
                 <div class="table-responsive p-0">
                   <table class="table align-items-center mb-0">
+                  
                     <thead>
                       <tr>
                         <th class="text-uppercase text-secondary text-xs font-weight-bolder">Hora</th>

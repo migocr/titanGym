@@ -1,6 +1,7 @@
 <?php
     require '../../../include/db_conn.php';
     $response = new stdClass();
+    header("Content-Type: application/json");
     
     if (isset($_GET['period'])) {
         $period  = $_GET['period'];
@@ -48,7 +49,7 @@
     $responseJSON = json_encode($response);
     
     echo $responseJSON;
-    header("Content-Type: application/json");
+    
     exit();
 
 
