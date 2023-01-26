@@ -1,4 +1,8 @@
-<?php $dataPerPage = 50; ?>
+<?php 
+$dataPerPage = 50;
+$prevPage = $currentPage - 1;
+$nextPage = $currentPage + 1;
+?>
 <nav aria-label="Page navigation example" class="<?php echo $enablePaginator == true ? '' : 'd-none' ?>">
 
     <ul class="pagination justify-content-center">
@@ -31,14 +35,14 @@
 </nav>
 <style>
     .page-item.active .page-link {
-      background:
-        <?php echo $principalColor ?>
-        !important;
-      border-color: gray !important;
-      color: white;
+        background:
+            <?php echo $principalColor ?>
+            !important;
+        border-color: gray !important;
+        color: white;
     }
 
     .page-item.disabled {
-      filter: opacity(0.3);
+        filter: opacity(0.3);
     }
-  </style>
+</style>

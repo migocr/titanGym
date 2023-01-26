@@ -14,12 +14,9 @@ $query = "select COUNT(*) from users";
 $result = mysqli_query($con, $query);
 
 $currentPage = isset($_GET['page']) ? $_GET['page'] : 1;
-$prevPage = $currentPage - 1;
-$nextPage = $currentPage + 1;
 $userTotal;
 $dataPerPage = 50;
 $dataSkip = ($currentPage * $dataPerPage) - $dataPerPage;
-
 
 if (mysqli_affected_rows($con) != 0) {
   while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
@@ -256,7 +253,6 @@ $enablePaginator = $userTotal > 50 ? true : false;
 
           </div>
           <?php $enablePaginator;
-          $prevPage;
           $totalData = $userTotal;
           $enablePaginator;
           $currentPage;

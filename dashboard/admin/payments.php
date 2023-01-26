@@ -1,15 +1,30 @@
 ﻿<?php
-	require '../../include/db_conn.php';
+require '../../include/db_conn.php';
 
-  date_default_timezone_set('America/Mazatlan');
-	page_protect();
-	$principalColor = $_SESSION['principalColor'];
-	$backgroundColor =  $_SESSION['backgroundColor'];
-  $_DIR = dirname(dirname(dirname(__FILE__)));
+date_default_timezone_set('America/Mazatlan');
+page_protect();
+$principalColor = $_SESSION['principalColor'];
+$backgroundColor = $_SESSION['backgroundColor'];
+$_DIR = dirname(dirname(dirname(__FILE__)));
 
-  require  $_DIR . '/vendor/autoload.php' ;
-  $dotenv = Dotenv\Dotenv::createImmutable($_DIR);
-  $dotenv->load(); 
+require $_DIR . '/vendor/autoload.php';
+$dotenv = Dotenv\Dotenv::createImmutable($_DIR);
+$dotenv->load();
+
+$queryCount = "select COUNT(*) from enrolls_to";
+$resultCount = mysqli_query($con, $queryCount);
+$currentPage = isset($_GET['page']) ? $_GET['page'] : 1;
+$dataPerPage = 50;
+$dataSkip = ($currentPage * $dataPerPage) - $dataPerPage;
+$totalData;
+if (mysqli_affected_rows($con) != 0) {
+  while ($row = mysqli_fetch_array($resultCount, MYSQLI_ASSOC)) {
+    $totalData = $row['COUNT(*)'];
+
+  }
+}
+$enablePaginator = $totalData > 50 ? true : false;
+
 ?>
 <!--
 =========================================================
@@ -37,7 +52,7 @@
     <?php echo $_SESSION['siteTitle']; ?>
   </title>
   <!--     Fonts and icons     -->
-  <link rel="stylesheet" href="../assets/css/all-min.css"  />
+  <link rel="stylesheet" href="../assets/css/all-min.css" />
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
   <!-- Nucleo Icons -->
   <link href="../assets/css/nucleo-icons.css" rel="stylesheet" />
@@ -51,11 +66,13 @@
   <link id="pagestyle" href="../assets/css/soft-ui-dashboard.css?v=1.0.6" rel="stylesheet" />
 </head>
 
-<body class="g-sidenav-show " style="<?php echo "background:$backgroundColor !important;"?>">
-  <?php $active = 'payment'; include 'components/menu.php'; ?>
+<body class="g-sidenav-show " style="<?php echo "background:$backgroundColor !important;" ?>">
+  <?php $active = 'payment';
+  include 'components/menu.php'; ?>
   <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
     <!-- Navbar -->
-    <?php $titlePage = 'Pagos'; include 'components/navbar.php'; ?>
+    <?php $titlePage = 'Pagos';
+    include 'components/navbar.php'; ?>
     <!-- End Navbar -->
     <div class="container-fluid py-4">
 
@@ -64,14 +81,14 @@
           <div class="card-header pb-0">
             <div class="d-flex justify-content-between">
               <div class="d-flex align-items-center">
-               
+
                 <h6 style="margin:inherit;"> <i class="fa-solid fa-file-invoice px-1"></i>Historial de Pagos</p>
               </div>
-              
+
               <p>
                 Total : 4</p>
             </div>
-            
+
             <div class="input-group">
               <span class="input-group-text text-body"><i class="fas fa-search" aria-hidden="true"></i></span>
               <input id="buscador" type="text" class="form-control" placeholder="Buscar pago por nombre o id..."
@@ -89,93 +106,93 @@
                         <th class="text-uppercase text-secondary text-xs font-weight-bolder text-center">ID</th>
                         <th class="text-uppercase text-secondary text-xs font-weight-bolder px-3">Nombre</th>
                         <th class="text-uppercase text-secondary text-xs font-weight-bolder px-3">Fecha de pago</th>
-                       
+
                         <th class="text-uppercase text-secondary text-xs font-weight-bolder ps-2 px-3">Membresia
                         </th>
                         <th class="text-uppercase text-secondary text-xs font-weight-bolder ps-2">Pago
                         </th>
-                      
+
                         <th class="text-center text-uppercase text-secondary text-xs font-weight-bolder">
                           Detalles</th>
-                       
+
                       </tr>
                     </thead>
                     <tbody id="membersTable">
-                    <?php
+                      <?php
 
 
-                      $query  = "select * from enrolls_to ORDER BY et_id DESC";
+                      $query = "select * from enrolls_to ORDER BY et_id DESC limit $dataPerPage OFFSET $dataSkip";
                       //echo $query;
                       $result = mysqli_query($con, $query);
-                      $sno    = 1;
+                      $sno = 1;
 
                       if (mysqli_affected_rows($con) != 0) {
-                          while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
+                        while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
 
-                              $uid   = $row['uid'];
-                              $planid=$row['pid'];
-                              $etId = $row['et_id'];
-                              $amount =  $row['amount'];
-                              setlocale(LC_TIME, 'es_ES', 'Spanish_Spain', 'Spanish'); 
-                              $_paidDate = date("Y-m-d", strtotime($row['paid_date']));
-                              $paidDate= strftime('%d %b %Y', strtotime($_paidDate));
-                                                    
-                             
-                              echo "<tr json-data=''>";
-                              $query2  = "select * from users where userid = $uid limit 1";
-                              $result2 = mysqli_query($con, $query2);
-                              $user = mysqli_fetch_array($result2);
-                              $userName = $user['username'];
+                          $uid = $row['uid'];
+                          $planid = $row['pid'];
+                          $etId = $row['et_id'];
+                          $amount = $row['amount'];
+                          setlocale(LC_TIME, 'es_ES', 'Spanish_Spain', 'Spanish');
+                          $_paidDate = date("Y-m-d", strtotime($row['paid_date']));
+                          $paidDate = strftime('%d %b %Y', strtotime($_paidDate));
 
-                              $query3  = "select * from plan where pid = '$planid' limit 1";
-                              $result3 = mysqli_query($con, $query3);
-                              $planData = mysqli_fetch_array($result3);
-                              $planName = $planData['planName'];
 
-                             
-                                  
-                       
-                              
+                          echo "<tr json-data=''>";
+                          $query2 = "select * from users where userid = $uid limit 1";
+                          $result2 = mysqli_query($con, $query2);
+                          $user = mysqli_fetch_array($result2);
+                          $userName = $user['username'];
 
-                              echo "<td>
+                          $query3 = "select * from plan where pid = '$planid' limit 1";
+                          $result3 = mysqli_query($con, $query3);
+                          $planData = mysqli_fetch_array($result3);
+                          $planName = $planData['planName'];
+
+
+
+
+
+
+                          echo "<td>
                                   <div class='d-flex justify-content-center'>
                                     <p class='mb-0 text-sm'>$etId</p>
                                   </div>
                                 </td>";
-                              echo "<td>
+                          echo "<td>
                                   <div class='d-flex px-2'>
                                     <p class='mb-0 text-sm'>$userName</p>
                                   </div>
                                 </td>";
-                                echo "<td>
+                          echo "<td>
                                   <div class='d-flex px-2'>
                                     <p class='mb-0 text-sm'>$paidDate</p>
                                   </div>
                                 </td>";
-                               
-                                echo "<td>
+
+                          echo "<td>
                                   <div class='d-flex '>
                                     <p class='mb-0 text-sm'>$planName</p>
                                   </div>
                                 </td>";
-                                echo "<td>
+                          echo "<td>
                                   <div class='d-flex '>
                                     <p class='mb-0 text-sm'><i class='fa-solid fa-dollar-sign'></i> $amount</p>
                                   </div>
                                 </td>";
-                             
-                                 
-                             
-                                echo "<td class='text-center'>
+
+
+
+                          echo "<td class='text-center'>
                                 <span style='max-width: 90px;' class='w-100 badge badge-sm'><i style='color:black;' class='fa-solid fa-arrow-up-right-from-square'></i></span>
                                  
                                 </td>";
-                                echo "</tr>";
+                          echo "</tr>";
 
-                          }
+                        }
                       }
-                      ?>			
-                     
+                      ?>
+
                     </tbody>
 
 
@@ -183,16 +200,22 @@
                 </div>
               </div>
             </div>
+            <?php $enablePaginator;
+            $totalData;
+            $enablePaginator;
+            $currentPage;
+            $pageLink = "payments.php";
+            include 'components/paginator.php'; ?>
 
           </div>
 
 
         </div>
       </div>
-      <?php include 'components/footer.php';?>
+      <?php include 'components/footer.php'; ?>
     </div>
   </main>
-  <?php include 'components/fixed_plugin.php';?>
+  <?php include 'components/fixed_plugin.php'; ?>
   <!--   Core JS Files   -->
   <script src="../assets/js/core/popper.min.js"></script>
   <script src="../assets/js/core/bootstrap.min.js"></script>
