@@ -51,7 +51,10 @@ $backgroundColor =  $_SESSION['backgroundColor'];
 				<div class="card mb-4">
 					<div class="card-header pb-0">
 						<h6>Agregar Membresia</h6>
-						<form id="form1" name="form1" method="post" class="a1-container" action="submit_plan_new.php">
+						
+					</div>
+					<div class="card-body">
+					<form id="form1" name="form1" method="post" class="a1-container" action="submit_plan_new.php">
 							<div class="form-group">
 								<label for="example-text-input" class="form-control-label">ID de Membresia</label>
 								<?php
@@ -78,7 +81,7 @@ $backgroundColor =  $_SESSION['backgroundColor'];
 										align-items: center;">
 								<div class="form-group" style="width:50%;">
 									<label for="example-text-input" class="form-control-label">Duraciónde Membresia</label>
-									<input class="form-control" type="number" name="planval" id="planVal" placeholder="Ingrese el tiempo de duracion en meses" size="40" required>
+									<input class="form-control" type="number" name="planval" id="planVal" placeholder="Ingrese el tiempo de duracion y escoja entre meses o dias" size="40" required>
 								</div>
 								<div style="margin-left:1em;">
 									<div class="form-check mb-3">
@@ -94,16 +97,16 @@ $backgroundColor =  $_SESSION['backgroundColor'];
 							</div>
 							
 							<div class="form-group">
-								<label for="example-text-input" class="form-control-label">Costo de membresia</label>
-								<input class="form-control" type="number" name="amount" id="planAmnt" placeholder="Enter plan amount" size="40" required>
+								<label for="example-text-input" class="form-control-label"><i class="fa-regular fa-circle-question costo"></i> Costo de membresia</label>
+								<input class="form-control" type="number" name="amount" id="planAmnt" placeholder="Ingrese el costo de membresia" size="40" required>
 								
 								
 
 							</div>
 							
-							<div class="form-group">
-								<input class="a1-btn a1-blue" type="submit" name="submit" id="submit" value="Crear Plan" >
-								<input class="a1-btn a1-blue" type="reset" name="reset" id="reset" value="Borrar">
+							<div class="form-group d-flex justify-content-center">
+								<input class="btn btn-primary center text-center mx-1" type="submit" name="submit" id="submit" value="Crear Plan" >
+								<input class="btn btn-default center text-center mx-1" type="reset" name="reset" id="reset" value="Borrar">
 							</div>
 							
 						</form>
