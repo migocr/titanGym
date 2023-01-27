@@ -123,7 +123,7 @@ $enablePaginator = $userTotal > 50 ? true : false;
             <div class="row">
               <div class="col-12">
                 <div class="table-responsive p-0">
-                  <table class="table align-items-center mb-0">
+                  <table class="table align-items-center mb-0 <?php echo $userTotal == 0 ? "d-none" :"" ?>">
                     <thead>
                       <tr>
                         <th class="text-uppercase text-secondary text-xs font-weight-bolder">ID</th>
@@ -140,9 +140,15 @@ $enablePaginator = $userTotal > 50 ? true : false;
 
                       </tr>
                     </thead>
+                    
                     <tbody id="membersTable">
                       <?php
 
+                      if($userTotal == 0) {
+                        echo "<p style='text-align: center;'>No hay usuarios registrados aun.</p>";
+                        
+                      }
+                      echo $isSearch;
                       if(!$isSearch) {
                         $query = "select * from users ORDER BY userid DESC limit $dataPerPage OFFSET $dataSkip";
                       } else {

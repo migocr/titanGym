@@ -96,13 +96,14 @@ $enablePaginator = $totalData > 50 ? true : false;
               <span class="input-group-text text-body"><i class="fas fa-search" aria-hidden="true"></i></span>
               <input id="buscador" type="text" class="form-control" placeholder="Buscar pago por nombre o id..."
                 onfocus="focused(this)" onfocusout="defocused(this)">
-            </div>
-          </div>-->
+            </div>-->
+          </div>
           <hr class="px-0 py-0 my-2" style="background: #00000099;height: .5px;">
           <div class="card-body px-3 py-1">
             <div class="row">
               <div class="col-12">
-                <div class="table-responsive p-0">
+                <?php echo $totalData == 0 ? '<p class="text-center">No hay pagos registrados aun</p>' : '';?>
+                <div class="table-responsive p-0 <?php echo $totalData == 0 ? 'd-none' : '';?>">
                   <table class="table align-items-center mb-0">
                     <thead>
                       <tr>
