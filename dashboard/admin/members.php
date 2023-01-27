@@ -14,6 +14,8 @@ $query = "select COUNT(*) from users";
 $result = mysqli_query($con, $query);
 
 $currentPage = isset($_GET['page']) ? $_GET['page'] : 1;
+$isSearch = isset($_GET['search']) ? $_GET['search'] : false;
+
 $userTotal;
 $dataPerPage = 50;
 $dataSkip = ($currentPage * $dataPerPage) - $dataPerPage;
@@ -103,12 +105,15 @@ $enablePaginator = $userTotal > 50 ? true : false;
               </a>
 
             </div>
-
+            <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="get">
             <div class="input-group">
-              <span class="input-group-text text-body"><i class="fas fa-search" aria-hidden="true"></i></span>
-              <input id="buscador" type="text" class="form-control" placeholder="Buscar miembro..."
+              <button type="submit" class="input-group-text text-body" value="">
+                <i class="fas fa-search" aria-hidden="true"></i>
+              </button>
+              <input id="buscador"type="text" name="search" id="buscador" onsubmit="this.form.submit()"  class="form-control" placeholder="Buscar miembro..." value="<?php echo $isSearch ? $isSearch : ''?>"
                 onfocus="focused(this)" onfocusout="defocused(this)">
             </div>
+            </form>
 
 
 
@@ -137,7 +142,14 @@ $enablePaginator = $userTotal > 50 ? true : false;
                     </thead>
                     <tbody id="membersTable">
                       <?php
-                      $query = "select * from users ORDER BY userid DESC limit $dataPerPage OFFSET $dataSkip";
+
+                      if(!$isSearch) {
+                        $query = "select * from users ORDER BY userid DESC limit $dataPerPage OFFSET $dataSkip";
+                      } else {
+                        $enablePaginator = false;
+                        $query = "select * from users where userid LIKE '%${isSearch}%' OR username LIKE '%${isSearch}%' ";
+                      }
+                      
                       //echo $query;
                       $result = mysqli_query($con, $query);
                       $sno = 1;
@@ -147,6 +159,7 @@ $enablePaginator = $userTotal > 50 ? true : false;
                           $emparray = array();
                           $emparray[] = $row;
                           $jsondata = json_encode($emparray);
+                           
                           echo "<tr json-data='$jsondata'>";
                           $uid = $row['userid'];
                           $rowGender = $row['gender'];
@@ -292,12 +305,14 @@ $enablePaginator = $userTotal > 50 ? true : false;
   if (!originalUserData) {
     originalUserData = userData;
   }
-
+  /*
   const search = document.querySelector("#buscador");
   search.addEventListener("keyup", function (event) {
     var temporalUserData = originalUserData;
     searchInTable(temporalUserData)
   });
+
+  //FUNCION DEGRADADA POR EL MOMENTO BUSCAR EN TABLA ES OBSOLETO
 
   function searchInTable(temporalUserData) {
     console.log(temporalUserData)
@@ -315,7 +330,7 @@ $enablePaginator = $userTotal > 50 ? true : false;
       }
 
     }
-  }
+  }*/
 
 
   function ConfirmDelete(name) {

@@ -14,6 +14,9 @@ $dotenv->load();
 $queryCount = "select COUNT(*) from enrolls_to";
 $resultCount = mysqli_query($con, $queryCount);
 $currentPage = isset($_GET['page']) ? $_GET['page'] : 1;
+
+
+
 $dataPerPage = 50;
 $dataSkip = ($currentPage * $dataPerPage) - $dataPerPage;
 $totalData;
@@ -86,15 +89,15 @@ $enablePaginator = $totalData > 50 ? true : false;
               </div>
 
               <p>
-                Total : 4</p>
+                Total : <?php echo $totalData;?> </p>
             </div>
-
+            <!-- 
             <div class="input-group">
               <span class="input-group-text text-body"><i class="fas fa-search" aria-hidden="true"></i></span>
               <input id="buscador" type="text" class="form-control" placeholder="Buscar pago por nombre o id..."
                 onfocus="focused(this)" onfocusout="defocused(this)">
             </div>
-          </div>
+          </div>-->
           <hr class="px-0 py-0 my-2" style="background: #00000099;height: .5px;">
           <div class="card-body px-3 py-1">
             <div class="row">
