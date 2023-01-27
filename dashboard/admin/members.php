@@ -10,11 +10,13 @@ require $_DIR . '/vendor/autoload.php';
 $dotenv = Dotenv\Dotenv::createImmutable($_DIR);
 $dotenv->load();
 
-$query = "select COUNT(*) from users";
-$result = mysqli_query($con, $query);
+
 
 $currentPage = isset($_GET['page']) ? $_GET['page'] : 1;
 $isSearch = isset($_GET['search']) ? $_GET['search'] : false;
+
+$query = $isSearch ? "SELECT COUNT(*) FROM users WHERE userid LIKE '%${isSearch}%' OR username LIKE '%${isSearch}%'" : "select COUNT(*) from users";
+$result = mysqli_query($con, $query);
 
 $userTotal;
 $dataPerPage = 50;
@@ -145,10 +147,11 @@ $enablePaginator = $userTotal > 50 ? true : false;
                       <?php
 
                       if($userTotal == 0) {
-                        echo "<p style='text-align: center;'>No hay usuarios registrados aun.</p>";
+                        
+                        echo $isSearch ? "<p style='text-align: center;'>No encontramos usuarios para tu busqueda: <strong>$isSearch</strong></p>" :  "<p style='text-align: center;'>No hay usuarios registrados aun.</p>";
                         
                       }
-                      echo $isSearch;
+                     
                       if(!$isSearch) {
                         $query = "select * from users ORDER BY userid DESC limit $dataPerPage OFFSET $dataSkip";
                       } else {

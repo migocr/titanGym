@@ -70,7 +70,7 @@
 							<div class="row">
 								<div class="col-8">
 									<div class="numbers">
-										<p class="text-sm mb-0 text-capitalize font-weight-bold">Ingresos del mes</p>
+										<p class="text-sm mb-0 text-capitalize font-weight-bold"><i class="fa-regular fa-circle-question month-earnings"></i> Ingresos del mes</p>
 										<h5 class="font-weight-bolder mb-0">
 											<?php
 											date_default_timezone_set('America/Mazatlan');
@@ -138,7 +138,7 @@
 							<div class="row">
 								<div class="col-8">
 								<div class="numbers">
-										<p class="text-sm mb-0 text-capitalize font-weight-bold">Ingresos Anuales</p>
+										<p class="text-sm mb-0 text-capitalize font-weight-bold"><i class="fa-regular fa-circle-question year-earnings"></i> Ingresos Anuales</p>
 										<h5 class="font-weight-bolder mb-0">
 											<?php
 											date_default_timezone_set('America/Mazatlan');
@@ -175,7 +175,7 @@
 							<div class="row">
 								<div class="col-8">
 									<div class="numbers">
-										<p class="text-sm mb-0 text-capitalize font-weight-bold">Miembros activos</p>
+										<p class="text-sm mb-0 text-capitalize font-weight-bold"><i class="fa-regular fa-circle-question active-members"></i> Miembros activos</p>
 										<h5 class="font-weight-bolder mb-0">
 											<?php
 												$today = date("Y-m-d");
@@ -211,7 +211,7 @@
 							<div class="row">
 								<div class="col-8">
 									<div class="numbers">
-										<p class="text-sm mb-0 text-capitalize font-weight-bold">Miembros Totales</p>
+										<p class="text-sm mb-0 text-capitalize font-weight-bold"><i class="fa-regular fa-circle-question total-members"></i> Miembros Totales</p>
 										<h5 class="font-weight-bolder mb-0">
 											<?php
 											$query = "select COUNT(*) from users";
@@ -249,7 +249,7 @@
 							<div class="card" style="box-shadow: none;">
 								<div class="card-header pb-0 pt-0">
 									<div class="d-flex justify-content-between">
-									<h6><i class="fa-solid fa-circle-exclamation"></i>  Miembros Proximos a Expirar</h6> 
+									<h6>  Miembros Proximos a Expirar</h6> 
 																		
 									</div>
 									
@@ -592,6 +592,22 @@
 		tippy('.do-payment', {
 			content: "Agregar pago a usuario",
 		});
+		tippy('.expire-list', {
+			content: "Lista de los miembros mas cercanos a expirar",
+		});
+		tippy('.total-members', {
+			content: "Cantidad de miembros totales registrados",
+		});
+		tippy('.active-members', {
+			content: "Cantidad de miembros con suscripcion activa",
+		});
+		tippy('.year-earnings', {
+			content: "Ganancias totales del año en curso",
+		});
+		tippy('.month-earnings', {
+			content: "Ganancias totales del mes en curso",
+		});
+		
 		
 														
 												

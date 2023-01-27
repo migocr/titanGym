@@ -134,6 +134,7 @@
 			<li class="nav-item mt-3" style="cursor: pointer;">
 				<h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Ajustes</h6>
 			</li>
+			<!--
 			<li class="nav-item">
 				<a class="nav-link  <?php echo ($active == 'system') ? 'active'  : ''; ?>" href="system.php">
 					<div style=<?php echo "'background-image:$principalColor;'"?>
@@ -163,7 +164,7 @@
 					</div>
 					<span class="nav-link-text ms-1">Sistema</span>
 				</a>
-			</li>
+			</li> -->
 			<li class="nav-item">
 				<a class="nav-link  <?php echo ($active == 'account') ? 'active'  : ''; ?>" href="account.php">
 					<div style=<?php echo "'background-image:$principalColor;'"?>
