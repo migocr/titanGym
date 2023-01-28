@@ -249,7 +249,7 @@
 							<div class="card" style="box-shadow: none;">
 								<div class="card-header pb-0 pt-0">
 									<div class="d-flex justify-content-between">
-									<h6>  Miembros Proximos a Expirar</h6> 
+									<h6><i class="fa-regular fa-circle-question expire-list"></i>  Miembros Proximos a Expirar</h6> 
 																		
 									</div>
 									
