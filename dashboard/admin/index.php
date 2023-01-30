@@ -40,6 +40,7 @@
 	<link rel="stylesheet" type="text/css"  href="/gym_l/dashboard/assets/css/all-min.css">
 	<script src="../assets/js/popper.js"></script>
 	<script src="../assets/js/tippy.js"></script>
+	<script src="../assets/js/sweetalert.js"></script>
 
 	<title>
 		<?php echo $_SESSION['siteTitle'] ?>

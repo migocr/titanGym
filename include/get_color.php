@@ -30,7 +30,7 @@
     }
 
     function getTitle($con) {
-        $query="SELECT config FROM system_settings WHERE nombre='nombreSitio';";
+        $query="SELECT config FROM system_settings WHERE nombre='siteTitle';";
         $result=mysqli_query($con,$query);
         $title;
         while ($row = $result->fetch_assoc()) {

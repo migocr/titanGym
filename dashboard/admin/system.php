@@ -76,7 +76,7 @@
 	    
 									//$query  = "SELECT config FROM system_settings WHERE nombre='color'";
 									//$query1  = "SELECT config FROM system_settings WHERE nombre='backgroundColor';";
-								    //$query2  = "SELECT config FROM system_settings WHERE nombre='nombreSitio';";
+								    //$query2  = "SELECT config FROM system_settings WHERE nombre='siteTitle';";
 									//$query3  = "SELECT config FROM system_settings WHERE nombre='colorFuente';";
 									//$query4  = "SELECT config FROM system_settings WHERE nombre='logo'; ;";
 									//echo $query;

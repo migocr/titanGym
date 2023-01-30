@@ -17,8 +17,8 @@
 		<ul class="navbar-nav">
 			<li class="nav-item">
 				<a class="nav-link  <?php echo ($active == 'dashboard') ? "active"  : ""; ?>" href="./index.php">
-					<div style=<?php echo "'background-image:$principalColor;'"?>
-						class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
+					<div style=<?php echo "'background:$principalColor;'"?>
+						class="principal-color icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
 						<i class="fa-solid fa-chart-line opacity-10"></i>
 					</div>
 					<span class="nav-link-text ms-1">Resumen</span>
@@ -28,7 +28,7 @@
 			
 			<li class="nav-item miembros" >
 				<a  data-bs-toggle="collapse" href="#pagesExamples" class="nav-link  <?php echo ($active == 'members' || $active == 'new') ? "active"  : "collapsed"; ?>" aria-controls="pagesExamples" role="button" aria-expanded="false">
-					<div style=<?php echo "'background-image:$principalColor;'"?> class="icon icon-shape icon-sm shadow border-radius-md  text-center d-flex align-items-center justify-content-center  me-2">
+					<div style=<?php echo "'background:$principalColor;'"?> class="principal-color icon icon-shape icon-sm shadow border-radius-md  text-center d-flex align-items-center justify-content-center  me-2">
 						<i class="fa-solid fa-users opacity-10"></i>			
 						<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
 							<g transform="translate(-1869.000000, -293.000000)" fill="#FFFFFF" fill-rule="nonzero">
@@ -67,7 +67,7 @@
 
 			<li class="nav-item" >
 				<a  data-bs-toggle="collapse" href="#memberships" class="nav-link  <?php echo ($active == 'memberships' || $active == 'new_membership') ? "active"  : "collapsed"; ?>" aria-controls="memberships" role="button" aria-expanded="false">
-					<div style=<?php echo "'background-image:$principalColor;'"?> class="icon icon-shape icon-sm shadow border-radius-md  text-center d-flex align-items-center justify-content-center  me-2">
+					<div style=<?php echo "'background:$principalColor;'"?> class="principal-color icon icon-shape icon-sm shadow border-radius-md  text-center d-flex align-items-center justify-content-center  me-2">
 					<svg class="text-dark" width="16px" height="16px" viewBox="0 0 40 44" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"> <title>document</title> <g id="Basic-Elements" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"> <g id="Rounded-Icons" transform="translate(-1870.000000, -591.000000)" fill="#FFFFFF" fill-rule="nonzero"> <g id="Icons-with-opacity" transform="translate(1716.000000, 291.000000)"> <g id="document" transform="translate(154.000000, 300.000000)"> <path class="" d="M40,40 L36.3636364,40 L36.3636364,3.63636364 L5.45454545,3.63636364 L5.45454545,0 L38.1818182,0 C39.1854545,0 40,0.814545455 40,1.81818182 L40,40 Z" id="Path" opacity="0.603585379"></path> <path class="" d="M30.9090909,7.27272727 L1.81818182,7.27272727 C0.814545455,7.27272727 0,8.08727273 0,9.09090909 L0,41.8181818 C0,42.8218182 0.814545455,43.6363636 1.81818182,43.6363636 L30.9090909,43.6363636 C31.9127273,43.6363636 32.7272727,42.8218182 32.7272727,41.8181818 L32.7272727,9.09090909 C32.7272727,8.08727273 31.9127273,7.27272727 30.9090909,7.27272727 Z M18.1818182,34.5454545 L7.27272727,34.5454545 L7.27272727,30.9090909 L18.1818182,30.9090909 L18.1818182,34.5454545 Z M25.4545455,27.2727273 L7.27272727,27.2727273 L7.27272727,23.6363636 L25.4545455,23.6363636 L25.4545455,27.2727273 Z M25.4545455,20 L7.27272727,20 L7.27272727,16.3636364 L25.4545455,16.3636364 L25.4545455,20 Z" id="Shape"></path> </g> </g> </g> </g> </svg>
 						
 					</div>
@@ -97,8 +97,8 @@
 			
 			<li class="nav-item">
 				<a class="nav-link  <?php echo ($active == 'payment') ? "active"  : ""; ?>" href="./payments.php">
-					<div style=<?php echo "'background-image:$principalColor;'"?>
-						class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
+					<div style=<?php echo "'background:$principalColor;'"?>
+						class="principal-color icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
 						<svg width="12px" height="12px" viewBox="0 0 43 36" version="1.1"
 							xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 							<title>credit-card</title>
@@ -124,8 +124,8 @@
 			
 			<li class="nav-item">
 				<a class="nav-link  <?php echo ($active == 'history') ? "active"  : ""; ?>" href="./visit_history.php">
-					<div style=<?php echo "'background-image:$principalColor;'"?>
-						class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
+					<div style=<?php echo "'background:$principalColor;'"?>
+						class="principal-color icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
 						<i class="fa-solid fa-book-open"></i>
 					</div>
 					<span class="nav-link-text ms-1">Historial de Visitas</span>
@@ -136,8 +136,8 @@
 			</li>
 			<!--
 			<li class="nav-item">
-				<a class="nav-link  <?php echo ($active == 'system') ? 'active'  : ''; ?>" href="system.php">
-					<div style=<?php echo "'background-image:$principalColor;'"?>
+				<a class="nav-link  <?php //echo ($active == 'system') ? 'active'  : ''; ?>" href="system.php">
+					<div style=<?php //echo "'background:$principalColor;'"?>
 						class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
 						<svg width="16px" height="16px" viewBox="0 0 40 40" version="1.1"
 							xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -167,8 +167,8 @@
 			</li> -->
 			<li class="nav-item">
 				<a class="nav-link  <?php echo ($active == 'account') ? 'active'  : ''; ?>" href="account.php">
-					<div style=<?php echo "'background-image:$principalColor;'"?>
-						class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
+					<div style=<?php echo "'background:$principalColor;'"?>
+						class="principal-color icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
 						<i style="opacity:1" class="fa-solid fa-user-lock"></i>
 					</div>
 					<span class="nav-link-text ms-1">Cuenta</span>
@@ -176,8 +176,8 @@
 			</li>
 			<li class="nav-item">
 				<a class="nav-link  " href="logout.php">
-					<div style=<?php echo "'background-image:$principalColor;'"?>
-						class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
+					<div style=<?php echo "'background:$principalColor;'"?>
+						class="principal-color icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
 						<i class="fa-solid fa-power-off opacity-10"></i>
 					</div>
 					
@@ -189,7 +189,7 @@
 	<div class="sidenav-footer mx-3 ">
 	
 		<a class="" href="registrar_visita.php">
-			<button style=<?php echo "'background-image:$principalColor;'"?> class="btn bg-gradient-primary mt-3 w-100">Registrar Visita</button>
+			<button style=<?php echo "'background:$principalColor;'"?> class="principal-color btn bg-gradient-primary mt-3 w-100">Registrar Visita</button>
 		</a>
 	</div>
 
