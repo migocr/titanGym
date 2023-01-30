@@ -7,9 +7,9 @@
 		<div class="card-header pb-0 pt-3 ">
 			<div class="float-start">
 				<h5 class="mt-3 mb-0">
-					<php ?> </php> Configuracion
+					<php ?> </php><i class="fa-solid fa-gear"></i> Configuracion
 				</h5>
-				<p>Personalizar aspecto</p>
+				<p><i class="fa-regular fa-circle-question custom-colors"></i> Personalizar aspecto</p>
 			</div>
 			<div class="float-end mt-4">
 				<button class="btn btn-link text-dark p-0 fixed-plugin-close-button">
@@ -149,13 +149,13 @@
 
 			</div>
 			<div class="form-group">
-				<h6 for="exampleFormControlInput1"><i class="fa-solid fa-dumbbell"></i>Nombre del Sitio</h6>
+				<h6 for="exampleFormControlInput1"><i class="fa-regular fa-circle-question site-name"></i> Nombre del Sitio</h6>
 				<input type="text" class="form-control" id="titleName" placeholder="" value="<?php echo $_SESSION['siteTitle'];?>">
 			</div>
 		
 			<!-- Navbar Fixed -->
 			<div class="mt-3">
-				<h6 class="mb-0">Navegacion Fija</h6>
+				<h6 class="mb-0"><i class="fa-regular fa-circle-question fixed-nav-help"></i> Navegacion Fija</h6>
 			</div>
 			
 			<div class="form-check form-switch">
@@ -354,5 +354,13 @@
 
 
 
-
+	tippy('.custom-colors', {
+		content: "Esta seccion te permite cambiar los colores de la interfaz del sistema",
+	});
+	tippy('.site-name', {
+		content: "Edita el nombre del gimnasio",
+	});
+	tippy('.fixed-nav-help', {
+		content: "Activa o desactiva la barra superior de navegacion",
+	});
 </script>
