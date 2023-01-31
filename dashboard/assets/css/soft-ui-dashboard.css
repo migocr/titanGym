@@ -23223,6 +23223,7 @@ hr.horizontal.gray-light {
 
   .g-sidenav-show.g-sidenav-pinned .sidenav {
     transform: translateX(0);
+    z-index: 10000;
   }
 }
 
