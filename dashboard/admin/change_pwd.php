@@ -35,7 +35,8 @@
 	<link id="pagestyle" href="../assets/css/soft-ui-dashboard.css?v=1.0.6" rel="stylesheet" />
 </head>
 	<body class="g-sidenav-show " style="<?php echo "background:$backgroundColor !important;"?>">
-		<?php $active = 'account'; $principalColor = $principalColor; include 'components/menu.php'; ?>
+		<?php include 'components/spiner.php'; ?>	
+	<?php $active = 'account'; $principalColor = $principalColor; include 'components/menu.php'; ?>
 		<main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
 			<?php $titlePage = 'Cuenta'; include 'components/navbar.php'; ?>
 			<form id="form1" name="form1"  action="change_s_pwd.php" enctype="multipart/form-data" method="POST" >

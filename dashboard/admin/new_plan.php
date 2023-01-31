@@ -42,7 +42,8 @@ $backgroundColor =  $_SESSION['backgroundColor'];
   <link id="pagestyle" href="../assets/css/soft-ui-dashboard.css?v=1.0.6" rel="stylesheet" />
 </head>
 	<body class="g-sidenav-show " style="<?php echo "background:$backgroundColor !important;"?>">
-		<?php $active = 'new_membership'; include 'components/menu.php'; ?>
+		<?php include 'components/spiner.php'; ?>	
+	<?php $active = 'new_membership'; include 'components/menu.php'; ?>
 		<main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
 			<!-- Navbar -->
 			<?php $titlePage = 'Miembros'; include 'components/navbar.php'; ?>

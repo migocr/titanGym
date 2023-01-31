@@ -71,7 +71,8 @@ $enablePaginator = $userTotal > 50 ? true : false;
 </head>
 
 <body class="g-sidenav-show " style="<?php echo "background:$backgroundColor !important;" ?>">
-  <?php $active = 'member-list';
+  <?php include 'components/spiner.php'; ?>	
+	<?php $active = 'member-list';
   include 'components/menu.php'; ?>
   <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
     <!-- Navbar -->

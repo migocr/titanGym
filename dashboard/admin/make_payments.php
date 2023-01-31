@@ -97,6 +97,7 @@ if (mysqli_affected_rows($con) == 1) {
 </head>
 
 <body class="g-sidenav-show " style="<?php echo "background:$backgroundColor !important;"?>">
+	<?php include 'components/spiner.php'; ?>	
 	<?php $active = 'payment'; include 'components/menu.php'; ?>
   <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
     <!-- Navbar -->

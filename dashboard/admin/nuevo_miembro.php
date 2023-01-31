@@ -41,6 +41,7 @@ $dotenv->load(); ?>
 </head>
 
 <body class="g-sidenav-show " style="<?php echo "background:$backgroundColor !important;"?>">
+	<?php include 'components/spiner.php'; ?>	
 	<?php $active = 'new'; include 'components/menu.php'; ?>
 	<main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
 		<!-- Navbar -->

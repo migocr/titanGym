@@ -57,6 +57,7 @@
 </head>
 
 <body class="g-sidenav-show" style="<?php echo "background:$backgroundColor !important;"?>     background-attachment: fixed;">
+	<?php include 'components/spiner.php'; ?>	
 	<?php $active = 'system'; $principalColor = $principalColor; include 'components/menu.php'; ?>
 	<main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
 		<!-- Navbar -->

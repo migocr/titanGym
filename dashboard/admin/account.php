@@ -55,7 +55,8 @@
 	<link id="pagestyle" href="../assets/css/soft-ui-dashboard.css?v=1.0.6" rel="stylesheet" />
 </head>
     <body class="g-sidenav-show "  style="<?php echo "background:$backgroundColor !important;"?>">
-		<?php $active = 'account'; $principalColor = $principalColor; include 'components/menu.php'; ?>
+		<?php include 'components/spiner.php'; ?>	
+	<?php $active = 'account'; $principalColor = $principalColor; include 'components/menu.php'; ?>
 		<main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
 			<?php $titlePage = 'Cuenta'; include 'components/navbar.php'; ?>
 			<div class="container-fluid py-4">
