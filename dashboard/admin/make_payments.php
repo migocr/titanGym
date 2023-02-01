@@ -185,7 +185,7 @@ if (mysqli_affected_rows($con) == 1) {
                 </form>
                 <div id="plandetls" class="row"></div>
                 <div style="display: flex;justify-content: center;">
-                  <button style="margin-right: 10px;" class="btn btn-primary btn-sm" onclick="savePayment()" name="submit" id="submit" >Guardar</button>
+                  <button  style="margin-right: 10px; background: <?php echo $principalColor; ?>;" class="btn btn-primary btn-sm" onclick="savePayment()" name="submit" id="submit" >Guardar</button>
                   <input class="btn btn-secondary btn-sm" type="reset" name="reset" id="reset" value="Borrar"></td>
                 </div>
 
@@ -291,6 +291,7 @@ if (mysqli_affected_rows($con) == 1) {
     }
   });
     async function savePayment() {
+        document.querySelector('.full-screen-spinner').style.display = 'flex';
         let formData = new FormData();
         let id = document.getElementById("idMembresia").value;
         let plan = document.getElementById("planSelector").value;

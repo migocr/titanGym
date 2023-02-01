@@ -144,7 +144,7 @@ $dotenv->load(); ?>
 													<div id="plandetls" class="row"></div>
 													<div class="col-md-12">
 													<div style="width: auto; display: flex;justify-content: center;">
-														<input style="margin-right: 1em;background-image:<?php echo $principalColor ?>" class="btn btn-primary" type="submit" name="submit" id="submit" value="Registrar">
+														<input style="margin-right: 1em;background-image:<?php echo $principalColor ?>" class="btn btn-primary register" type="submit" name="submit" id="submit" value="Registrar">
 														<input class="btn btn-default" type="reset" name="reset" id="reset" value="Borrar">
 													</div>							
 													</div>
@@ -187,6 +187,9 @@ $dotenv->load(); ?>
 </body>
 
 <script>
+	document.querySelector("input.register").addEventListener("click", function(){
+		document.querySelector('.full-screen-spinner').style.display = 'flex';
+	})
 	function changeExpireDate(str, duration, durationType) {
 		/*Obtenemos data del plan e imprimimos en pantalla un template llamado plandetail.php */
 		if (str == "") {
