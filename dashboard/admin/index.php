@@ -286,8 +286,7 @@
 											<tbody id="membersTable">
 											
 											<?php
-												$query = "select * FROM users WHERE cast(dob as DATE) >= CURDATE() ORDER BY cast(dob as DATE) ASC LIMIT 30";
-												//echo $query;
+												$query = "select * FROM users WHERE DATE_ADD(cast(dob as DATE), INTERVAL 1 DAY) >= CURDATE() ORDER BY cast(dob as DATE) ASC LIMIT 30";												//echo $query;
 												$result = mysqli_query($con, $query);
 												$sno    = 1;
 												
@@ -308,26 +307,32 @@
 															<p class='mb-0 text-sm'>". $row['username'] ." </p>
 														</td>";
  
-														$expireDate = strtotime($row['dob']);
-														$today = strtotime(date("Y-m-d"));
-														$timeDiff = abs($expireDate - $today);
+														$expireDate = strtotime($row['dob']); //fecha de expiracion
+														$expireDate = strtotime("+1 day", $expireDate); //aumenta un día a la fecha de expiración
+														$today = strtotime(date("Y-m-d")); //hoy
+														$timeDiff = abs($expireDate - $today); //diferencia de tiempo entre la fecha de expiracion y hoy
 														$numberDays = $timeDiff/86400;
 														$numberDays = intval($numberDays);
 														
 														$timestamp1 = strtotime(str_replace('-', '/', $row['dob']));
 														$timestamp2 = strtotime(date('Y/m/d'));
 														//echo $today;
-														if (date('Ymd', $timestamp1) <= date('Ymd', $timestamp2)) {
+														if (date('Ymd', $timestamp1) < date('Ymd', $timestamp2)) {
 															//echo $today . 'es menor que' . $expireDate;
 															$memberStatus = false;
 															$statusString = "Expirado";
 															$statusClass = "bg-gradient-danger";
+														} else if (date('Ymd', $timestamp1) == date('Ymd', $timestamp2)) {
+															$memberStatus = true;
+															$statusString = "Ultimo Dia";
+															$statusClass = "bg-gradient-warning";
 														} else {
 															//echo  $today . 'es mayor o igual que'. $expireDate;
 															$memberStatus = true;
 															$statusString = "Activo";
 															$statusClass = "bg-gradient-success";
 														}
+														
 														echo "<td ><p class='text-center my-auto'>" . $numberDays ."</p></td>";
 														echo "<td class='text-center'><span class=' w-100 badge badge-sm  $statusClass'>$statusString</span></td>";									
 														

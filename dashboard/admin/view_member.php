@@ -209,17 +209,21 @@ if (isset($_GET['id'])) {
 																	$timestamp1 = strtotime($planEnd);
 																	$timestamp2 = strtotime($today);
 																	//echo $today;
-																	if (date('Ymd', $timestamp1) <= date('Ymd', $timestamp2)) {
+																	if (date('Ymd', $timestamp1) == date('Ymd', $timestamp2)) {
 																		//echo $today . 'es menor que' . $expireDate;
+																		$memberStatus = true;
+																		$statusString = "Ultimo Dia";
+																		$statusClass = "bg-gradient-warning";
+																	  } else if (date('Ymd', $timestamp1) < date('Ymd', $timestamp2)) {
 																		$memberStatus = false;
 																		$statusString = "Expirado";
 																		$statusClass = "bg-gradient-danger";
-																	} else {
+																	  } else {
 																		//echo  $today . 'es mayor o igual que'. $expireDate;
 																		$memberStatus = true;
 																		$statusString = "Activo";
 																		$statusClass = "bg-gradient-success";
-																	}
+																	  }
 																	echo "<tr>
 																			<td>
 																				<p class='text-center text-xs font-weight-bold mb-0'>$paymentId </p>

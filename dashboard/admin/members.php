@@ -191,11 +191,15 @@ $enablePaginator = $userTotal > 50 ? true : false;
                           $timestamp1 = $expireDate ? strtotime($expireDate) : strtotime($today);
                           $timestamp2 = strtotime($today);
                           //echo $today;
-                          if (date('Ymd', $timestamp1) <= date('Ymd', $timestamp2)) {
+                          if (date('Ymd', $timestamp1) < date('Ymd', $timestamp2)) {
                             //echo $today . 'es menor que' . $expireDate;
                             $memberStatus = false;
                             $statusString = "Expirado";
                             $statusClass = "bg-gradient-danger";
+                          } else if (date('Ymd', $timestamp1) == date('Ymd', $timestamp2)) {
+                            $memberStatus = true;
+                            $statusString = "Ultimo Dia";
+                            $statusClass = "bg-gradient-warning";
                           } else {
                             //echo  $today . 'es mayor o igual que'. $expireDate;
                             $memberStatus = true;
@@ -224,7 +228,7 @@ $enablePaginator = $userTotal > 50 ? true : false;
 
 
                           echo "<td><p class='text-sm  mb-0'> $lastPaymentStr</p></td>";
-                          echo "<td class='text-center'><span style='max-width:85px;' class='w-100 badge badge-sm ${statusClass}'>$statusString</span></td>";
+                          echo "<td class='text-center'><span style='max-width:95px;' class='w-100 badge badge-sm ${statusClass}'>$statusString</span></td>";
 
                           echo "<td class='text-center'><p class='text-sm  mb-0'>" . $userExpire . "</p></td>";
 

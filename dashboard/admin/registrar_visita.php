@@ -285,13 +285,23 @@ $dotenv->load();
 			for (let index = 0; index < users.length; index++) {
 				
 				let user = users[index];
-				console.log(user);
-				if (Date.parse(user.dob) <= Date.now()) {
+				
+				let d = Date.parse(user.dob);
+				let dateDob = new Date(d);
+				dateDob.setHours(dateDob.getHours() + 7); //Esto es para la zona horaria GMT-0700
+				console.log(dateDob); // Fri Feb 01 2023 07:00:00 GMT-0700 (hora estándar del Pacífico de México)
+
+				if (new Date().getDate() == dateDob.getDate() && new Date().getMonth() == dateDob.getMonth() && new Date().getFullYear() == dateDob.getFullYear()) {
+					
+					stateString = "Ultimo dia";
+					classBadget = 'bg-gradient-warning';
+					classInput = "disabled;"
+				} else if (Date.parse(user.dob) < Date.now()) {
+					
 					stateString = "Expirado";
 					classBadget = 'bg-gradient-danger';
 					classInput = "disabled;"
 				} else {
-				
 					stateString = "Activo";
 					classBadget = 'bg-gradient-success';
 				}
