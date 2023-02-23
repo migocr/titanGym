@@ -187,9 +187,7 @@ $dotenv->load(); ?>
 </body>
 
 <script>
-	document.querySelector("input.register").addEventListener("click", function(){
-		document.querySelector('.full-screen-spinner').style.display = 'flex';
-	})
+	
 	function changeExpireDate(str, duration, durationType) {
 		/*Obtenemos data del plan e imprimimos en pantalla un template llamado plandetail.php */
 		if (str == "") {
@@ -212,6 +210,7 @@ $dotenv->load(); ?>
 
 			xmlhttp.open("GET", "plandetail.php?q=" + str, true);
 			xmlhttp.send();
+			document.querySelector('.full-screen-spinner').style.display = 'flex';
 		}
 		/* FIN */
 		/* Seteamos fecha de acuerdo al plan elegido */
